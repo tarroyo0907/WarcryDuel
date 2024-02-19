@@ -1,0 +1,1 @@
+{"figurineNames":["Rook_Figurine", "Rook_Figurine", "Rook_Figurine", "Rook_Figurine", "Rook_Figurine", "Rook_Figurine"]}

@@ -1,0 +1,4 @@
+repository "WARCRY Duel@WARCRY@cloud"
+  path "/"
+    br "/main"
+    co "/main"
