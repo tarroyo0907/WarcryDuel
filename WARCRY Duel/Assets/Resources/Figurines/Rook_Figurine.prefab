@@ -2142,7 +2142,7 @@ GameObject:
   - component: {fileID: 3427417810891941284}
   m_Layer: 8
   m_Name: Rook_Figurine
-  m_TagString: Untagged
+  m_TagString: Figurine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2203,6 +2203,8 @@ MonoBehaviour:
   currentHealth: 20
   totalHealth: 20
   movementPoints: 2
+  isSpawnable: 0
+  isAbleToFight: 0
   move1: {fileID: 11400000, guid: 238e23876dba09541ba93c6b2bbb110a, type: 2}
   move2: {fileID: 11400000, guid: ab369ba57578e7b4c9bf5e083d5304ea, type: 2}
   move3: {fileID: 11400000, guid: 9f10b13269b3cea49bcd87699ae8a25b, type: 2}
@@ -2214,6 +2216,7 @@ MonoBehaviour:
   team: 
   possibleTargets: []
   isMoving: 0
+  isDefeated: 0
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   healthBar: {fileID: 3342420188412062178}
   movementPointText: {fileID: 2946827394184806756}

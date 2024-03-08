@@ -67,18 +67,13 @@ public class Multiplayer_Player : NetworkBehaviour
     {
         UpdateBattleFigures += UpdateBattleFigure;
 
-        PlayerTeamData playerTeamData = new PlayerTeamData
-        {
-            figurineNames = new string[playerTeamPrefabs.Count]
-        };
+        string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
+        PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(saveString);
 
-        for (int i = 0; i < playerTeamPrefabs.Count; i++)
+        for (int i = 0; i < playerTeamData.figureNames.Length; i++)
         {
-            playerTeamData.figurineNames[i] = playerTeamPrefabs[i].name;
+            playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
         }
-
-        string json = JsonUtility.ToJson(playerTeamData);
-        Debug.Log(json);
     }
 
     // Start is called before the first frame update
@@ -174,7 +169,8 @@ public class Multiplayer_Player : NetworkBehaviour
             return;
         }
 
-        if (OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState)
+        // Checks if its the player's turn
+        if (OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
         {
             if (DetectAttackFigure(hit, serverRpcParams)) { return; }
             if (DetectMoveFigure(hit, serverRpcParams))
@@ -353,12 +349,19 @@ public class Multiplayer_Player : NetworkBehaviour
         if (hit.tag == "Figurine")
         {
             Figurine enemyFigure = hit.GetComponent<Figurine>();
+
             // Checks if the figure is an enemy
             if (enemyFigure.Team != $"Player {playerID}")
             {
                 // Checks if it is a possible target to your selected figurine
                 if (selectedFigurine.PossibleTargets.Contains(enemyFigure.gameObject))
                 {
+                    // Returns False if the figurine is attacking from a bench
+                    if (selectedFigurine.CurrentSpacePos.name.Contains("Bench"))
+                    {
+                        return false;
+                    }
+
                     // Starts Attack Sequence
                     Debug.Log("Starting Battle Attack Sequence");
 
@@ -605,10 +608,10 @@ public class Multiplayer_Player : NetworkBehaviour
             string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
 
             PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(saveString);
-            for (int i = 0; i < playerTeamData.figurineNames.Length; i++)
+            for (int i = 0; i < playerTeamData.figureNames.Length; i++)
             {
-                Debug.Log("Figurine Name : " + playerTeamData.figurineNames[i]);
-                playerTeamPrefabs[i] = Resources.Load<GameObject>("Figurines/" + playerTeamData.figurineNames[i]);
+                Debug.Log("Figurine Name : " + playerTeamData.figureNames[i]);
+                playerTeamPrefabs[i] = Resources.Load<GameObject>("Figurines/" + playerTeamData.figureNames[i]);
             }
         }
     }
@@ -630,6 +633,6 @@ public class Multiplayer_Player : NetworkBehaviour
 
     private class PlayerTeamData
     {
-        public string[] figurineNames;
+        public string[] figureNames;
     }
 }

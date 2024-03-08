@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5186294827520214980}
   m_Layer: 8
   m_Name: Bastion_Figurine
-  m_TagString: Untagged
+  m_TagString: Figurine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +67,8 @@ MonoBehaviour:
   currentHealth: 30
   totalHealth: 30
   movementPoints: 1
+  isSpawnable: 0
+  isAbleToFight: 0
   move1: {fileID: 11400000, guid: 238e23876dba09541ba93c6b2bbb110a, type: 2}
   move2: {fileID: 11400000, guid: 1f6ffba4374ab57439896ff6ce4b42a8, type: 2}
   move3: {fileID: 11400000, guid: 5a2623b5a6dc9c442ad5d052234cc847, type: 2}
@@ -78,6 +80,7 @@ MonoBehaviour:
   team: 
   possibleTargets: []
   isMoving: 0
+  isDefeated: 0
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   healthBar: {fileID: 5047233978749373314}
   movementPointText: {fileID: 1159775597343107757}

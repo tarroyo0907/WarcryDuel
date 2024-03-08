@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5873214505989823289}
   m_Layer: 8
   m_Name: Bulwark_Figurine
-  m_TagString: Untagged
+  m_TagString: Figurine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,6 +67,8 @@ MonoBehaviour:
   currentHealth: 25
   totalHealth: 25
   movementPoints: 2
+  isSpawnable: 0
+  isAbleToFight: 0
   move1: {fileID: 11400000, guid: e94ecf94efc9a4d4aa7b534cde4ae45f, type: 2}
   move2: {fileID: 11400000, guid: f74d215d8678c0b4089bca7f75564f99, type: 2}
   move3: {fileID: 11400000, guid: aefce13d48ce22944a4d448c44811dd7, type: 2}
@@ -78,10 +80,10 @@ MonoBehaviour:
   team: 
   possibleTargets: []
   isMoving: 0
+  isDefeated: 0
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   healthBar: {fileID: 5797208440356689791}
   movementPointText: {fileID: 6265704216446697465}
-  isDefeated: 0
 --- !u!114 &787530155378214462
 MonoBehaviour:
   m_ObjectHideFlags: 0

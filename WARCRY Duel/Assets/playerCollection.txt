@@ -1,0 +1,1 @@
+{"figureNames":["Bulwark_Figurine","Bastion_Figurine","Shade_Figurine","Shade_Figurine","Rook_Figurine","Rook_Figurine","Bulwark_Figurine","Bastion_Figurine","Shade_Figurine","Shade_Figurine","Rook_Figurine","Rook_Figurine"]}
