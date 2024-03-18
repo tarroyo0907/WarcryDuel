@@ -11,7 +11,8 @@ public class FigurineEffect
         Freeze,
         Burn,
         Stealth,
-        Stunned
+        Stunned,
+        Lifesteal
     }
 
     public enum MoveEffects

@@ -199,6 +199,33 @@ public class MoveManager : NetworkBehaviour
         enemyFigurine.TakeEffect();
     }
 
+    IEnumerator ArcaneBlast(object[] parameters)
+    {
+        Debug.Log("ArcaneBlast");
+        Figurine playerFigurine = (Figurine) parameters[0];
+        Figurine enemyFigurine = (Figurine) parameters[1];
+
+        enemyFigurine.incomingEffect.IncomingDamage += 5;
+
+        yield return new WaitForSeconds(0.5f);
+
+        enemyFigurine.TakeEffect();
+    }
+
+    IEnumerator DeceptiveEnergy(object[] parameters)
+    {
+        Debug.Log("Deceptive Energy");
+        Figurine playerFigurine = (Figurine)parameters[0];
+        Figurine enemyFigurine = (Figurine)parameters[1];
+
+        int lifestealStacks = playerFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+        enemyFigurine.incomingEffect.IncomingDamage += 5 + (5 * lifestealStacks);
+        playerFigurine.incomingEffect.SelfBuffsToRemove.Add(FigurineEffect.StatusEffects.Lifesteal, lifestealStacks);
+
+        yield return new WaitForSeconds(0.5f);
+
+        enemyFigurine.TakeEffect();
+    }
 
     #endregion
 
@@ -240,5 +267,12 @@ public class MoveManager : NetworkBehaviour
         localPlayer.activeExternalMove = "";
     }
 
+    #endregion
+
+    #region Abilities
+    public void Lifesteal()
+    {
+
+    }
     #endregion
 }

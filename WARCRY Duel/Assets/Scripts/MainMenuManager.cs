@@ -62,6 +62,9 @@ public class MainMenuManager : NetworkBehaviour
     #region State Info
     private enum MenuStates { Home, PartyOverview, CollectionView, Shop, Campaign, Event }
     [SerializeField] private MenuStates currentMenuState = MenuStates.Home;
+
+    private bool spawnedSavedParty = false;
+    private Vector3 partyFigurinesOriginalPos;
     #endregion
 
     #region Collection Data
@@ -93,7 +96,7 @@ public class MainMenuManager : NetworkBehaviour
 
         NetworkManager.Singleton.OnServerStarted += LocalServerTesting;
 
-        // Set Party Data
+        /*// Set Party Data
         CollectionObject partyTeam = new CollectionObject
         {
             figureNames = new string[6] {"Bulwark_Figurine","Bastion_Figurine","Shade_Figurine","Shade_Figurine","Rook_Figurine","Rook_Figurine"} 
@@ -115,7 +118,7 @@ public class MainMenuManager : NetworkBehaviour
         json = JsonUtility.ToJson(collectionObject);
 
         // Write the Json String to Text File
-        File.WriteAllText(Application.dataPath + "/playerCollection.txt", json);
+        File.WriteAllText(Application.dataPath + "/playerCollection.txt", json);*/
 
 #if DEDICATED_SERVER
         backfillTicketId = null;
@@ -301,6 +304,42 @@ public class MainMenuManager : NetworkBehaviour
         partyFigurines.SetActive(true);
         partyCanvasView.SetActive(true);
         backButton.SetActive(true);
+
+        if (spawnedSavedParty == false)
+        {
+            // Grabs all Party Figurine Spaces
+            GameObject[] partyFigurinePositions = new GameObject[6];
+            for (int i = 0; i < 6; i++)
+            {
+                partyFigurinePositions[i] = partyFigurines.transform.GetChild(i).gameObject;
+            }
+
+            // Fill Party Figurines Spaces with the player's figurines
+            // Starts by reading from the JSON file that stores the party information
+            string[] savedPartyFigurines = LoadParty();
+
+            // Spawns each figurine into it's space.
+            for (int i = 0; i < savedPartyFigurines.Length; i++)
+            {
+                // Grab the Figurine To Spawn
+                GameObject figurineToSpawn = (GameObject)Resources.Load($"Figurines/{savedPartyFigurines[i]}");
+
+                // Adjust Position based on Index
+                Vector3 spawnPosition = partyFigurinePositions[i].transform.position;
+
+                // Spawn Figurine at new Position
+                GameObject spawnedFigurine = Instantiate(figurineToSpawn, spawnPosition, partyFigurinePositions[i].transform.rotation, partyFigurines.transform);
+                spawnedFigurine.transform.localScale = partyFigurinePositions[i].transform.localScale;
+                Destroy(spawnedFigurine.GetComponent<NetworkObject>());
+                Destroy(spawnedFigurine.GetComponent<Figurine>());
+
+                spawnedFigurine.name = savedPartyFigurines[i];
+            }
+
+            spawnedSavedParty = true;
+            partyFigurinesOriginalPos = partyFigurines.transform.position;
+        }
+        
     }
 
     public void SelectMenuButton(Button clickedButton)
@@ -429,6 +468,7 @@ public class MainMenuManager : NetworkBehaviour
 
             case MenuStates.CollectionView:
                 partyFigurines.transform.SetParent(partyCanvasView.transform);
+                partyFigurines.transform.position = partyFigurinesOriginalPos;
                 partyFormationView.SetActive(false);
                 partyCanvasView.SetActive(true);
                 currentMenuState = MenuStates.PartyOverview;
@@ -704,6 +744,29 @@ public class MainMenuManager : NetworkBehaviour
 
             _figureNames = collectionObject.figureNames;
         }
+    }
+
+    public string[] LoadParty()
+    {
+        if (File.Exists(Application.dataPath + "/savedTeam.txt"))
+        {
+            // Reads json text from the file into saveString
+            string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
+            Debug.Log("Loaded: " + saveString);
+
+            // Converts JSON text into Collection Object
+            CollectionObject partyObject = JsonUtility.FromJson<CollectionObject>(saveString);
+
+            // Displays the variable values from Collection Object
+            foreach (string figureName in partyObject.figureNames)
+            {
+                Debug.Log("Figure Name : " + figureName);
+            }
+
+            return partyObject.figureNames;
+        }
+
+        return null;
     }
 
 

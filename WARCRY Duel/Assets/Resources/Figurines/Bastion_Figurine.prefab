@@ -72,6 +72,7 @@ MonoBehaviour:
   move1: {fileID: 11400000, guid: 238e23876dba09541ba93c6b2bbb110a, type: 2}
   move2: {fileID: 11400000, guid: 1f6ffba4374ab57439896ff6ce4b42a8, type: 2}
   move3: {fileID: 11400000, guid: 5a2623b5a6dc9c442ad5d052234cc847, type: 2}
+  ability: {fileID: 11400000, guid: 7a438630c1c617544943717de9ca55c3, type: 2}
   incomingEffect:
     incomingDamage: 0
     blockIncomingDamage: 0

@@ -40,6 +40,7 @@ public class Figurine : NetworkBehaviour
     public FigurineMove move1;
     public FigurineMove move2;
     public FigurineMove move3;
+    public FigurineAbility ability;
 
     public FigurineEffect incomingEffect = new FigurineEffect();
     public Dictionary<FigurineEffect.StatusEffects, int> buffs = new Dictionary<FigurineEffect.StatusEffects, int>();
@@ -96,7 +97,6 @@ public class Figurine : NetworkBehaviour
         // Subscribing to Events
         Multiplayer_Player.OnBattleStart += DisableFigurineHealthBar;
         Multiplayer_GameManager.EndCombatEvent += EnableFigurineHealthBar;
-        Multiplayer_GameManager.EndCombatEvent += ApplyMoveEffect;
         Multiplayer_GameManager.OnChangeTurn += InflictStatusEffect;
         Multiplayer_GameManager.OnChangeTurn += ClearPossibleTargets;
         PlayerUI.OnEndTurn += ClearPossibleTargets;
@@ -388,11 +388,6 @@ public class Figurine : NetworkBehaviour
         incomingEffect = new FigurineEffect();
     }
 
-    public void ApplyMoveEffect()
-    {
-        
-    }
-
     public void Defeated()
     {
         Debug.Log("Figurine Defeated");
@@ -659,6 +654,24 @@ public class Figurine : NetworkBehaviour
         }
 
 
+    }
+
+    public void ActivateAbility()
+    {
+        // Checks if the figurine has an ability
+        if (ability != null)
+        {
+            // Check what ability the figurine has an activate it
+            switch (ability.name)
+            {
+                case "Lifesteal":
+                    
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
 
     #region Helper Methods
