@@ -31,7 +31,7 @@ public class PFXManager : NetworkBehaviour
         Multiplayer_GameManager.OnInitiateMoveEffect += HandleMoveEffectParticles;
 
         MoveManager.OnUseExternalMove += HandleExternalMoveParticles;
-        //Multiplayer_Player.OnCompletedExternalMove += ClearFigureSelectParticles;
+        MoveManager.OnMoveUse += HandleMoveVFX;
 
         TeamSpawner.OnFiguresSpawned += SelectFigureParticles;
 
@@ -238,6 +238,54 @@ public class PFXManager : NetworkBehaviour
         }
     }
     #endregion
+
+    private void HandleMoveVFX(string moveName, Multiplayer_Player user)
+    {
+        // Call the function that corresponds to the used move
+        //object[] parameters = new object[2] {moveName, user};
+        moveName = moveName.Replace(" ","");
+        StartCoroutine(moveName + "VFX", user);
+    }
+
+    private IEnumerator SlashVFX(Multiplayer_Player user) 
+    {
+        // Load in Slash VFX
+        GameObject slashVFX = Resources.Load<GameObject>("Effects/VFX_Slash");
+
+        // Spawn in Slash VFX
+        Vector3 enemyForwardVector = user.enemyBattleFigure.transform.forward;
+        Vector3 enemyPosition = user.enemyBattleFigure.transform.position;
+        Quaternion playerRotation = user.playerBattleFigure.transform.rotation;
+        GameObject slashEffect = Instantiate(slashVFX, enemyPosition + (enemyForwardVector * 0.75f) + new Vector3(0, 0.5f, 0), playerRotation);
+        return null;
+    }
+
+    private IEnumerator SmokebombVFX(Multiplayer_Player user)
+    {
+        // Load in Smokebomb VFX
+        GameObject smokebombVFX = Resources.Load<GameObject>("PFX/SmokeEffect");
+
+        // Spawn in SmokeBomb VFX
+        Vector3 playerPosition = user.playerBattleFigure.transform.position;
+        Quaternion playerRotation = user.playerBattleFigure.transform.rotation;
+        GameObject smokeBombEffect = Instantiate(smokebombVFX, playerPosition, smokebombVFX.transform.rotation);
+        return null;
+    }
+
+    private IEnumerator ArcaneBlastVFX(Multiplayer_Player user)
+    {
+        // Load in Arcane Blast PFX
+        GameObject arcaneBlastPFX = Resources.Load<GameObject>("PFX/PS_ArcaneBlast");
+
+        // Spawn in Arcane Blast
+        Vector3 playerPosition = user.playerBattleFigure.transform.position;
+        Quaternion playerRotation = user.playerBattleFigure.transform.rotation;
+        GameObject arcaneBlastEffect = Instantiate(arcaneBlastPFX, playerPosition, arcaneBlastPFX.transform.rotation);
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(arcaneBlastEffect);
+    }
 
     private void HandleMoveEffectParticles(FigurineEffect.MoveEffects moveEffect)
     {

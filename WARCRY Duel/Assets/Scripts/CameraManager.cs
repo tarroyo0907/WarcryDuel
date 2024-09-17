@@ -52,18 +52,26 @@ public class CameraManager : MonoBehaviour
                 if (player1Camera != null)
                 {
                     player1Camera.GetComponent<Camera>().enabled = true;
+                    player1Camera.GetComponent<AudioListener>().enabled = true;
                 }
 
                 if (player1BattleCamera != null)
                 {
                     player1BattleCamera.GetComponent<Camera>().enabled = false;
+                    player1BattleCamera.GetComponent<AudioListener>().enabled = false;
                 }
                 
                 break;
 
             case 2:
-                if (player2Camera != null) { player2Camera.GetComponent<Camera>().enabled = true; }
-                if (player2BattleCamera != null) { player2BattleCamera.GetComponent<Camera>().enabled = false; }
+                if (player2Camera != null) {
+                    player2Camera.GetComponent<Camera>().enabled = true;
+                    player2Camera.GetComponent<AudioListener>().enabled = true;
+                }
+                if (player2BattleCamera != null) { 
+                    player2BattleCamera.GetComponent<Camera>().enabled = false;
+                    player2BattleCamera.GetComponent<AudioListener>().enabled = false;
+                }
                 break;
 
             default:
@@ -83,12 +91,16 @@ public class CameraManager : MonoBehaviour
         {
             case 1:
                 player1Camera.GetComponent<Camera>().enabled = false;
+                player1Camera.GetComponent<AudioListener>().enabled = false;
                 player1BattleCamera.GetComponent<Camera>().enabled = true;
+                player1BattleCamera.GetComponent<AudioListener>().enabled = true;
                 break;
 
             case 2:
                 player2Camera.GetComponent<Camera>().enabled = false;
+                player2Camera.GetComponent<AudioListener>().enabled = false;
                 player2BattleCamera.GetComponent<Camera>().enabled = true;
+                player2BattleCamera.GetComponent<AudioListener>().enabled = true;
                 break;
 
             default:

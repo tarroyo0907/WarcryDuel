@@ -117,8 +117,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Settings\INetworkConfiguration.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\GameCenter\LinkWithAppleGameCenterRequest.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\PlayerIdComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\DateTime\DateTimeWrapper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AuthenticationState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\DateTime\DateTimeWrapper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\OculusConfig.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\NetworkHandler.cs" />
   </ItemGroup>

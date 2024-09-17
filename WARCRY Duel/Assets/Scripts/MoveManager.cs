@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq.Expressions;
 // Tyler Arroyo
 // Move Manager
 // Manages all the attacking moves a unit can make
@@ -17,17 +18,14 @@ public class MoveManager : NetworkBehaviour
     public static event MoveHandler OnMoveUse;
     public static event MoveManagerHandler OnMoveEnd;
     public static event ExternalMoveHandler OnUseExternalMove;
+
     #endregion
 
     #region Gameplay Fields
     [SerializeField] private Multiplayer_Player localPlayer;
     [SerializeField] private bool waitingForCompletedExternalMove = false;
-
+    private const float MoveDelay = 0.1f;
     #endregion
-    private void Awake()
-    {
-        
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,10 +55,9 @@ public class MoveManager : NetworkBehaviour
     {
         yield return new WaitUntil(() => localPlayer.combatMove != null);
 
+        yield return new WaitForSeconds(0.5f);
+
         OnMoveUse?.Invoke(localPlayer.combatMove.moveName, localPlayer);
-
-        yield return new WaitForSeconds(2f);
-
         StartCoroutine(UseMoveCoroutine(localPlayer.combatMove, localPlayer.playerBattleFigure, localPlayer.enemyBattleFigure));
     }
 
@@ -77,9 +74,35 @@ public class MoveManager : NetworkBehaviour
         Debug.Log($"Figurine Move : {move.name}");
         Debug.Log($"Figurine Cooldown : {playerFigurine.moveCooldowns[move]}");
 
+        // Abilities
+        CheckForAbilities(move, playerFigurine, enemyFigurine);
+
         yield return new WaitForSeconds(1f);
 
         OnMoveEnd?.Invoke();
+    }
+
+    private void CheckForAbilities(FigurineMove move, Figurine playerFigurine, Figurine enemyFigurine)
+    {
+        if (playerFigurine.ability != null)
+        {
+            switch (playerFigurine.ability.abilityName)
+            {
+                case "Lifesteal":
+                    Debug.Log("Applying Lifesteal Ability");
+                    // If the figurine uses an action move
+                    if (move.moveType == FigurineMove.moveTypes.Action)
+                    {
+                        // Apply 1 stack of Lifesteal to the Figurine
+                        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Lifesteal, 2);
+                        playerFigurine.TakeEffect();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        
     }
 
     #region Moves
@@ -90,10 +113,8 @@ public class MoveManager : NetworkBehaviour
         Figurine enemyFigurine = (Figurine)parameters[1];
 
         enemyFigurine.incomingEffect.IncomingDamage += 5;
-
-        yield return new WaitForSeconds(0.5f);
-
-        enemyFigurine.TakeEffect();  
+        yield return new WaitForSeconds(MoveDelay);
+        enemyFigurine.TakeEffect();
     }
 
     IEnumerator Block(object[] parameters)
@@ -103,9 +124,7 @@ public class MoveManager : NetworkBehaviour
         Figurine enemyFigurine = (Figurine)parameters[1];
 
         playerFigurine.incomingEffect.BlockIncomingDamage = true;
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -116,9 +135,7 @@ public class MoveManager : NetworkBehaviour
         Figurine enemyFigurine = (Figurine)parameters[1];
 
         enemyFigurine.incomingEffect.IncomingDamage += 15;
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -133,11 +150,10 @@ public class MoveManager : NetworkBehaviour
             enemyFigurine.incomingEffect.IncomingDamage += 3;
             enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Bleed, 1);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
 
             enemyFigurine.TakeEffect();
         }
-
     }
 
     IEnumerator Smokebomb(object[] parameters)
@@ -148,8 +164,7 @@ public class MoveManager : NetworkBehaviour
 
         playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Stealth, 3);
         playerFigurine.incomingEffect.BlockIncomingDamage = true;
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -161,11 +176,8 @@ public class MoveManager : NetworkBehaviour
 
         playerFigurine.incomingEffect.BlockIncomingDamage = true;
         playerFigurine.incomingEffect.RemoveAllDebuffs = false;
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
-
     }
 
     IEnumerator RockSwing(object[] parameters)
@@ -179,9 +191,7 @@ public class MoveManager : NetworkBehaviour
         {
             //enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Stunned, 2);
         }
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -193,9 +203,7 @@ public class MoveManager : NetworkBehaviour
 
         enemyFigurine.incomingEffect.IncomingDamage += 7;
         enemyFigurine.incomingEffect.moveEffects.Add(FigurineEffect.MoveEffects.Pushback, 1);
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -206,9 +214,7 @@ public class MoveManager : NetworkBehaviour
         Figurine enemyFigurine = (Figurine) parameters[1];
 
         enemyFigurine.incomingEffect.IncomingDamage += 5;
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -221,9 +227,7 @@ public class MoveManager : NetworkBehaviour
         int lifestealStacks = playerFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
         enemyFigurine.incomingEffect.IncomingDamage += 5 + (5 * lifestealStacks);
         playerFigurine.incomingEffect.SelfBuffsToRemove.Add(FigurineEffect.StatusEffects.Lifesteal, lifestealStacks);
-
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
 
@@ -272,7 +276,7 @@ public class MoveManager : NetworkBehaviour
     #region Abilities
     public void Lifesteal()
     {
-
+        
     }
     #endregion
 }

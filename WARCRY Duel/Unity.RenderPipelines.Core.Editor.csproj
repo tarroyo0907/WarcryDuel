@@ -62,8 +62,8 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\LookDev\DisplayWindow.EnvironmentLibrarySidePanel.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\Material\MaterialHeaderScope.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\Debugging\DebugUIDrawer.Builtins.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\ICoreRenderPipelinePreferencesProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\Camera\CameraUI.Skin.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\ICoreRenderPipelinePreferencesProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\Volume\SerializedDataParameter.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\LookDev\LookDev.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Editor\Volume\Drawers\IntParameterDrawer.cs" />

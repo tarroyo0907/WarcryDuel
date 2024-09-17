@@ -20,18 +20,25 @@ public class PlayerUI : NetworkBehaviour
     public static event ExternalMoveHandler OnPressExternalMoveButton;
 
     // Fields
+    #region Misc References
     [Header("Misc References")]
     [SerializeField] private Canvas playerCanvas;
     [SerializeField] private TMPro.TextMeshProUGUI TurnIndicatorText;
     [SerializeField] private Button EndTurnButton;
+    #endregion
 
+    #region Header References
     [Header("Header References")]
     [SerializeField] private GameObject headerPanel;
+    #endregion
 
+    #region Figurine Overview References
     [Header("Figurine Overview References")]
     [SerializeField] private GameObject figurineOverviewPanel;
     [SerializeField] private Image figurineRender;
+    #endregion
 
+    #region Figurine Status References
     [Header("Figurine Status References")]
     [SerializeField] private GameObject figurineStatusPanel;
     [SerializeField] private TMPro.TextMeshProUGUI figurineNameText;
@@ -43,7 +50,9 @@ public class PlayerUI : NetworkBehaviour
     [SerializeField] private GameObject debuffConditionPanel;
     [SerializeField] private Image debuffConditionIcon;
     [SerializeField] private TextMeshProUGUI debuffConditionCounterText;
+    #endregion
 
+    #region Figurine Moveset References
     [Header("Figurine Moveset References")]
     [SerializeField] private GameObject figurineMovesetPanel;
     [SerializeField] private GameObject move1Background;
@@ -65,10 +74,14 @@ public class PlayerUI : NetworkBehaviour
     [SerializeField] private GameObject externalMoveBackground;
     [SerializeField] private Button externalMoveButton;
     [SerializeField] private TextMeshProUGUI externalMoveText;
+    [SerializeField] private Button passiveDisplayButton;
+    [SerializeField] private TextMeshProUGUI passiveDisplayButtonText;
+    #endregion
 
+    #region Data Fields
     // Data Fields
     [SerializeField] private string selectedMoveName;
-
+    #endregion
 
     private void Awake()
     {
@@ -98,6 +111,7 @@ public class PlayerUI : NetworkBehaviour
             move1Button.onClick.AddListener(() => { DisplayMoveDescription(move1Button); });
             move2Button.onClick.AddListener(() => { DisplayMoveDescription(move2Button); });
             move3Button.onClick.AddListener(() => { DisplayMoveDescription(move3Button); });
+            passiveDisplayButton.onClick.AddListener(() => { DisplayPassiveDescription(passiveDisplayButton);  });
 
             // Use External Move Button Listener
             externalMoveButton.onClick.AddListener(() => { OnPressExternalMoveButton?.Invoke(selectedMoveName); });
@@ -154,6 +168,23 @@ public class PlayerUI : NetworkBehaviour
 
         
         DisplayExternalMove(figurineMove);
+    }
+
+    private void DisplayPassiveDescription(Button selectedButton) {
+        // Grab the ability that the player selected
+        string abilityName = selectedButton.name.Replace(" ", "");
+        string path = $"Abilities/{abilityName}";
+        FigurineAbility figurineAbility = Resources.Load<FigurineAbility>(path);
+
+        // Clear all icons
+        move1Background.SetActive(false);
+        move2Background.SetActive(false);
+        move3Background.SetActive(false);
+
+        // Updates Description text and displays it
+        moveDescriptionText.text = figurineAbility.abilityDescription;
+        moveDescriptionText.gameObject.SetActive(true);
+
     }
 
     private void DisplayExternalMove(FigurineMove figurineMove)
@@ -273,6 +304,20 @@ public class PlayerUI : NetworkBehaviour
         else
         {
             debuffConditionPanel.SetActive(false);
+        }
+        #endregion
+
+        #region Passive Check
+        // Check for Passive
+        if(selectedFigurine.ability == null) {
+            passiveDisplayButton.gameObject.SetActive(false);
+            
+        }
+        else
+        {
+            passiveDisplayButton.gameObject.SetActive(true);
+            passiveDisplayButton.name = selectedFigurine.ability.abilityName.ToString();
+            passiveDisplayButtonText.text = selectedFigurine.ability.abilityName.ToString();
         }
         #endregion
     }

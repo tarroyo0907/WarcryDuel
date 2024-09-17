@@ -249,7 +249,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/Source/iamty/Documents/user.keystore
+  AndroidKeystoreName: '{dedicated}: Documents/user.keystore'
   AndroidKeyaliasName: warcry
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

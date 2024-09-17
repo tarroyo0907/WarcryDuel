@@ -184,8 +184,8 @@
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Lighting\ProbeVolume\ProbeIndexOfIndices.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Common\ListBuffer.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Lighting\ProbeVolume\ProbeVolumePositioning.cs" />
-    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFoldout.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Common\GlobalDynamicResolutionSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFoldout.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Common\IAdditionalData.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Utilities\ArrayExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.render-pipelines.core@12.1.7\Runtime\Debugging\DebugUI.Fields.cs" />

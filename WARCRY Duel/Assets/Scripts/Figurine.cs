@@ -61,7 +61,7 @@ public class Figurine : NetworkBehaviour
 
     [SerializeField] public UnityEngine.UI.Slider healthBar;
     [SerializeField] private TMPro.TextMeshProUGUI movementPointText;
-    
+
 
     public Dictionary<FigurineMove, int> moveCooldowns;
     #endregion
@@ -120,7 +120,7 @@ public class Figurine : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     #endregion
 
@@ -175,7 +175,7 @@ public class Figurine : NetworkBehaviour
     {
         // Inflicts all the status effects that the figurine currently has
         Debug.Log("Inflicting Status Effect on Figurine!");
-        FigurineEffect.StatusEffects statusEffect = (FigurineEffect.StatusEffects) statusEffectEnum;
+        FigurineEffect.StatusEffects statusEffect = (FigurineEffect.StatusEffects)statusEffectEnum;
         switch (statusEffect)
         {
             case FigurineEffect.StatusEffects.Stealth:
@@ -193,7 +193,7 @@ public class Figurine : NetworkBehaviour
         {
             buffs.Remove(statusEffect);
         }
-            
+
         // Invokes the Status Effect Event and runs on clients side
         InflictStatusEffectEvent?.Invoke(statusEffect);
 
@@ -268,7 +268,7 @@ public class Figurine : NetworkBehaviour
                 {
                     case "Enduring Defense":
                         // Reduces Incoming Damage by 10% rounded up.
-                        incomingEffect.IncomingDamage = (int) (incomingEffect.IncomingDamage * 0.9f);
+                        incomingEffect.IncomingDamage = (int)(incomingEffect.IncomingDamage * 0.9f);
                         break;
                     default:
                         break;
@@ -293,7 +293,7 @@ public class Figurine : NetworkBehaviour
             {
                 Debug.Log("No Stealth Detected!");
             }
-            
+
         }
         #endregion
 
@@ -313,6 +313,11 @@ public class Figurine : NetworkBehaviour
         // Reduces current health by the specified damage
         currentHealth -= incomingEffect.IncomingDamage;
         healthBar.value = currentHealth;
+        if (incomingEffect.IncomingDamage != 0)
+        {
+            StartCoroutine(TakeDamageAnimation());
+        }
+        
 
         // Appends the self status effects first
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfBuff in incomingEffect.SelfBuffsToApply)
@@ -325,7 +330,7 @@ public class Figurine : NetworkBehaviour
             {
                 buffs[selfBuff.Key] += selfBuff.Value;
             }
-            
+
         }
 
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfDebuff in incomingEffect.SelfDebuffsToApply)
@@ -399,12 +404,12 @@ public class Figurine : NetworkBehaviour
     {
         OnStartMoving?.Invoke(this);
         List<Tile> tilePath = new List<Tile>();
-         tilePath = FindEndingPoint(currentSpacePos.gameObject.GetComponent<Tile>(), endingPoint, null, 0);
+        tilePath = FindEndingPoint(currentSpacePos.gameObject.GetComponent<Tile>(), endingPoint, null, 0);
         Debug.Log("Tile Path Count : " + tilePath.Count);
         for (int i = 0; i < tilePath.Count - 1; i++)
         {
             Debug.Log("Tile Path Iteration : " + tilePath[i]);
-            StartCoroutine(MoveFigure(tilePath[i], tilePath[i+1], 1f));
+            StartCoroutine(MoveFigure(tilePath[i], tilePath[i + 1], 1f));
             yield return new WaitUntil(() => isMoving == false);
         }
 
@@ -545,8 +550,8 @@ public class Figurine : NetworkBehaviour
                 possiblePositions[0].Add(accessibileTile);
             }
         }
-        
-        
+
+
         // Depending on the movement points, keeps adding to the list of possible positions
         // Each Index represents the depth
         for (int i = 0; i < movementPoints - 1; i++)
@@ -561,7 +566,7 @@ public class Figurine : NetworkBehaviour
                         bool IsAccessibleTile = true;
                         foreach (GameObject figure in Figurines)
                         {
-                            
+
                             // Check if any figurine is standing on top of an accessible tile
                             if (figure.GetComponent<Figurine>().CurrentSpacePos.name == childTile.name)
                             {
@@ -576,12 +581,12 @@ public class Figurine : NetworkBehaviour
                         {
                             possiblePositions[i + 1].Add(childTile);
                         }
-                        
+
                     }
                 }
             }
         }
-        
+
 
         return possiblePositions;
 
@@ -622,7 +627,7 @@ public class Figurine : NetworkBehaviour
                             possibleTargets.Add(figure);
                         }
                     }
-                }        
+                }
             }
         }
 
@@ -641,11 +646,11 @@ public class Figurine : NetworkBehaviour
         foreach (GameObject enemy in surroundingEnemies)
         {
             Figurine enemyFigurine = enemy.GetComponent<Figurine>();
-            if(enemyFigurine.GetPossibleTargets().Count == enemyFigurine.currentSpacePos.GetComponent<Tile>().AccessibleTiles.Count)
+            if (enemyFigurine.GetPossibleTargets().Count == enemyFigurine.currentSpacePos.GetComponent<Tile>().AccessibleTiles.Count)
             {
                 enemyFigurine.Defeated();
                 defeatedEnemies.Add(enemy);
-            }   
+            }
         }
 
         foreach (GameObject enemy in defeatedEnemies)
@@ -665,13 +670,27 @@ public class Figurine : NetworkBehaviour
             switch (ability.name)
             {
                 case "Lifesteal":
-                    
+
                     break;
                 default:
                     break;
 
             }
         }
+    }
+
+    public IEnumerator TakeDamageAnimation()
+    {
+        // Get MeshRenderer Component
+        SkinnedMeshRenderer figureMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        // Store original color before flashing red
+        Color originalColor = figureMeshRenderer.material.color;
+        figureMeshRenderer.material.color = Color.red;
+
+        yield return new WaitForSeconds(0.2f);
+
+        figureMeshRenderer.material.color = originalColor;
     }
 
     #region Helper Methods

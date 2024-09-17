@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c033689f643147748841233e8b920ab4, type: 3}
   m_Name: EnduringDefense
   m_EditorClassIdentifier: 
-  abilityName: EnduringDefense
+  abilityName: Enduring Defense
   abilityDescription: Take 1 less damage from all attacks.

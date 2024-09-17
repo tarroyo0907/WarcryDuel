@@ -1,4 +1,3 @@
-
 using System;
 using System.IO;
 using System.Collections;
@@ -332,6 +331,7 @@ public class MainMenuManager : NetworkBehaviour
                 spawnedFigurine.transform.localScale = partyFigurinePositions[i].transform.localScale;
                 Destroy(spawnedFigurine.GetComponent<NetworkObject>());
                 Destroy(spawnedFigurine.GetComponent<Figurine>());
+                Destroy(partyFigurinePositions[i]);
 
                 spawnedFigurine.name = savedPartyFigurines[i];
             }
@@ -450,8 +450,22 @@ public class MainMenuManager : NetworkBehaviour
 
     public void SaveParty()
     {
+        // Save the player's current party.
         SavePartyData();
         SaveCollection();
+
+        // Go back to the Party Select Menu
+        // Hide Collection Menu
+        partyFormationView.SetActive(false);
+
+        // Show Party View
+        partyFigurines.SetActive(true);
+        partyCanvasView.SetActive(true);
+        partyFigurines.transform.SetParent(partyCanvasView.transform);
+        partyFigurines.transform.position = partyFigurinesOriginalPos;
+
+        // Change Menu State
+        currentMenuState = MenuStates.PartyOverview;
     }
 
     public void OpensPreviousMenu()

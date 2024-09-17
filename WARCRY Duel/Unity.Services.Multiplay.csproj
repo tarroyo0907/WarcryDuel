@@ -71,8 +71,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\Apis\GameServerApiRequests.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\ErrorMitigation\IRetryPolicy.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\Http\IsolatedJsonConvert.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\SDK\ServerEvents\MultiplayServerSubscriptionState.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\SDK\MultiplayEventCallbacks.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\SDK\ServerEvents\MultiplayServerSubscriptionState.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\SDK\Internal\MultiplayServiceLogging.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\SDK\IServerQueryHandler.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\AssemblyInfo.cs" />
