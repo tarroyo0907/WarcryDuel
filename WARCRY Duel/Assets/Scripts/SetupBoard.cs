@@ -76,7 +76,6 @@ public class SetupBoard : NetworkBehaviour
                     LineRenderer lineRenderer = lineObject.GetComponent<LineRenderer>();
                     if (lineRenderer != null)
                     {
-                        Debug.Log("Drawing Line!");
                         Vector3 initialPos;
                         Vector3 finalPos;
                         initialPos = boardSpace.transform.position;

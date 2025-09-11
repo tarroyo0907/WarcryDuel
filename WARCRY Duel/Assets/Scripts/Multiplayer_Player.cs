@@ -49,6 +49,7 @@ public class Multiplayer_Player : NetworkBehaviour
     [SerializeField] public string playerTeam;
     public Figurine playerBattleFigure;
     public Figurine enemyBattleFigure;
+    public bool canInteract = true;
 
     public FigurineMove combatMove;
     public Dictionary<FigurineEffect.MoveEffects, int> moveEffects = new Dictionary<FigurineEffect.MoveEffects, int>();
@@ -67,12 +68,11 @@ public class Multiplayer_Player : NetworkBehaviour
     {
         UpdateBattleFigures += UpdateBattleFigure;
 
-        string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
-        PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(saveString);
+        string savedTeamString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
 
-        for (int i = 0; i < playerTeamData.figureNames.Length; i++)
+        if (IsOwner)
         {
-            playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
+            SendPlayerTeamToServerRpc(savedTeamString);
         }
     }
 
@@ -106,8 +106,9 @@ public class Multiplayer_Player : NetworkBehaviour
         if (!IsOwner) { return; }
 
         // Checks if player touches the screen or clicks the mouse
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+        if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0) && canInteract)
         {
+            
             PlayerInteract();
         }
 
@@ -124,11 +125,11 @@ public class Multiplayer_Player : NetworkBehaviour
 
         if (hit.collider != null)
         {
+            canInteract = false;
             string hitReferenceName = hit.collider.gameObject.name;
             Debug.Log("Hit Object's Name: " + hitReferenceName);
             PlayerInteractServerRpc(hitReferenceName);
         }
-
     }
 
     /// <summary>
@@ -141,6 +142,14 @@ public class Multiplayer_Player : NetworkBehaviour
         ulong playerID = serverRpcParams.Receive.SenderClientId;
         GameObject hit = GameObject.Find(hitName);
 
+        var clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { playerID }
+            }
+        };
+
         // Checks if there is a current active move effect
         Multiplayer_GameManager.MoveEffectStateEnum currentMoveEffectState = Multiplayer_GameManager.Instance.MoveEffectState;
         if (currentMoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERONE ||
@@ -149,11 +158,13 @@ public class Multiplayer_Player : NetworkBehaviour
             if (playerID == 1 && currentMoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERONE)
             {
                 CompleteMoveEffect(hit);
+                OnPlayerInteractCompleteClientRpc(clientRpcParams);
                 return;
             }
             else if (playerID == 2 && currentMoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERTWO)
             {
                 CompleteMoveEffect(hit);
+                OnPlayerInteractCompleteClientRpc(clientRpcParams);
                 return;
             }
             else
@@ -166,21 +177,30 @@ public class Multiplayer_Player : NetworkBehaviour
         if (activeExternalMove != "" && OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
         {
             CompleteExternalMove(hit);
+            OnPlayerInteractCompleteClientRpc(clientRpcParams);
             return;
         }
 
         // Checks if its the player's turn
         if (OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
         {
-            if (DetectAttackFigure(hit, serverRpcParams)) { return; }
+            if (DetectAttackFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(clientRpcParams); return; }
             if (DetectMoveFigure(hit, serverRpcParams))
             {
                 OnEndTurn?.Invoke(this);
+                OnPlayerInteractCompleteClientRpc(clientRpcParams);
                 return;
             }
         }
 
-        if (DetectSelectFigure(hit, serverRpcParams)) { return; }
+        if (DetectSelectFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(clientRpcParams); return; }
+        OnPlayerInteractCompleteClientRpc(clientRpcParams);
+    }
+
+    [ClientRpc]
+    private void OnPlayerInteractCompleteClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        canInteract = true;
     }
 
     public bool DetectMoveFigure(GameObject hit, ServerRpcParams serverRpcParams)
@@ -503,7 +523,10 @@ public class Multiplayer_Player : NetworkBehaviour
         Figurine enemyFigure = enemyNetworkObject.gameObject.GetComponent<Figurine>();
 
         UpdateBattleFigures(attackerFigure, enemyFigure, attackerID);
-        OnBattleStart.Invoke(this);
+
+        Debug.Log($"BattleStartClientRpc called on client {NetworkManager.Singleton.LocalClientId}, OwnerClientId: {OwnerClientId}");
+        OnBattleStart?.Invoke(this);
+
     }
 
     private void UpdateBattleFigure(Figurine attackerFigurine, Figurine enemyFigurine, ulong attackerID)
@@ -562,6 +585,28 @@ public class Multiplayer_Player : NetworkBehaviour
 
     }
 
+    [ServerRpc]
+    public void SendPlayerTeamToServerRpc(string savedTeamString, ServerRpcParams serverRpcParams = default)
+    {
+        PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(savedTeamString);
+        for (int i = 0; i < playerTeamData.figureNames.Length; i++)
+        {
+            playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
+        }
+
+        UpdatePlayerTeamClientRpc(savedTeamString);
+    }
+
+    [ClientRpc]
+    private void UpdatePlayerTeamClientRpc(string savedTeamString)
+    {
+        PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(savedTeamString);
+        for (int i = 0;i < playerTeamData.figureNames.Length;i++)
+        {
+            playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
+        }
+    }
+
     #region Game Preparation
     /// <summary>
     /// Runs whenever the Multiplayer Battle Scene gets completely loaded in.
@@ -603,9 +648,9 @@ public class Multiplayer_Player : NetworkBehaviour
 
     public void LoadPlayerTeam()
     {
-        if (File.Exists(Application.dataPath + "/savedTeam.txt"))
+        if (File.Exists(Application.persistentDataPath + "/savedTeam.txt"))
         {
-            string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
+            string saveString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
 
             PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(saveString);
             for (int i = 0; i < playerTeamData.figureNames.Length; i++)

@@ -56,44 +56,44 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderOptions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IAuthenticationAdminClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationAdminClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\UpdateIdProviderRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\GetIdDomainResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\GenesisTokenProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\AuthenticationIdentifier.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationEditorService.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AuthenticationAdminClientManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\TokenExchangeResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\TokenExchangeRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Analytics\AuthenticationEditorAnalytics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\AuthenticationTopMenu.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\CreateIdProviderRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Settings\AuthenticationSettingsHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderCustomSettingsElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\IdProviderNames.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Requests\OpenIDConfig.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\IdProviderResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\ListIdProviderResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProviderRegistry.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\IAuthenticationAdminNetworkClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Utilities\IGenesisTokenProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\IdProviders\IdProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\AuthenticationAdminNetworkClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Network\Responses\TokenExchangeErrorResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\AuthenticationAdminClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Requests\UpdateIdProviderRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Utilities\GenesisTokenProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Settings\AuthenticationSettingsElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\AuthenticationAdminClientManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Analytics\AuthenticationEditorAnalytics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Utilities\AuthenticationTopMenu.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IdProviders\IdProviderElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Utilities\IdProviderNames.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IdProviders\IdProviderRegistry.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\IAuthenticationAdminNetworkClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Utilities\IGenesisTokenProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\AuthenticationAdminNetworkClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IdProviders\IdProviderOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Settings\AuthenticationSettingsProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IAuthenticationAdminClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Responses\GetIdDomainResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Utilities\AuthenticationIdentifier.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\AuthenticationEditorService.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Responses\TokenExchangeResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Requests\TokenExchangeRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Requests\CreateIdProviderRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Settings\AuthenticationSettingsHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IdProviders\IdProviderCustomSettingsElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Requests\OpenIDConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Responses\IdProviderResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Responses\ListIdProviderResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\IdProviders\IdProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Network\Responses\TokenExchangeErrorResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\UXML\AuthenticationProjectSettings.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\UXML\ConfigureProject.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\USS\AuthenticationStyleSheet.uss" />
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\UXML\IdProviderElement.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\USS\ConfigureProjectStyleSheet.uss" />
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Editor\Unity.Services.Authentication.Editor.asmdef" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\UXML\AuthenticationProjectSettings.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\UXML\ConfigureProject.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\USS\AuthenticationStyleSheet.uss" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\UXML\IdProviderElement.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\USS\ConfigureProjectStyleSheet.uss" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Editor\Unity.Services.Authentication.Editor.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -388,7 +388,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -397,7 +397,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

@@ -56,59 +56,59 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Memory.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\xxHash3.AVX2.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeText.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringMethods.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Attributes.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeStream.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeUtilityEx.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeAtomicCounter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringFormat.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\AllocatorManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringFormatMethods.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeNotBurstCompatible.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringParseMethods.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeScratchAllocator.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeHashMapExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\xxHash3.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\ListExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeHashSetExtensions.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringInternalMethods.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeHashSet.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeArrayExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeHashSetExtensions.gen.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeList.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeText.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\ConcurrentMask.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Deprecated.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeNotBurstCompatible.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedString.gen.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\RewindableAllocator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\BurstCompatibleAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeList.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeQueue.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeStream.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedList.gen.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeRingQueue.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeAppendBuffer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\BurstCompatibleAttribute.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeBitArray.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\JetBrains.Annotations.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeReference.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeSort.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\DebugView.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\CollectionHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\HeapString.gen.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeMultiHashMap.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Unicode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringAppendMethods.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeHashMap.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\BitField.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeHashMap.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeMultiHashMap.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\xxHash3.StreamingState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Memory.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\Attributes.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeStream.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeUtilityEx.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringFormat.gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeScratchAllocator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeHashSet.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeHashSetExtensions.gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeList.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeText.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeNotBurstCompatible.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedString.gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\RewindableAllocator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeQueue.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedList.gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeRingQueue.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeStream.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UnsafeAppendBuffer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeReference.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\DebugView.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\CollectionHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\FixedStringAppendMethods.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\BitField.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeMultiHashMap.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeBitArray.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\UTF8ArrayUnsafeUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections\NativeHashSet.cs" />
@@ -397,7 +397,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -406,7 +406,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

@@ -58,12 +58,12 @@
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\RuntimeAccessModifiersILPP.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\PostProcessorReflectionImporter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\INetworkSerializableILPP.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\INetworkMessageILPP.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\CodeGenHelpers.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\PostProcessorReflectionImporterProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\PostProcessorAssemblyResolver.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\NetworkBehaviourILPP.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\INetworkSerializableILPP.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\PostProcessorReflectionImporterProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Editor\CodeGen\com.unity.netcode.editor.codegen.asmdef" />

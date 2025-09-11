@@ -57,9 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Data\ContinuousExponentialMovingAverageTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Data\RingBufferTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Data\RingBufferExtensionsTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Data\ExponentialMovingAverageTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Data\RingBufferTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\Common\Tests\Unity.Multiplayer.Tools.Common.Tests.asmdef" />

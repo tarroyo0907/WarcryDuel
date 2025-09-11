@@ -56,28 +56,28 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Configuration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\WireDirectServiceProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\SubscriptionHandle.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\Client.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\WireErrorCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\WebSocket.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\WireDirect.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Utils\BackoffStrategy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Exceptions\WireExceptions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\Subscription.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\IWireDirect.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\CentrifugeErrorCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\CommandManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\WireMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\CentrifugeCloseCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Utils\Logger.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Centrifuge\Messages.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\WireDirectServiceProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\SubscriptionHandle.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\Client.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\WireErrorCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\WebSocket.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\WireDirect.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\Subscription.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\CentrifugeErrorCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\CentrifugeCloseCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Utils\Logger.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\Messages.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Configuration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Utils\BackoffStrategy.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Exceptions\WireExceptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\IWireDirect.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\CommandManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Centrifuge\WireMessage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.services.multiplay@1.0.3\Runtime\EmbedWire\Unity.Services.Multiplay.Wire.Internal.asmdef" />
+    <None Include="Library\PackageCache\com.unity.services.multiplay@1.3.0\Runtime\EmbedWire\Unity.Services.Multiplay.Wire.Internal.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -360,7 +360,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -369,7 +369,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

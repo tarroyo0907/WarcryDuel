@@ -56,17 +56,17 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\CounterVisualElementTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmCustomDataDisplayUpdateTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Graphing\GraphScalingUtilsTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmVisibilityTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmTestHarness.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\Graphs\GraphDataSamplerTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Stats\StatHistoryRequirementsTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\Graphs\GraphBoundsTransformerTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\CounterVisualElementTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmCustomDataDisplayUpdateTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Graphing\GraphScalingUtilsTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmDisplayUpdateTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\Graphs\GraphInputSynchronizerTest.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Component\RnsmDisplayUpdateStatus.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\UI\Graphs\GraphBoundsTransformerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Tests\Implementation\Unity.Multiplayer.Tools.NetStatsMonitor.Tests.Implementation.asmdef" />

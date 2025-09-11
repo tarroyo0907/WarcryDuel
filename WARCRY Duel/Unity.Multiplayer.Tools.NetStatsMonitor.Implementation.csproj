@@ -57,37 +57,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\StackedAreaGraphRenderer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\StatHistoryRequirements.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphType.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Graphing\GraphScalingUtils.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Util\NumericUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\CounterVisualElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphAxisLabels.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphParameters.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphLegend.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\LegendKey.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\RnsmVisualElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\IGraphRenderer.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Configuration\Extensions\NetStatsMonitorConfiguration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Configuration\Extensions\DisplayElementConfiguration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphDataSampler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphInputSynchronizer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\NoDataReceivedVisualElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\LinearTransform.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphContent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphVisualElement.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\LineGraphRenderer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Graphing\GraphColorUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\StatsAccumulator.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Util\MetricsUtils.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\MultiStatHistoryRequirements.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\MultiStatHistory.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Component\RnsmComponentImplementation.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphBoundsTransformer.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\StatsAggregator.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\StatHistory.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Metrics\RnsmMetricObserver.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Stats\StatHistoryRequirements.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphType.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Graphing\GraphScalingUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Util\NumericUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\CounterVisualElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphAxisLabels.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphParameters.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphLegend.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Configuration\Extensions\DisplayElementConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphDataSampler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphInputSynchronizer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\NoDataReceivedVisualElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphVisualElement.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\LineGraphRenderer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Graphing\GraphColorUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\Component\RnsmComponentImplementation.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStatsMonitor\Implementation\UI\Graphs\GraphBuffers.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -345,13 +345,13 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Rocks">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

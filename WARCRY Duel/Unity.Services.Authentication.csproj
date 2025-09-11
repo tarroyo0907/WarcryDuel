@@ -56,74 +56,104 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\WebRequestVerb.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\Profile\IProfile.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\Oculus\LinkWithOculusRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\DateTime\IDateTimeWrapper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Metrics\AuthenticationMetrics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\AuthenticationErrorResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\LinkResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AuthenticationServiceInternal.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Security\AccessTokenExtraClaims.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Core\AuthenticationExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Cache\AuthenticationCache.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Cache\IAuthenticationCache.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\SignInOptions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\SessionTokenComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Jwt\JwtDecoder.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Jwt\IJwtDecoder.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AuthenticationErrorCodes.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Identity.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Metrics\IAuthenticationMetrics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Cache\ICache.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\SignInWithExternalTokenRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\GameCenter\SignInWithAppleGameCenterRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AuthenticationService.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\Logger.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Settings\AuthenticationSettings.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\Profile\ProfileComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\User.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\SignInResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\WebRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\PlayerInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\EnvironmentIdComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\SessionTokenRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Core\AuthenticationPackageInitializer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\AccessTokenComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Settings\NetworkConfiguration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\LinkOptions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\IdProviderKeys.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\PlayerInfoResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\INetworkHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\Profile\ProfileEventArgs.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Security\BaseJwt.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Exceptions\AuthenticationException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Security\AccessToken.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\WebRequestException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\AuthenticationNetworkClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\UnlinkRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\HttpUtilities.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Settings\IAuthenticationSettings.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\IAuthenticationService.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\LinkWithExternalTokenRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\AppleGameCenterConfig.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\IAuthenticationNetworkClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\ExternalIdentity.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Compatibility\Models.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Responses\UnlinkResponse.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Compatibility\Utilities.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\Oculus\SignInWithOculusRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Settings\INetworkConfiguration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\GameCenter\LinkWithAppleGameCenterRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Components\PlayerIdComponent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\AuthenticationState.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Utilities\DateTime\DateTimeWrapper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Models\Requests\OculusConfig.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Network\NetworkHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\Profile\IProfile.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Metrics\AuthenticationMetrics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\AuthenticationErrorResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\PlayerNames\Model\Player.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Cache\AuthenticationCache.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\OpenAPIDateConverter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Cache\IAuthenticationCache.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiRequestOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Jwt\JwtDecoder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Identity.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\GameCenter\SignInWithAppleGameCenterRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\PlayerNames\Model\Detail.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\AuthenticationService.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\IApiClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Logger.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\IsolatedJsonConvert.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Exceptions\AuthenticationExceptionHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\UpdatePasswordRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\PlayerInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\EnvironmentIdComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Core\AuthenticationPackageInitializer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\AccessTokenComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Settings\NetworkConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\LinkOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\PlayerInfoResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\Multimap.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\INetworkHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Security\BaseJwt.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Security\AccessToken.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\PlayerNameComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\WebRequestException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\IApiConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\HttpUtilities.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Settings\IAuthenticationSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\IAuthenticationService.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\IAuthenticationNetworkClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\IApiAccessor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\ExternalIdentity.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\AuthenticationApiClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\UnlinkResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\SerializerSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Compatibility\Utilities.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Settings\INetworkConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\PlayerNames\Model\UpdateNameRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\PlayerIdComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\WebRequestVerb.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\Oculus\LinkWithOculusRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\LinkWithSteamRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Exceptions\IAuthenticationExceptionHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\PlayerNames\Model\ErrorStatus.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiRequestPathBuilder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\UsernamePasswordRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\LinkResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\AuthenticationServiceInternal.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Security\AccessTokenExtraClaims.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Core\AuthenticationExtensions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\SignInOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\SessionTokenComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Jwt\IJwtDecoder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Exceptions\AuthenticationErrorCodes.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Metrics\IAuthenticationMetrics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\Cache\ICache.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\SignInWithExternalTokenRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\IPlayerName.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiExceptionType.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Settings\AuthenticationSettings.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\PlayerNames\Api\PlayerNamesApi.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\Profile\ProfileComponent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\User.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\AbstractOpenAPISchema.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\WebRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\SignInResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\SessionTokenRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Utilities\IdProviderKeys.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Components\Profile\ProfileEventArgs.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Exceptions\AuthenticationException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\SteamConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\AuthenticationNetworkClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Generated\Shared\ApiConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\UnlinkRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Responses\UsernameInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\LinkWithExternalTokenRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\AppleGameCenterConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Compatibility\Models.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\Oculus\SignInWithOculusRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\SignInWithSteamRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\GameCenter\LinkWithAppleGameCenterRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\AuthenticationState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Models\Requests\OculusConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\AuthenticationWebRequestUtils.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Network\NetworkHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.services.authentication@2.4.0\Runtime\Unity.Services.Authentication.asmdef" />
+    <None Include="Library\PackageCache\com.unity.services.authentication@2.7.4\Runtime\Unity.Services.Authentication.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -406,7 +436,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -415,7 +445,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

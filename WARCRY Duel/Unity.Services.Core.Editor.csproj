@@ -56,107 +56,149 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedMember.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\ProjectBindRedirectContentUI.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\ProjectStateRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\ServiceFlagRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\EditorGameServiceRegistry.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\PackageInfoNameComparer.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedType.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Scheduler\ActionSchedulerCleaner.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\ProjectStateHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\ServiceInstallationListener.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\EditorGameServiceFlagEnabler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\IProjectEditorDrawerFactory.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\VisualElementHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\BackendHelpers\JsonHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\JsonWebToken.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\IProjectStateHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedField.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UserRoleManagement\UserRole.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\SettingsCommonHeaderUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\XmlLinkedModelsExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\SliderToggleUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\EditorGameServiceSettingsProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\IEditorGameServiceIdentifier.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\IEditorGameService.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\LoggedOutUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\ProductionTokenExchangeUrls.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedAssembly.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalyticsSender.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedPreserve.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\StagingTokenExchangeUrls.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\ProjectState.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\CloudEnvironment\CloudEnvironmentConfigProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\PlatformSupportUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\InvalidJwtException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\ITokenExchangeUrls.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\ProjectBindRedirectPopupUI.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\IServiceFlagRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UserRoleManagement\IUserRoleHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\ServiceFlagEndpoint.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\OrganizationHandler\IOrganizationHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectStateManagement\IProjectStateRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\IGatewayTokens.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalyticsRegistrant.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\ProjectBindRedirectPopupWindow.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\OrganizationHandler\OrganizationProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\ExceptionHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UserRoleManagement\IUserRoleRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\OrganizationHandler\OrganizationHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkerModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\IEditorGameServiceEnabler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\IAccessTokens.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedProperty.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedAccessors.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\Analytics\IEditorAnalyticsEventRegistrant.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UserRoleManagement\UserRoleHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\OfflineUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Telemetry\OperatePackageVersionConfigProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\LinkFileGenerator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\DefaultCdnConfiguredEndpoint.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\AccessTokenErrorUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\EditorGameServiceDashboardHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Linker\Models\XmlLinkedMethod.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UserRoleRequestUiHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UserRoleManagement\UserRoleRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\Analytics\IEditorGameServiceAnalyticsSender.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\IEditorGameServiceRegistry.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\GatewayTokens.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\BackendHelpers\UnityWebRequestHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Build\ProjectUnlinkBuildWarning.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\ProjectBindRedirectProjectSettingsUi.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Utils\AccessTokens.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Networking\TokenExchange.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\ProjectBindRedirectUiConstants.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\EditorGameServiceRemoteConfiguration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Telemetry\PackageConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\Scope.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\ProjectStateRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalyticData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\PackageInfoNameComparer.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\ServiceInstallationListener.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\IProjectEditorDrawerFactory.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\VisualElementHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\BackendHelpers\JsonHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\IProjectStateHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\ModelBinding.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UserRoleManagement\UserRole.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\ServiceProvider.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\SliderToggleUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\LoggedOutUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\ProductionTokenExchangeUrls.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedPreserve.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\ProjectState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\Singleton.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\CloudEnvironment\CloudEnvironmentConfigProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\ITokenExchangeUrls.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\MethodNotFoundException.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\EditorUtils\Sync.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\ServiceFlagEndpoint.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\OrganizationHandler\IOrganizationHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalyticsRegistrant.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\ProjectBindRedirectPopupWindow.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\OrganizationHandler\OrganizationProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\ExceptionHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\Factories.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\OrganizationHandler\OrganizationHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\IAccessTokens.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedAccessors.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\Transient.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\ProgressBar.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\TypeAlreadyRegisteredException.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\LinkFileGenerator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\AssemblyInfo.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\DefaultCdnConfiguredEndpoint.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\EditorGameServiceDashboardHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UserRoleRequestUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\EditorUtils\ICopyable.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Clients\AssemblyInfo.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\GatewayTokens.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\BackendHelpers\UnityWebRequestHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Build\ProjectUnlinkBuildWarning.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\TokenExchange.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\EditorUtils\ApplyRevertChangeTracker.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Collections\MappedObservableCollection.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\ConstructorNotFoundException.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\ProjectBindRedirectUiConstants.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\DependencyNotFoundException.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Collections\ReadOnlyObservableCollection.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\FileSystem\IFileSystem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedMember.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\ProjectBindRedirectContentUI.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalytic.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\ServiceFlagRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\EditorUtils\EditorValueTracker.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\Notifications.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\EditorGameServiceRegistry.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\IScopedServiceProvider.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedType.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Scheduler\ActionSchedulerCleaner.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\ProjectStateHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\EventBinding.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\EditorGameServiceFlagEnabler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\JsonWebToken.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\IServiceFactory.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedField.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\SettingsCommonHeaderUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\XmlLinkedModelsExtensions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\EditorGameServiceSettingsProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Collections\MergedObservableCollection.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\IEditorGameServiceIdentifier.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\IEditorGameService.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\AccessTokensSingleton.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedAssembly.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\EditorGameServiceAnalyticsSender.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\StagingTokenExchangeUrls.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\PlatformSupportUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Networking\InvalidJwtException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\ProjectBindRedirectPopupUI.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\IServiceFlagRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Clients\CloudEnvironmentConfigProvider.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UserRoleManagement\IUserRoleHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectStateManagement\IProjectStateRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\FileSystem\FileSystem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\IGatewayTokens.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UserRoleManagement\IUserRoleRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Collections\CollectionExtensions.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Collections\IReadOnlyObservable.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\IO\PathUtils.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\ServiceCollection.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkerModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\IEditorGameServiceEnabler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedProperty.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\IEditorAnalyticsEventRegistrant.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UserRoleManagement\UserRoleHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\EditorUtils\AssemblyInfo.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\OfflineUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Telemetry\OperatePackageVersionConfigProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\AssemblyInfo.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\AccessTokenErrorUiHelper.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\AssemblyInfo.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\SystemEnvironment\SystemEnvironmentPathUtils.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Linker\Models\XmlLinkedMethod.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UserRoleManagement\UserRoleRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\Analytics\IEditorGameServiceAnalyticsSender.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\IEditorGameServiceRegistry.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\DependencyInversion\AbstractRuntimeServices.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\ProjectBindRedirectProjectSettingsUi.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Utils\AccessTokens.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Clients\AdminApiHeaders.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\UI\CollectionBinding.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Shared\Infrastructure\Threading\Sync.Gen.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\EditorGameServiceRemoteConfiguration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Telemetry\PackageConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\ExceptionVisual.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectContent.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\USS\PlatformSupportVisualDark.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectProjectSettings.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\USS\PlatformSupportVisualLight.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\PleaseWait.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectProjectSettings.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupCommon.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\ProjectSettingsCommonHeader.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\USS\SliderToggleCommon.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\USS\PlatformSupportVisualCommon.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupDark.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\USS\ServicesProjectSettingsCommon.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\AccessTokenError.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\USS\ServicesProjectSettingsLight.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\Unity.Services.Core.Editor.asmdef" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupLight.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectPopup.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\EditorGameService\USS\ServicesProjectSettingsDark.uss" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\LoggedOut.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\PlatformSupportVisual.uxml" />
-    <None Include="Library\PackageCache\com.unity.services.core@1.8.2\Editor\Core\UiHelpers\UXML\Offline.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\ExceptionVisual.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectContent.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\USS\PlatformSupportVisualDark.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectProjectSettings.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\USS\PlatformSupportVisualLight.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\PleaseWait.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectProjectSettings.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupCommon.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\ProjectSettingsCommonHeader.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\USS\SliderToggleCommon.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\USS\PlatformSupportVisualCommon.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupDark.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\USS\ServicesProjectSettingsCommon.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\AccessTokenError.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\USS\ServicesProjectSettingsLight.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\Unity.Services.Core.Editor.asmdef" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\USS\ProjectBindRedirectPopupLight.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\ProjectBindRedirect\UXML\ProjectBindRedirectPopup.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\EditorGameService\USS\ServicesProjectSettingsDark.uss" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\LoggedOut.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\PlatformSupportVisual.uxml" />
+    <None Include="Library\PackageCache\com.unity.services.core@1.12.5\Editor\Core\UiHelpers\UXML\Offline.uxml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -451,7 +493,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -460,7 +502,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>
@@ -888,6 +930,10 @@
     <ProjectReference Include="Unity.Services.Core.Registration.csproj">
       <Project>{47198E11-7584-09C8-EAF7-6C337598EC70}</Project>
       <Name>Unity.Services.Core.Registration</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
+      <Project>{FB3355D5-6F9A-16B0-D0F5-75D0F88162D9}</Project>
+      <Name>Unity.Services.Core.Environments</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{88173558-18E9-5E3F-E081-E66A5E695C6D}</Project>

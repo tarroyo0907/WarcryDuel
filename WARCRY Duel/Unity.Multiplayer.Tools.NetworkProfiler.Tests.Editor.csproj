@@ -56,13 +56,13 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Counter\ProfilerCountersTestData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\DetailsViewFoldoutStateTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Search\TestRowData.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\TreeModel\TreeModelBuilderTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Search\SortTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Search\SearchTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Counter\ProfilerCountersTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Counter\ProfilerCountersTestData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\DetailsViewFoldoutStateTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Search\SearchTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Tests\Editor\Unity.Multiplayer.Tools.NetworkProfiler.Tests.Editor.asmdef" />
@@ -339,7 +339,7 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

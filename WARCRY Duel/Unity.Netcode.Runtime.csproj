@@ -57,74 +57,41 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\INetworkHooks.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\ComponentFactory.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\RpcAttributes.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\Arithmetic.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\NetworkDelivery.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\INetworkMetrics.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\INetworkSerializable.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\NetworkConfigurationException.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\DestroyObjectMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\UnityTransport.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\OrderingMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\IMessageProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BytePacker.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkBehaviour.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Connection\PendingClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\NotServerException.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ConnectionApprovedMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Timing\NetworkTickSystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\RpcMessages.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Logging\LogLevel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Spawning\NetworkPrefabHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariable.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\ILPPMessageProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\Collections\NetworkList.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\NetworkObjectReference.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BufferSerializerWriter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\CreateObjectMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\NetworkTransport.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\IMessageSender.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\InvalidParentException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\ISceneManagerHandler.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BufferSerializer.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\NamedMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\SceneEventProgress.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\NetworkVariableDeltaMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariableSerialization.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\BatchHeader.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\NetworkBehaviourReference.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Configuration\HashSize.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ServerLogMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkObject.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\FastBufferWriter.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\MemoryStructures\ByteBool.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\NetworkEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkUpdateLoop.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\MemoryStructures\UIntFloat.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Configuration\NetworkPrefab.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\FastBufferReader.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\NetworkMetricsContext.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\RpcParams.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Hashing\XXHash\XXHash.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\NetworkContext.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Logging\NetworkLog.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\ForceNetworkSerializeByMemcpy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Profiling\ProfilingHooks.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkBehaviourUpdater.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\BatchedSendQueue.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\NotListeningException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\MetricHooks.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\BatchedReceiveQueue.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ChangeOwnershipMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BitWriter.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Configuration\NetworkConfig.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\INetworkMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ConnectionRequestMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\NetworkMetricsPipelineStage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariablePermission.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\NetworkMetrics.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Configuration\NetworkConstants.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Connection\NetworkClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Spawning\NetworkSpawnManager.cs" />
@@ -132,26 +99,59 @@
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\UnnamedMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\IReaderWriter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BitCounter.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UNET\UNetTransport.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\TimeSyncMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\NetworkSceneManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\NetworkObjectProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Timing\NetworkTimeSystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\SceneEventData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariableBase.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\IDeferredMessageManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\DeferredMessageManager.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BitReader.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\INetworkSerializeByMemcpy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\NullNetworkMetrics.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\CustomMessageManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\ByteUnpacker.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ParentSyncMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Timing\NetworkTime.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BufferSerializerReader.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\SpawnStateException.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\MessageHeader.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\ComponentFactory.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\RpcAttributes.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\Arithmetic.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\NetworkDelivery.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\INetworkMetrics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\UnityTransport.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\IMessageProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\NotServerException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Logging\LogLevel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Spawning\NetworkPrefabHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariable.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\Collections\NetworkList.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\CreateObjectMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Exceptions\InvalidParentException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\ISceneManagerHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\SceneEventProgress.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\NetworkVariableDeltaMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\NetworkBehaviourReference.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Configuration\HashSize.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ServerLogMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkObject.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\NetworkEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Core\NetworkUpdateLoop.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Hashing\XXHash\XXHash.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Logging\NetworkLog.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\ForceNetworkSerializeByMemcpy.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Profiling\ProfilingHooks.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Transports\UTP\BatchedSendQueue.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\MetricHooks.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BitWriter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\INetworkMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ConnectionRequestMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\NetworkMetrics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\BitCounter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\SceneManagement\NetworkSceneManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Timing\NetworkTimeSystem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\NetworkVariable\NetworkVariableBase.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Metrics\NullNetworkMetrics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Serialization\ByteUnpacker.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\ParentSyncMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Timing\NetworkTime.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\MessagingSystem.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Messaging\Messages\SceneEventMessage.cs" />
     <Compile Include="Library\PackageCache\com.unity.netcode.gameobjects@1.0.2\Runtime\Spawning\ReleasedNetworkId.cs" />
@@ -440,7 +440,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -449,7 +449,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

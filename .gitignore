@@ -1,4 +1,7 @@
 WARCRY Duel/Library/*
+WARCRY Duel/Temp/*
+WARCRY Duel/Obj/*
 WARCRY Duel_clone_0/*
 WARCRY Duel_clone_1/*
+WARCRY Duel_BurstDebugInformation_DoNotShip/*
 *.log

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 
+#if DEDICATED_SERVER
+using Unity.Services.Multiplay;
+#endif
+
 public class Multiplayer_GameManager : NetworkBehaviour
 {
     #region Delegates
@@ -96,6 +100,11 @@ public class Multiplayer_GameManager : NetworkBehaviour
             Figurine.OnStopMoving += CheckForWin;
 
             // Grabs both players if they are connected
+            Debug.Log("Connected Clients Count: " + NetworkManager.Singleton.ConnectedClients.Count);
+            for (int i=0; i < NetworkManager.Singleton.ConnectedClients.Count; i++)
+            {
+                Debug.Log("Client ID: " + NetworkManager.Singleton.ConnectedClientsIds[i]);
+            }
             if (NetworkManager.Singleton.ConnectedClients.Count >= 2)
             {
                 player1 = NetworkManager.Singleton.ConnectedClients[1].PlayerObject.GetComponent<Multiplayer_Player>();

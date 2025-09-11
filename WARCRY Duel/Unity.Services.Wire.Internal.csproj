@@ -56,25 +56,41 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\WireServiceProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Utils\BackoffStrategy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\WebSocket.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\CommandManager.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\WireErrorCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\Subscription.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\CentrifugeCloseCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Utils\Logger.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\WireMessage.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\CentrifugeErrorCode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\Client.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Exceptions\WireExceptions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Configuration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Centrifuge\Messages.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\WireServiceProvider.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Utils\BackoffStrategy.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\WebSocket.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\CommandManager.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\Subscription.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\SubscribeResult.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ConcurrentDictSubscriptionRepository.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Utils\Logger.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Reply.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\PingRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\PingResult.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\CentrifugeErrorCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Push.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Exceptions\WireExceptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Configuration.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\UnsubscribeResult.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\BatchMessagesUtil.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Unsubscribe.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\UnsubscribeRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\ClientInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Publication.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\WireErrorCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\CommandID.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Error.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\CentrifugeCloseCode.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\WireMessage.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\ConnectResult.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\ConnectRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\Client.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\SubscribeRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Centrifuge\ProtocolSchema\Command.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.services.wire@1.1.4\Runtime\Unity.Services.Wire.Internal.asmdef" />
+    <None Include="Library\PackageCache\com.unity.services.wire@1.2.5\Runtime\Unity.Services.Wire.Internal.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -357,7 +373,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -366,7 +382,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>
@@ -758,6 +774,10 @@
     <ProjectReference Include="Unity.Services.Core.Internal.csproj">
       <Project>{CCACF6BE-D0B6-7CEA-FB37-78A23CD5D936}</Project>
       <Name>Unity.Services.Core.Internal</Name>
+    </ProjectReference>
+    <ProjectReference Include="unity-websocket-sharp.csproj">
+      <Project>{7CB03C21-A001-E51D-F0C3-11591F826216}</Project>
+      <Name>unity-websocket-sharp</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{88173558-18E9-5E3F-E081-E66A5E695C6D}</Project>

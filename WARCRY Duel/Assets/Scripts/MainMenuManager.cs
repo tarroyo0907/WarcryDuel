@@ -1,18 +1,22 @@
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using Unity.Services;
+using Unity.Services.Authentication;
+using Unity.Services.Core;
+using Unity.Services.Matchmaker;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Unity.Netcode;
-using Unity.Services;
-using Unity.Services.Core;
-using Unity.Services.Matchmaker;
-using Unity.Services.Authentication;
-using Unity.Services.Matchmaker.Models;
-using Unity.Netcode.Transports.UTP;
 using static Multiplayer_Network;
+
+#if DEDICATED_SERVER
+using Unity.Services.Multiplay;
+#endif
 
 // Tyler Arroyo
 // Main Menu Manager
@@ -64,6 +68,7 @@ public class MainMenuManager : NetworkBehaviour
 
     private bool spawnedSavedParty = false;
     private Vector3 partyFigurinesOriginalPos;
+    private bool loadingStarted = false;
     #endregion
 
     #region Collection Data
@@ -82,6 +87,7 @@ public class MainMenuManager : NetworkBehaviour
     private float acceptBackfillTicketsTimerMax = 1.1f;
 
     private bool battleStarting = false;
+    
 #endif
 
     private async void Awake()
@@ -95,42 +101,47 @@ public class MainMenuManager : NetworkBehaviour
 
         NetworkManager.Singleton.OnServerStarted += LocalServerTesting;
 
-        /*// Set Party Data
-        CollectionObject partyTeam = new CollectionObject
-        {
-            figureNames = new string[6] {"Bulwark_Figurine","Bastion_Figurine","Shade_Figurine","Shade_Figurine","Rook_Figurine","Rook_Figurine"} 
-        };
-
-        // Convert Collection Object to JSON format string
-        string json = JsonUtility.ToJson(partyTeam);
-
-        // Write the Json String to Text File
-        File.WriteAllText(Application.dataPath + "/savedTeam.txt", json);
-
-        // Set Collection Data
-        CollectionObject collectionObject = new CollectionObject
-        {
-            figureNames = new string[12] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine", "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine"}
-        };
-
-        // Convert Collection Object to JSON format string
-        json = JsonUtility.ToJson(collectionObject);
-
-        // Write the Json String to Text File
-        File.WriteAllText(Application.dataPath + "/playerCollection.txt", json);*/
+        InitializePartyData();
 
 #if DEDICATED_SERVER
+        await UnityServices.InitializeAsync();
+
         backfillTicketId = null;
         serverQueryHandler = null;
-        var serviceConfig = MultiplayService.Instance.ServerConfig;
-        ushort port = serviceConfig.Port;
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", port, "0.0.0.0");
 
         // Handles Backfill Tickets
         //SetupBackfillTickets();
 
+        var serviceConfig = MultiplayService.Instance.ServerConfig;
+        ushort port = serviceConfig.Port;
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", port);
+
         Debug.Log("Starting as Server!");
-        NetworkManager.Singleton.StartServer();
+        if (!NetworkManager.Singleton.IsServer && !NetworkManager.Singleton.IsClient)
+        {
+            NetworkManager.Singleton.StartServer();
+        }
+        else
+        {
+            Debug.Log("Server already running, skipping StartServer().");
+        }
+
+
+
+        // Read ports & paths that Multiplay injected
+        Debug.Log($"ServerId:{serviceConfig.ServerId} AllocId:{serviceConfig.AllocationId} Port:{serviceConfig.Port} Query:{serviceConfig.QueryPort} Logs:{serviceConfig.ServerLogDirectory}");
+
+        // Start SQP and keep it updated
+        serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(
+            maxPlayers: 2, serverName: "RankedMatch", gameType: "Ranked",
+            buildId: Application.version, map: "Battle");
+
+        serverQueryHandler.CurrentPlayers = 0;
+        serverQueryHandler.Port = port;            // expose the same port clients use
+        serverQueryHandler.MaxPlayers = 2;
+        serverQueryHandler.UpdateServerCheck();
+
+        // Only after allocation completes and your game is ready:
         await MultiplayService.Instance.ReadyServerForPlayersAsync();
 #endif
     }
@@ -148,8 +159,7 @@ public class MainMenuManager : NetworkBehaviour
 
         battleButton.onClick.AddListener(() =>
         {
-            FindLocalMatch();
-
+            FindMatch();
         });
 
         startServerButton.onClick.AddListener(() => { StartLocalServer(); });
@@ -217,6 +227,34 @@ public class MainMenuManager : NetworkBehaviour
             }
         }
         #endregion
+    }
+
+
+    private void InitializePartyData()
+    {
+        // Set Party Data
+        CollectionObject partyTeam = new CollectionObject
+        {
+            figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+        };
+
+        // Convert Collection Object to JSON format string
+        string json = JsonUtility.ToJson(partyTeam);
+
+        // Write the Json String to Text File
+        File.WriteAllText(Application.persistentDataPath + "/savedTeam.txt", json);
+
+        // Set Collection Data
+        CollectionObject collectionObject = new CollectionObject
+        {
+            figureNames = new string[12] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine", "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+        };
+
+        // Convert Collection Object to JSON format string
+        json = JsonUtility.ToJson(collectionObject);
+
+        // Write the Json String to Text File
+        File.WriteAllText(Application.persistentDataPath + "/playerCollection.txt", json);
     }
 
     private void ClickFigurine(RaycastHit hit)
@@ -532,6 +570,7 @@ public class MainMenuManager : NetworkBehaviour
     private async void FindMatch()
     {
         Debug.Log("Finding Match...");
+        SceneManager.LoadScene("Loading");
 
         // Creates Matchmaker Ticket
         createTicketResponse = await MatchmakerService.Instance.CreateTicketAsync(new List<Unity.Services.Matchmaker.Models.Player>
@@ -617,11 +656,30 @@ public class MainMenuManager : NetworkBehaviour
                 case MultiplayAssignment.StatusOptions.Timeout:
                     createTicketResponse = null;
                     Debug.Log("Multiplay Timeout!");
+                    
+                    GameObject sceneManager = GameObject.Find("SceneManager");
+                    GameObject networkManager = GameObject.Find("NetworkManager");
+                    GameObject soundManager = GameObject.Find("SoundManager");
+                    Destroy(sceneManager);
+                    Destroy(networkManager);
+                    Destroy(soundManager);
+
+                    SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                     break;
 
                 case MultiplayAssignment.StatusOptions.Failed:
                     createTicketResponse = null;
                     Debug.Log("Failed to create Multiplay server!");
+
+                    sceneManager = GameObject.Find("SceneManager");
+                    networkManager = GameObject.Find("NetworkManager");
+                    soundManager = GameObject.Find("SoundManager");
+
+                    Destroy(sceneManager);
+                    Destroy(networkManager);
+                    Destroy(soundManager);
+
+                    SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
                     break;
 
                 case MultiplayAssignment.StatusOptions.InProgress:
@@ -672,13 +730,21 @@ public class MainMenuManager : NetworkBehaviour
 
     private void ChangeNetworkScene(ulong clientID)
     {
-        if (NetworkManager.Singleton.ConnectedClients.Count == 2)
+        #if DEDICATED_SERVER
+        if (serverQueryHandler != null)
+        {
+            serverQueryHandler.CurrentPlayers = (ushort) NetworkManager.Singleton.ConnectedClients.Count;
+        }
+        #endif
+
+        if (NetworkManager.Singleton.ConnectedClients.Count == 2 && loadingStarted == false)
         {
             SceneEventProgressStatus eventStatus = NetworkManager.Singleton.SceneManager.LoadScene("Battle", LoadSceneMode.Single);
             Debug.Log("Event Status : " + eventStatus.ToString());
+            loadingStarted = true;
         }
     }
-    #endregion
+#endregion
 
     #region Data Manipulation
     public class CollectionObject
@@ -741,10 +807,10 @@ public class MainMenuManager : NetworkBehaviour
 
     public void LoadCollection()
     {
-        if (File.Exists(Application.dataPath + "/playerCollection.txt"))
+        if (File.Exists(Application.persistentDataPath + "/playerCollection.txt"))
         {
             // Reads json text from the file into saveString
-            string saveString = File.ReadAllText(Application.dataPath + "/playerCollection.txt");
+            string saveString = File.ReadAllText(Application.persistentDataPath + "/playerCollection.txt");
             Debug.Log("Loaded: " + saveString);
 
             // Converts JSON text into Collection Object
@@ -762,10 +828,10 @@ public class MainMenuManager : NetworkBehaviour
 
     public string[] LoadParty()
     {
-        if (File.Exists(Application.dataPath + "/savedTeam.txt"))
+        if (File.Exists(Application.persistentDataPath + "/savedTeam.txt"))
         {
             // Reads json text from the file into saveString
-            string saveString = File.ReadAllText(Application.dataPath + "/savedTeam.txt");
+            string saveString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
             Debug.Log("Loaded: " + saveString);
 
             // Converts JSON text into Collection Object

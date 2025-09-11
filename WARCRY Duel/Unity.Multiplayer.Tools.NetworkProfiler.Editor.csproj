@@ -58,51 +58,51 @@
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Persistence\DetailsViewFoldoutState.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\DetailsView\DetailsViewRow.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\IRowData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\ConnectionViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\TreeViewItem.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\DataProvider\NetworkProfilerDataProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ExtensibilityProfiler\NetworkDetailsViewController.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Tabs\TabNames.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\SpawnEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\NamedMessageEventViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\List\ListViewNetwork.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Persistence\DetailsViewPersistentState.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ExtensibilityProfiler\NetcodeObjectsProfilerModule.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Tabs\TreeViewTabElement.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\TreeModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\NetworkMessageEventViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\ServerLogEventViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\ITreeViewItem.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ProfilerModuleDefinitions.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\UiElementsUtility.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\LegacyProfiler\LegacyProfilerModules.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\TreeModelNode.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\UnnamedMessageEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\TreeViewNetwork.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Columns\ColumnBarNetwork.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\DestroyEventViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\TreeModelBuilder.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\TreeModelUtility.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Search\SearchBar.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Formatting\RowDataSorting.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Columns\ColumnBarState.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\NetworkVariableEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\OwnershipChangeEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ModuleNames.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\TreeView.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ExtensibilityProfiler\ProfilerModuleDefinitionExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\RpcEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\SceneEventViewModel.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\VisualElementExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\ViewModelBase.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\List\ListViewContainer.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Persistence\DetailsViewSelectedState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Formatting\SortDirection.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\IRowData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\ConnectionViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\TreeViewItem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ExtensibilityProfiler\NetworkDetailsViewController.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\List\ListViewNetwork.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\NetworkMessageEventViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\ServerLogEventViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeView\ITreeViewItem.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\LegacyProfiler\LegacyProfilerModules.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\UnnamedMessageEventViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\TreeModel\TreeModelBuilder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Search\SearchBar.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Columns\ColumnBarState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\NetworkVariableEventViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\RpcEventViewModel.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\List\ListViewContainer.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Search\Filters.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\ExtensibilityProfiler\NetcodeMessagesProfilerModule.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ViewModels\GameObjectViewModel.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\Formatting\SortDirection.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\NetworkProfilerDetailsView.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Tooltips.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetworkProfiler\Editor\Windows\ListViewExtensions.cs" />
@@ -405,7 +405,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -414,7 +414,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

@@ -58,19 +58,19 @@
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\TestMetric.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\TestMetricId.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\TimerTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Serialization\TestEventData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricIdTypeLibraryTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricCollectionTestUtility.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Serialization\MetricFactoryTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Serialization\NetStatSerializerTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\CounterTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricIdTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\GaugeTests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricEventTests.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Dispatch\MetricDispatcherTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\TimerTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricIdTypeLibraryTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Serialization\MetricFactoryTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Serialization\NetStatSerializerTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricIdTests.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Metrics\MetricEventTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\NetStats\Tests\Editor\Unity.Multiplayer.Tools.NetStats.Tests.Editor.asmdef" />

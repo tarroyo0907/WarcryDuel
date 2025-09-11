@@ -57,27 +57,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\RpcEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkMessageEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\OwnershipChangeEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\DirectionalMetricInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\ObjectSpawnedEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkDirection.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\DirectedMetricTypeExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkObjectIdentifier.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\ServerLogEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\ConnectionInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\ObjectDestroyedEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\SceneEventMetric.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkMetricTypes.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\INetworkMetricEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\MetricTypeExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\INetworkObjectEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\MetricType.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\UnnamedMessageEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkMessageEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\OwnershipChangeEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\DirectionalMetricInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\DirectedMetricTypeExtensions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkObjectIdentifier.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\ServerLogEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\INetworkMetricEvent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\MetricTypeExtensions.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\StringConversionUtility.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NetworkVariableEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\NamedMessageEvent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\MetricTypes\UnnamedMessageEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer.tools@1.0.0\MetricTypes\Runtime\Unity.Multiplayer.Tools.MetricTypes.asmdef" />
@@ -363,7 +363,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -372,7 +372,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>

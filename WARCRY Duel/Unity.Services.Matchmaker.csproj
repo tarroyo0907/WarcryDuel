@@ -57,53 +57,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Scheduler\ThreadHelper.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\DeserializationException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\BackfillTicket.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\WrappedMatchmakerService.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\ErrorMitigation\StatusCodePolicyConfig.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\CreateTicketResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\TicketStatusResponseOneOf.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Apis\BackfillApi.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\QoSResult.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\Utils\Logger.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\DeserializationSettings.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\HttpException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\LegacyBackfillTicket.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\CreateTicketRequest.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Apis\TicketsApi.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\HttpClientResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\Player.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Scheduler\EngineStateHelper.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\BaseApiClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\CreateBackfillTicketRequest.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\IMatchmakerService.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\CreateBackfillTicketResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\MatchmakerServiceSdk.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\Exceptions\MatchmakerServiceException.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\ResponseHandler.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\JsonHelpers.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\TicketStatusResponse.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\MatchmakerServiceProvider.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\CreateBackfillTicketOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\IDeserializable.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\ErrorMitigation\IRetryPolicy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\BackfillTicketProperties.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\Responses.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\ErrorMitigation\RetryPolicyConfig.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Apis\TicketsApiRequests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\CreateTicketOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\IMatchmakerSdkConfiguration.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\IHttpClient.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\HttpClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\ProblemDetails.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\PayloadProxyApiClient.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\MultiplayAssignment.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Configuration\Configuration.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\ResponseDeserializationException.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\ErrorMitigation\RetryPolicy.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\MatchmakerIOneOf.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\Team.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\AsyncOpRetry.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Apis\BackfillApiRequests.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\MatchmakerService.cs" />
@@ -113,6 +90,29 @@
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\JsonObjectConverter.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\UnityWebRequestHelpers.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\MatchProperties.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\DeserializationException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\BackfillTicket.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\QoSResult.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\Utils\Logger.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\HttpException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\LegacyBackfillTicket.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Apis\TicketsApi.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\HttpClientResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\CreateBackfillTicketRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\Exceptions\MatchmakerServiceException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\ResponseHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\JsonHelpers.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\TicketStatusResponse.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\CreateBackfillTicketOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\BackfillTicketProperties.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Http\Responses.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\ErrorMitigation\RetryPolicyConfig.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\CreateTicketOptions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\ProblemDetails.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\SDK\PayloadProxyApiClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\MultiplayAssignment.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Models\Team.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.services.matchmaker@1.0.0\Runtime\Unity.Services.Matchmaker.asmdef" />
@@ -398,7 +398,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>Library\PackageCache\com.unity.services.wire@1.1.4\Plugins\websocket-sharp.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.services.wire@1.2.5\Plugins\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.17.6\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -407,7 +407,7 @@
       <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.1\Mono.Cecil.dll</HintPath>
