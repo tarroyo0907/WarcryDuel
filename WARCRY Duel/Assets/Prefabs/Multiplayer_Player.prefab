@@ -69,14 +69,16 @@ MonoBehaviour:
   - {fileID: 1880444566353528, guid: 39d98a079e6aa9744afb74f16a271c9e, type: 3}
   - {fileID: 1880444566353528, guid: 39d98a079e6aa9744afb74f16a271c9e, type: 3}
   - {fileID: 1452004769610041407, guid: 1ef1ee335f92d4042975a13641621ef6, type: 3}
-  - {fileID: 170640315424675010, guid: d5f1d7f6aeddf854f98bf64d23c25723, type: 3}
+  - {fileID: 8957456632464403039, guid: 929c0465c9c159b48a7dc749814932a3, type: 3}
   selectedFigurine: {fileID: 0}
   playerID: 0
   isHighlightingPositions: 0
   playerTeam: 
   playerBattleFigure: {fileID: 0}
   enemyBattleFigure: {fileID: 0}
+  canInteract: 1
   combatMove: {fileID: 0}
+  activeExternalMove: 
 --- !u!114 &2041792622977104049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,3 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPlayer: {fileID: 0}
+  waitingForCompletedExternalMove: 0

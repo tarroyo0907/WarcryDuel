@@ -43,9 +43,10 @@ public class PFXManager : NetworkBehaviour
         Multiplayer_Player.SelectEnemyFigurine += ClearFigureSelectParticles;
         Multiplayer_Player.SelectEnemyFigurine += CreateSelectedFigureParticles;
 
-        Multiplayer_Player.OnFigureMoved += ClearFigureSelectParticles;
+        Multiplayer_Player.OnFigureStartMoving += ClearFigureSelectParticles;
         Multiplayer_Player.OnBattleStart += ClearFigureSelectParticles;
 
+        Multiplayer_Player.OnFigureMoved += ShowPossibleTargets;
         Figurine.OnStopMoving += ShowPossibleTargets;
         Figurine.OnStartMoving += ClearFigureSelectParticles;
     }
@@ -70,7 +71,6 @@ public class PFXManager : NetworkBehaviour
 
     private void ClearFigureSelectParticles()
     {
-        Debug.Log("Clearing Figure Selected Particles!");
         // Clears all existing particle effects
         GameObject[] ringEffects = GameObject.FindGameObjectsWithTag("RingEffect");
         List<GameObject> PFXEffects = new List<GameObject>(ringEffects);
@@ -188,7 +188,6 @@ public class PFXManager : NetworkBehaviour
     {
         if (player.IsHighlightingPositions)
         {
-            Debug.Log("Showing Possible Figure Positions!");
             ShowPossiblePositionsServerRpc();
         }
         
@@ -247,6 +246,7 @@ public class PFXManager : NetworkBehaviour
         StartCoroutine(moveName + "VFX", user);
     }
 
+    #region MoveVFX
     private IEnumerator SlashVFX(Multiplayer_Player user) 
     {
         // Load in Slash VFX
@@ -286,6 +286,7 @@ public class PFXManager : NetworkBehaviour
 
         Destroy(arcaneBlastEffect);
     }
+    #endregion
 
     private void HandleMoveEffectParticles(FigurineEffect.MoveEffects moveEffect)
     {

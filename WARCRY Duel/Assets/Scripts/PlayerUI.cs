@@ -107,6 +107,9 @@ public class PlayerUI : NetworkBehaviour
             Multiplayer_Player.OnFigureMoved += ClearFigurineOverview;
             PlayerUI.OnEndTurn += ClearFigurineOverview;
 
+            Multiplayer_Player.OnFigureStartMoving += HideEndTurnButton;
+            Multiplayer_Player.OnFigureStopMoving += ShowEndTurnButton;
+
             // Overview Button Listeners
             move1Button.onClick.AddListener(() => { DisplayMoveDescription(move1Button); });
             move2Button.onClick.AddListener(() => { DisplayMoveDescription(move2Button); });
@@ -337,6 +340,17 @@ public class PlayerUI : NetworkBehaviour
         ClearFigurineOverview();
     }
 
+    #region EndTurnButton
+    public void HideEndTurnButton(Multiplayer_Player player)
+    {
+        EndTurnButton.gameObject.SetActive(false);
+    }
+
+    public void ShowEndTurnButton(Multiplayer_Player player)
+    {
+        EndTurnButton.gameObject.SetActive(true);
+    }
+
     public void OnEndTurnButtonClick()
     {
         EndTurnServerRpc();
@@ -351,6 +365,7 @@ public class PlayerUI : NetworkBehaviour
         OnEndTurn?.Invoke();
     }
 
+    #endregion
 
     private void ChangeTurnUI()
     {
@@ -370,13 +385,11 @@ public class PlayerUI : NetworkBehaviour
         // Checks if it is the player's turn
         if ((ulong) newState == NetworkManager.Singleton.LocalClientId)
         {
-            Debug.Log("Enabling End Turn Button");
             EndTurnButton.gameObject.SetActive(true);
         }
         // If it isn't your turn, disables the End Turn Button
         else
         {
-            Debug.Log("Disabling End Turn Button");
             EndTurnButton.gameObject.SetActive(false);
         }
 
@@ -433,6 +446,7 @@ public class PlayerUI : NetworkBehaviour
         TurnIndicatorText.gameObject.SetActive(true);
     }
 
+    #region PlayerUICanvas
     private void TogglePlayerUICanvas()
     {
         // Toggles the Canvas
@@ -457,7 +471,9 @@ public class PlayerUI : NetworkBehaviour
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = true;
     }
+    #endregion
 
+    #region Status Effect UI
     IEnumerator CycleBuffCondition(Figurine selectedFigurine)
     {
         int buffIndex = 0;
@@ -493,4 +509,5 @@ public class PlayerUI : NetworkBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+    #endregion
 }

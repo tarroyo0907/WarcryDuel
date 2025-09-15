@@ -97,7 +97,13 @@ public class Figurine : NetworkBehaviour
         // Subscribing to Events
         Multiplayer_Player.OnBattleStart += DisableFigurineHealthBar;
         Multiplayer_GameManager.EndCombatEvent += EnableFigurineHealthBar;
-        Multiplayer_GameManager.OnChangeTurn += InflictStatusEffect;
+
+        int figureOwnerID = int.Parse(team.Replace("Player ", ""));
+        if (NetworkManager.Singleton.LocalClientId == (ulong) figureOwnerID)
+        {
+            Multiplayer_GameManager.OnChangeTurn += InflictStatusEffect;
+        }
+        
         Multiplayer_GameManager.OnChangeTurn += ClearPossibleTargets;
         PlayerUI.OnEndTurn += ClearPossibleTargets;
         #endregion

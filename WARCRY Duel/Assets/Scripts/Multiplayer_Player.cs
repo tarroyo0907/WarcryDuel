@@ -15,6 +15,7 @@ using System.IO;
 public class Multiplayer_Player : NetworkBehaviour
 {
     #region Delegates
+    public delegate void DefaultHandler();
     public delegate void PlayerHandler(Multiplayer_Player player);
     public delegate void FigurineHandler(Figurine figurine);
     public delegate void BattleHandler(Figurine attackerFigure, Figurine enemyFigure, ulong attackerID);
@@ -26,6 +27,8 @@ public class Multiplayer_Player : NetworkBehaviour
     public static event PlayerHandler SelectOwnFigurine;
     public static event PlayerHandler SelectEnemyFigurine;
     public static event PlayerHandler OnFigureMoved;
+    public static event PlayerHandler OnFigureStartMoving;
+    public static event PlayerHandler OnFigureStopMoving;
     public static event PlayerHandler TurnStart;
     public static event PlayerHandler OnEndTurn;
     public static event PlayerHandler OnBattleStart;
@@ -50,6 +53,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public Figurine playerBattleFigure;
     public Figurine enemyBattleFigure;
     public bool canInteract = true;
+    private bool hasFigurineStartedMoving = false;
 
     public FigurineMove combatMove;
     public Dictionary<FigurineEffect.MoveEffects, int> moveEffects = new Dictionary<FigurineEffect.MoveEffects, int>();
@@ -64,6 +68,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public int MoveEffectCount { get { return moveEffects.Count; } }
     #endregion
 
+    #region Base Methods
     private void Awake()
     {
         UpdateBattleFigures += UpdateBattleFigure;
@@ -108,27 +113,33 @@ public class Multiplayer_Player : NetworkBehaviour
         // Checks if player touches the screen or clicks the mouse
         if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0) && canInteract)
         {
-            
             PlayerInteract();
         }
 
     }
+    #endregion
 
     #region Player Interaction
     private void PlayerInteract()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        // Casts the ray and get the first game object hit
-        Physics.Raycast(ray, out hit);
-
-        if (hit.collider != null)
+        try
         {
-            canInteract = false;
-            string hitReferenceName = hit.collider.gameObject.name;
-            Debug.Log("Hit Object's Name: " + hitReferenceName);
-            PlayerInteractServerRpc(hitReferenceName);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            // Casts the ray and get the first game object hit
+            Physics.Raycast(ray, out hit);
+
+            if (hit.collider != null)
+            {
+                canInteract = false;
+                string hitReferenceName = hit.collider.gameObject.name;
+                Debug.Log("Hit Object's Name: " + hitReferenceName);
+                PlayerInteractServerRpc(hitReferenceName);
+            }
+        }
+        catch (Exception)
+        {
         }
     }
 
@@ -209,10 +220,20 @@ public class Multiplayer_Player : NetworkBehaviour
         {
             if (Multiplayer_GameManager.Instance.MovementTurns >= 1)
             {
-                if (selectedFigurine.Team != playerTeam)
+                try
                 {
-                    return false;
+                    if (selectedFigurine.Team != playerTeam || selectedFigurine.debuffs.ContainsKey(FigurineEffect.StatusEffects.Wait))
+                    {
+                        return false;
+                    }
                 }
+                catch (Exception e) { }
+
+                // Creates ClientRpcParams to identify which client to send the rpc to
+                ClientRpcParams clientRpcParams = new ClientRpcParams
+                {
+                    Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { serverRpcParams.Receive.SenderClientId } }
+                };
 
                 GameObject boardSpace = hit;
                 Tile tile = boardSpace.GetComponent<Tile>();
@@ -228,27 +249,15 @@ public class Multiplayer_Player : NetworkBehaviour
 
                 if (isPossibleSpace)
                 {
-                    Debug.Log("IsPossibleSpace");
-                    StartCoroutine(selectedFigurine.MovementSequence(tile));
+                    StartCoroutine(StartMovingFigurine(clientRpcParams, tile));
+
+                    
+                    return true;
                 }
                 else
                 {
                     return false;
                 }
-
-                // Creates ClientRpcParams to identify which client to send the rpc to
-                ClientRpcParams clientRpcParams = new ClientRpcParams
-                {
-                    Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { serverRpcParams.Receive.SenderClientId } }
-                };
-
-                // Decrements Movement Turns
-                Multiplayer_GameManager.Instance.MovementTurns--;
-
-                // Initiates MovedFigureEvent on Client
-                UpdateFigurePositionClientRpc(selectedFigurine.name, tile.gameObject.name);
-                MovedFigureCallbackClientRpc(clientRpcParams);
-                return true;
             }
             
         }
@@ -259,22 +268,74 @@ public class Multiplayer_Player : NetworkBehaviour
     [ClientRpc]
     private void UpdateFigurePositionClientRpc(string figureName, string newFigureSpaceName)
     {
-        Debug.Log("Updating Figurine Position!");
-        Figurine figurine = GameObject.Find(figureName).GetComponent<Figurine>();
-        figurine.CurrentSpacePos = GameObject.Find(newFigureSpaceName);
+        try
+        {
+            Figurine figurine = GameObject.Find(figureName).GetComponent<Figurine>();
+            figurine.CurrentSpacePos = GameObject.Find(newFigureSpaceName);
+        }
+        catch (Exception)
+        {
+        }
+        
+    }
+    [ClientRpc]
+    private void StartedMovingFigureClientRpc(ClientRpcParams clientRpcParams)
+    {
+        OnFigureStartMoving?.Invoke(this);
+
+        AcknowledgeMovementServerRpc();
+    }
+
+    private IEnumerator StartMovingFigurine(ClientRpcParams clientRpcParams, Tile tile)
+    {
+        hasFigurineStartedMoving = false;
+        bool hasFigurineStoppedMoving = false;
+        Multiplayer_GameManager.Instance.MovementTurns--;
+
+        // Handler for the OnStopMoving event
+        Figurine.FigurineHandler handler = null;
+        handler = (figure) =>
+        {
+            if (figure == selectedFigurine)
+            {
+                hasFigurineStoppedMoving = true;
+                Figurine.OnStopMoving -= handler; 
+            }
+        };
+        Figurine.OnStopMoving += handler;
+
+        StartedMovingFigureClientRpc(clientRpcParams);
+        UpdateFigurePositionClientRpc(selectedFigurine.name, tile.gameObject.name);
+
+        yield return new WaitUntil(() => hasFigurineStartedMoving);
+
+        hasFigurineStartedMoving = false;
+        
+        StartCoroutine(selectedFigurine.MovementSequence(tile));
+
+        yield return new WaitUntil(() => hasFigurineStoppedMoving);
+
+        // update state
+        MovedFigureCallbackClientRpc(clientRpcParams);
+
+    }
+
+    [ServerRpc]
+    private void AcknowledgeMovementServerRpc(ServerRpcParams rpcParams = default)
+    {
+        hasFigurineStartedMoving = true;
     }
 
     [ClientRpc]
     private void MovedFigureCallbackClientRpc(ClientRpcParams clientRpcParams)
     {
-        Debug.Log("Moved Figure Callback Client Rpc!");
-
         // If the player can still attack, get the selected figures possible targets
         if (Multiplayer_GameManager.Instance.CanAttack)
         {
             selectedFigurine.GetPossibleTargets();
         }
 
+        OnFigureStopMoving.Invoke(this);
         OnFigureMoved?.Invoke(this);
     }
 
@@ -309,7 +370,7 @@ public class Multiplayer_Player : NetworkBehaviour
                 if (OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState)
                 {
                     // Checks if the player can still move this turn
-                    if (Multiplayer_GameManager.Instance.MovementTurns >= 1)
+                    if (Multiplayer_GameManager.Instance.MovementTurns >= 1 && !selectedFigurine.debuffs.ContainsKey(FigurineEffect.StatusEffects.Wait))
                     {
                         IsHighlightingPositions = true;
                         selectedFigurine.GetPossiblePositions();

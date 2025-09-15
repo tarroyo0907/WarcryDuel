@@ -71,7 +71,6 @@ public class SectionManager : NetworkBehaviour
     /// <param name="figurine"> Figurine to send to Infirmary.</param>
     IEnumerator SendToInfirmary(Figurine figurine)
     {
-        Debug.Log("Moving Unit to Informary");
         int FigureBenchCount = 8;
         figurine.currentHealth = figurine.totalHealth;
         figurine.healthBar.value = figurine.currentHealth;
@@ -88,8 +87,6 @@ public class SectionManager : NetworkBehaviour
         {
             figureBench = GameObject.Find("Player 2 Bench");
         }
-
-        Debug.Log("FIGURE BENCH : " + figureBench.name);
 
         // Grabs a list of all the figures on the same team
         GameObject[] tempPlayerFigures = GameObject.FindGameObjectsWithTag("Figurine");
@@ -137,6 +134,14 @@ public class SectionManager : NetworkBehaviour
 
                 Tile _startingTile = unitFigure.CurrentSpacePos.GetComponent<Tile>();
                 Tile _endingTile = figureBench.transform.GetChild(a - 1).gameObject.GetComponent<Tile>();
+
+                // Check if the unit is getting out of the infirmary
+                if (_startingTile.name == "Infirmary")
+                {
+                    // The Unit has left the infirmary
+                    unitFigure.debuffs.Add(FigurineEffect.StatusEffects.Wait, 2);
+                }
+
                 StartCoroutine(unitFigure.MoveFigure(_startingTile, _endingTile, 3f));
                 i++;
 
@@ -147,7 +152,6 @@ public class SectionManager : NetworkBehaviour
             Tile startingTile = figurine.CurrentSpacePos.GetComponent<Tile>();
             Tile endingTile = figureBench.transform.GetChild(FigureBenchCount - 1).gameObject.GetComponent<Tile>();
 
-            Debug.Log("ENDING TILE : " + endingTile.name);
             StartCoroutine(figurine.MoveFigure(startingTile, endingTile, 3f));
             break;
         }
@@ -157,10 +161,17 @@ public class SectionManager : NetworkBehaviour
     [ClientRpc]
     public void UpdateFigureHPClientRpc(string figurineName)
     {
-        GameObject selectedFigurine = GameObject.Find(figurineName);
-        Figurine figurine = selectedFigurine.GetComponent<Figurine>();
+        try
+        {
+            GameObject selectedFigurine = GameObject.Find(figurineName);
+            Figurine figurine = selectedFigurine.GetComponent<Figurine>();
 
-        figurine.currentHealth = figurine.totalHealth;
-        figurine.healthBar.value = figurine.currentHealth;
+            figurine.currentHealth = figurine.totalHealth;
+            figurine.healthBar.value = figurine.currentHealth;
+        }
+        catch (System.Exception)
+        {
+        }
+        
     }
 }

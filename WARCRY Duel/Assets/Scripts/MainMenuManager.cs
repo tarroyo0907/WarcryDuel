@@ -69,6 +69,7 @@ public class MainMenuManager : NetworkBehaviour
     private bool spawnedSavedParty = false;
     private Vector3 partyFigurinesOriginalPos;
     private bool loadingStarted = false;
+    [SerializeField] private bool localTesting = false;
     #endregion
 
     #region Collection Data
@@ -159,7 +160,15 @@ public class MainMenuManager : NetworkBehaviour
 
         battleButton.onClick.AddListener(() =>
         {
-            FindMatch();
+            if (localTesting)
+            {
+                FindLocalMatch();
+            }
+            else
+            {
+                FindMatch();
+            }
+            
         });
 
         startServerButton.onClick.AddListener(() => { StartLocalServer(); });
@@ -210,21 +219,28 @@ public class MainMenuManager : NetworkBehaviour
         // Checks if the player clicks/taps on an object
         if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            // Casts the ray and get the first game object hit
-            Physics.Raycast(ray, out hit);
-
-            if (hit.collider != null)
+            try
             {
-                if (hit.collider.tag == "Figurine")
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                // Casts the ray and get the first game object hit
+                Physics.Raycast(ray, out hit);
+
+                if (hit.collider != null)
                 {
-                    ClickFigurine(hit);
-                    Debug.Log("Clicked Figurine");
+                    if (hit.collider.tag == "Figurine")
+                    {
+                        ClickFigurine(hit);
+                        Debug.Log("Clicked Figurine");
+                    }
+
                 }
-                
             }
+            catch (Exception)
+            {
+            }
+            
         }
         #endregion
     }
@@ -232,29 +248,39 @@ public class MainMenuManager : NetworkBehaviour
 
     private void InitializePartyData()
     {
-        // Set Party Data
-        CollectionObject partyTeam = new CollectionObject
+        string savedTeamPath = Application.persistentDataPath + "/savedTeam.txt";
+        string playerCollectionPath = Application.persistentDataPath + "/playerCollection.txt";
+        if (File.Exists(savedTeamPath) && File.Exists(playerCollectionPath))
         {
-            figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
-        };
-
-        // Convert Collection Object to JSON format string
-        string json = JsonUtility.ToJson(partyTeam);
-
-        // Write the Json String to Text File
-        File.WriteAllText(Application.persistentDataPath + "/savedTeam.txt", json);
-
-        // Set Collection Data
-        CollectionObject collectionObject = new CollectionObject
+            return;
+        }
+        else
         {
-            figureNames = new string[12] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine", "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
-        };
+            Debug.Log("Initializing Party Data");
+            // Set Party Data
+            CollectionObject partyTeam = new CollectionObject
+            {
+                figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+            };
 
-        // Convert Collection Object to JSON format string
-        json = JsonUtility.ToJson(collectionObject);
+            // Convert Collection Object to JSON format string
+            string json = JsonUtility.ToJson(partyTeam); 
 
-        // Write the Json String to Text File
-        File.WriteAllText(Application.persistentDataPath + "/playerCollection.txt", json);
+            // Write the Json String to Text File
+            File.WriteAllText(Application.persistentDataPath + "/savedTeam.txt", json);
+
+            // Set Collection Data
+            CollectionObject collectionObject = new CollectionObject
+            {
+                figureNames = new string[12] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine", "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+            };
+
+            // Convert Collection Object to JSON format string
+            json = JsonUtility.ToJson(collectionObject);
+
+            // Write the Json String to Text File
+            File.WriteAllText(Application.persistentDataPath + "/playerCollection.txt", json);
+        }
     }
 
     private void ClickFigurine(RaycastHit hit)
@@ -754,8 +780,6 @@ public class MainMenuManager : NetworkBehaviour
 
     public void SaveCollection()
     {
-        Debug.Log("Saving to " + Application.dataPath);
-
         // Sets Variable Values
         int childCount = collectionFigures.transform.childCount;
         _figureNames = new string[childCount];
@@ -775,12 +799,12 @@ public class MainMenuManager : NetworkBehaviour
         string json = JsonUtility.ToJson(collectionObject);
 
         // Write the Json String to Text File
-        File.WriteAllText(Application.dataPath + "/playerCollection.txt", json);
+        File.WriteAllText(Application.persistentDataPath + "/playerCollection.txt", json);
     }
 
     public void SavePartyData()
     {
-        Debug.Log("Saving to " + Application.dataPath);
+        Debug.Log("Saving to " + Application.persistentDataPath);
 
         // Sets Variable Values
         int childCount = partyFigurines.transform.childCount;
@@ -802,7 +826,7 @@ public class MainMenuManager : NetworkBehaviour
         string json = JsonUtility.ToJson(collectionObject);
 
         // Write the Json String to Text File
-        File.WriteAllText(Application.dataPath + "/savedTeam.txt", json);
+        File.WriteAllText(Application.persistentDataPath + "/savedTeam.txt", json);
     }
 
     public void LoadCollection()
@@ -816,12 +840,6 @@ public class MainMenuManager : NetworkBehaviour
             // Converts JSON text into Collection Object
             CollectionObject collectionObject = JsonUtility.FromJson<CollectionObject>(saveString);
 
-            // Displays the variable values from Collection Object
-            foreach (string figureName in collectionObject.figureNames)
-            {
-                Debug.Log("Figure Name : " + figureName);
-            }
-
             _figureNames = collectionObject.figureNames;
         }
     }
@@ -832,16 +850,9 @@ public class MainMenuManager : NetworkBehaviour
         {
             // Reads json text from the file into saveString
             string saveString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
-            Debug.Log("Loaded: " + saveString);
 
             // Converts JSON text into Collection Object
             CollectionObject partyObject = JsonUtility.FromJson<CollectionObject>(saveString);
-
-            // Displays the variable values from Collection Object
-            foreach (string figureName in partyObject.figureNames)
-            {
-                Debug.Log("Figure Name : " + figureName);
-            }
 
             return partyObject.figureNames;
         }

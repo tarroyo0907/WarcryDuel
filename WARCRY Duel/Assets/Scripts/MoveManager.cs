@@ -47,7 +47,6 @@ public class MoveManager : NetworkBehaviour
 
     private void UseMove()
     {
-        Debug.Log("CALLING USE MOVE FUNCTION");
         StartCoroutine(StartMoveCoroutine());
     }
 
@@ -63,7 +62,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator UseMoveCoroutine(FigurineMove move, Figurine playerFigurine, Figurine enemyFigurine)
     {
-        Debug.Log("Using Move! : " + move.moveName.ToString());
         object[] parameters = new object[2] { playerFigurine, enemyFigurine };
         string coroutineName = move.moveName.Replace(" ", "");
 
@@ -71,8 +69,6 @@ public class MoveManager : NetworkBehaviour
 
         // Resets Move Cooldown
         playerFigurine.moveCooldowns[move] = move.moveCooldown;
-        Debug.Log($"Figurine Move : {move.name}");
-        Debug.Log($"Figurine Cooldown : {playerFigurine.moveCooldowns[move]}");
 
         // Abilities
         CheckForAbilities(move, playerFigurine, enemyFigurine);
@@ -89,7 +85,6 @@ public class MoveManager : NetworkBehaviour
             switch (playerFigurine.ability.abilityName)
             {
                 case "Lifesteal":
-                    Debug.Log("Applying Lifesteal Ability");
                     // If the figurine uses an action move
                     if (move.moveType == FigurineMove.moveTypes.Action)
                     {
@@ -108,7 +103,6 @@ public class MoveManager : NetworkBehaviour
     #region Moves
     IEnumerator Slash(object[] parameters)
     {
-        Debug.Log("Slash");
         Figurine playerFigurine = (Figurine) parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -119,7 +113,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator Block(object[] parameters)
     {
-        Debug.Log("Block");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -130,7 +123,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator EmpoweredStrike(object[] parameters)
     {
-        Debug.Log("Empowered Strike");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -141,7 +133,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator ShurikenThrow(object[] parameters)
     {
-        Debug.Log("Shuriken Throw");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -158,11 +149,10 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator Smokebomb(object[] parameters)
     {
-        Debug.Log("Smokebomb");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
-        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Stealth, 3);
+        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Stealth, 2);
         playerFigurine.incomingEffect.BlockIncomingDamage = true;
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
@@ -170,7 +160,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator ImperviousBastion(object[] parameters)
     {
-        Debug.Log("Impervious Bastion");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -182,7 +171,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator RockSwing(object[] parameters)
     {
-        Debug.Log("Rock Swing");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -197,7 +185,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator Earthquake(object[] parameters)
     {
-        Debug.Log("Earthquake");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
@@ -209,7 +196,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator ArcaneBlast(object[] parameters)
     {
-        Debug.Log("ArcaneBlast");
         Figurine playerFigurine = (Figurine) parameters[0];
         Figurine enemyFigurine = (Figurine) parameters[1];
 
@@ -220,7 +206,6 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator DeceptiveEnergy(object[] parameters)
     {
-        Debug.Log("Deceptive Energy");
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
 
