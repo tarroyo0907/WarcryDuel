@@ -241,9 +241,13 @@ public class PFXManager : NetworkBehaviour
     private void HandleMoveVFX(string moveName, Multiplayer_Player user)
     {
         // Call the function that corresponds to the used move
-        //object[] parameters = new object[2] {moveName, user};
         moveName = moveName.Replace(" ","");
-        StartCoroutine(moveName + "VFX", user);
+        try
+        {
+            StartCoroutine(moveName + "VFX", user);
+        }
+        catch (Exception){}
+        
     }
 
     #region MoveVFX

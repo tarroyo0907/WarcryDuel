@@ -232,7 +232,6 @@ public class MainMenuManager : NetworkBehaviour
                     if (hit.collider.tag == "Figurine")
                     {
                         ClickFigurine(hit);
-                        Debug.Log("Clicked Figurine");
                     }
 
                 }

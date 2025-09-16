@@ -29,6 +29,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     public static event CombatTurnHandler OnChangeCombatTurn;
     public static event GameManagerHandler InitiateMoves;
     public static event GameManagerHandler EndCombatEvent;
+    public static event GameManagerHandler OnCancelledMoveEffect;
 
     public static event MoveEffectHandler OnInitiateMoveEffect;
     #endregion
@@ -437,11 +438,22 @@ public class Multiplayer_GameManager : NetworkBehaviour
                         activeMoveEffect = FigurineEffect.MoveEffects.Pushback;
                         if (moveEffectPlayer == player1)
                         {
+
                             MoveEffectState = MoveEffectStateEnum.PLAYERTWO;
                         }
                         else if (moveEffectPlayer == player2)
                         {
                             MoveEffectState = MoveEffectStateEnum.PLAYERONE;
+                        }
+
+                        // Check Move Effect
+                        List<Tile>[] enemyPossiblePositions = moveEffectPlayer.enemyBattleFigure.GetPossiblePositions();
+                        if (enemyPossiblePositions == null)
+                        {
+                            Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
+                            CancelMoveEffectClientRpc();
+                            waitingForCompletedMoveEffect = true;
+                            break;
                         }
 
                         InitiateMoveEffectClientRpc(moveEffect.Key.ToString(), MoveEffectState.ToString());
@@ -479,6 +491,12 @@ public class Multiplayer_GameManager : NetworkBehaviour
         // Announces that the move effect is currently being initiated
         OnInitiateMoveEffect?.Invoke(MoveEffectEnum);
 
+    }
+
+    [ClientRpc]
+    void CancelMoveEffectClientRpc()
+    {
+        OnCancelledMoveEffect.Invoke();
     }
 
     void CompletedMoveEffect(Multiplayer_Player player)

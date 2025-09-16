@@ -512,6 +512,11 @@ public class Figurine : NetworkBehaviour
 
     public List<Tile>[] GetPossiblePositions()
     {
+        if (movementPoints == 0)
+        {
+            return null;
+        }
+
         // Sets the size of the array to the number of movement points
         possiblePositions = new List<Tile>[movementPoints];
 
@@ -536,6 +541,7 @@ public class Figurine : NetworkBehaviour
         GameObject[] Figurines = GameObject.FindGameObjectsWithTag("Figurine");
 
         // Checks each accessible tile connecting to the parent tile
+        int accessibleTileCount = 0;
         foreach (Tile accessibileTile in parentTile.AccessibleTiles)
         {
             bool IsAccessibleTile = true;
@@ -554,7 +560,14 @@ public class Figurine : NetworkBehaviour
             if (IsAccessibleTile)
             {
                 possiblePositions[0].Add(accessibileTile);
+                accessibleTileCount++;
             }
+        }
+
+        // If there are no accessible tiles, return null
+        if (accessibleTileCount == 0)
+        {
+            return null;
         }
 
 
@@ -689,6 +702,11 @@ public class Figurine : NetworkBehaviour
     {
         // Get MeshRenderer Component
         SkinnedMeshRenderer figureMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        if (figureMeshRenderer == null)
+        {
+            yield break;
+        }
 
         // Store original color before flashing red
         Color originalColor = figureMeshRenderer.material.color;

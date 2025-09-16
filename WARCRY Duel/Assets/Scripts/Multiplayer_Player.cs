@@ -95,6 +95,7 @@ public class Multiplayer_Player : NetworkBehaviour
         Figurine.OnApplyMoveEffect += ApplyMoveEffect;
         PlayerUI.OnEndTurn += EndingTurn;
         OnCompletedMoveEffect += ClearMoveEffect;
+        Multiplayer_GameManager.OnCancelledMoveEffect += CancelMoveEffect;
 
         Debug.Log("Waiting for Scene to Change...");
         NetworkManager.SceneManager.OnLoadEventCompleted += GamePreparation;
@@ -134,7 +135,6 @@ public class Multiplayer_Player : NetworkBehaviour
             {
                 canInteract = false;
                 string hitReferenceName = hit.collider.gameObject.name;
-                Debug.Log("Hit Object's Name: " + hitReferenceName);
                 PlayerInteractServerRpc(hitReferenceName);
             }
         }
@@ -342,14 +342,12 @@ public class Multiplayer_Player : NetworkBehaviour
     public bool DetectSelectFigure(GameObject hit, ServerRpcParams serverRpcParams)
     {
         // Detects if you click on one of your Figurines
-        Debug.Log("Detecting Select Figure!");
         if (hit.tag == "Figurine")
         {
             selectedFigurine = hit.GetComponent<Figurine>();
 
             if (hit.GetComponent<Figurine>().Team == $"Player {playerID}")
             {
-                Debug.Log("Clicked Own Figure!");
 
                 try
                 {
@@ -359,12 +357,8 @@ public class Multiplayer_Player : NetworkBehaviour
                         return false;
                     }
                 }
-                catch (System.Exception)
-                {
-                    // Do Nothing
-                }
+                catch (System.Exception) { }
 
-                
                 IsHighlightingPositions = false;
 
                 if (OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState)
@@ -395,9 +389,6 @@ public class Multiplayer_Player : NetworkBehaviour
             }
             else
             {
-                // When a player selects an enemy figurine
-                Debug.Log("Selected enemy figurine!");
-
                 // Creates ClientRpcParams to identify which client to send the rpc to
                 ClientRpcParams clientRpcParams = new ClientRpcParams
                 {
@@ -435,7 +426,7 @@ public class Multiplayer_Player : NetworkBehaviour
             if (enemyFigure.Team != $"Player {playerID}")
             {
                 // Checks if it is a possible target to your selected figurine
-                if (selectedFigurine.PossibleTargets.Contains(enemyFigure.gameObject))
+                if (selectedFigurine != null && selectedFigurine.PossibleTargets.Contains(enemyFigure.gameObject))
                 {
                     // Returns False if the figurine is attacking from a bench
                     if (selectedFigurine.CurrentSpacePos.name.Contains("Bench"))
@@ -492,11 +483,17 @@ public class Multiplayer_Player : NetworkBehaviour
 
     public void CompleteMoveEffect(GameObject hitObject)
     {
-        Debug.Log("Checking for a Completed Move Effect!");
         switch (Multiplayer_GameManager.Instance.activeMoveEffect)
         {
             case FigurineEffect.MoveEffects.Pushback:
                 List<Tile>[] enemyPossiblePositions = enemyBattleFigure.GetPossiblePositions();
+                if (enemyPossiblePositions == null)
+                {
+                    CompleteMoveEffectClientRpc();
+                    OnCompletedMoveEffect?.Invoke(this);
+                    return;
+                }
+
                 foreach (Tile possiblePosition in enemyPossiblePositions[0])
                 {
                     if (hitObject == possiblePosition.gameObject)
@@ -526,6 +523,12 @@ public class Multiplayer_Player : NetworkBehaviour
     {
         moveEffects.Remove(Multiplayer_GameManager.Instance.activeMoveEffect);
         Debug.Log("Move Effect Count : " + moveEffects.Count);
+    }
+
+    private void CancelMoveEffect()
+    {
+        CompleteMoveEffectClientRpc();
+        OnCompletedMoveEffect?.Invoke(this);
     }
 
     #endregion

@@ -34,6 +34,7 @@ public class MoveManager : NetworkBehaviour
         Multiplayer_GameManager.InitiateMoves += UseMove;
         localPlayer = this.GetComponent<Multiplayer_Player>();
 
+        Debug.Log("MOVE MANAGER : " + IsOwner);
         if (!IsOwner) { return; }
         PlayerUI.OnPressExternalMoveButton += UseExternalMove;
         Multiplayer_Player.OnCompletedExternalMove += CompletedExternalMove;
@@ -42,7 +43,6 @@ public class MoveManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void UseMove()
@@ -57,7 +57,12 @@ public class MoveManager : NetworkBehaviour
         yield return new WaitForSeconds(0.5f);
 
         OnMoveUse?.Invoke(localPlayer.combatMove.moveName, localPlayer);
-        StartCoroutine(UseMoveCoroutine(localPlayer.combatMove, localPlayer.playerBattleFigure, localPlayer.enemyBattleFigure));
+
+        try
+        {
+            StartCoroutine(UseMoveCoroutine(localPlayer.combatMove, localPlayer.playerBattleFigure, localPlayer.enemyBattleFigure));
+        }
+        catch (System.Exception){}
     }
 
     IEnumerator UseMoveCoroutine(FigurineMove move, Figurine playerFigurine, Figurine enemyFigurine)
@@ -221,6 +226,7 @@ public class MoveManager : NetworkBehaviour
     #region External Moves
     private void UseExternalMove(string selectedExternalMove)
     {
+        Debug.Log("USING EXTERNAL MOVE");
         UseExternalMoveServerRpc(selectedExternalMove);
     }
 
@@ -233,6 +239,9 @@ public class MoveManager : NetworkBehaviour
     IEnumerator ExternalMoveCoroutine(string selectedExternalMove)
     {
         waitingForCompletedExternalMove = true;
+        FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
+        localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
+        Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
         localPlayer.activeExternalMove = selectedExternalMove;
         UseExternalMoveClientRpc(selectedExternalMove);
         
@@ -244,9 +253,11 @@ public class MoveManager : NetworkBehaviour
     [ClientRpc]
     private void UseExternalMoveClientRpc(string selectedExternalMove)
     {
-        // Announce what external move is being used
-        Debug.Log("Using External Move : " + selectedExternalMove);
+        FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
+        localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
+        Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
         localPlayer.activeExternalMove = selectedExternalMove;
+
         OnUseExternalMove?.Invoke(selectedExternalMove);
     }
 
