@@ -64,12 +64,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTeamPrefabs:
-  - {fileID: 8957456632464403039, guid: 929c0465c9c159b48a7dc749814932a3, type: 3}
-  - {fileID: 8957456632464403039, guid: 929c0465c9c159b48a7dc749814932a3, type: 3}
-  - {fileID: 1880444566353528, guid: 39d98a079e6aa9744afb74f16a271c9e, type: 3}
-  - {fileID: 1880444566353528, guid: 39d98a079e6aa9744afb74f16a271c9e, type: 3}
-  - {fileID: 170640315424675010, guid: d5f1d7f6aeddf854f98bf64d23c25723, type: 3}
-  - {fileID: 170640315424675010, guid: d5f1d7f6aeddf854f98bf64d23c25723, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   selectedFigurine: {fileID: 0}
   playerID: 0
   isHighlightingPositions: 0

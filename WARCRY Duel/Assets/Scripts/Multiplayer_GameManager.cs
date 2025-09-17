@@ -30,6 +30,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     public static event GameManagerHandler InitiateMoves;
     public static event GameManagerHandler EndCombatEvent;
     public static event GameManagerHandler OnCancelledMoveEffect;
+    public static event GameManagerHandler LoadPlayerTeams;
 
     public static event MoveEffectHandler OnInitiateMoveEffect;
     #endregion
@@ -63,6 +64,8 @@ public class Multiplayer_GameManager : NetworkBehaviour
     // Player References
     [SerializeField] public Multiplayer_Player player1;
     [SerializeField] public Multiplayer_Player player2;
+
+    private int playerTeamsLoaded = 0;
     #endregion
 
     #region Properties
@@ -90,8 +93,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
         if (IsServer)
         {
             Debug.Log("Subcribing Events in GameManager as Server!");
-
-            NetworkManager.SceneManager.OnLoadComplete += StartGame;
             PlayerUI.OnEndTurn += ChangeTurn;
             Multiplayer_Player.OnBattleStart += StartCombat;
             BattleUI.OnBattleMoveChosen += CombatClash;
@@ -99,6 +100,8 @@ public class Multiplayer_GameManager : NetworkBehaviour
             Multiplayer_Player.OnCompletedMoveEffect += CompletedMoveEffect;
             Multiplayer_Player.OnCompletedExternalMove += CompletedExternalMove;
             Figurine.OnStopMoving += CheckForWin;
+            NetworkManager.SceneManager.OnLoadEventCompleted += StartGame;
+            Multiplayer_Player.OnPartyLoaded += OnPlayerPartyLoaded;
 
             // Grabs both players if they are connected
             Debug.Log("Connected Clients Count: " + NetworkManager.Singleton.ConnectedClients.Count);
@@ -129,8 +132,19 @@ public class Multiplayer_GameManager : NetworkBehaviour
         Debug.Log("Scene Successfully Loaded!");
     }
 
-    void StartGame(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
+    void StartGame(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
+        Debug.Log("Running Start Game Coroutine!");
+        StartCoroutine(StartGameCoroutine());
+    }
+
+    IEnumerator StartGameCoroutine()
+    {
+        Debug.Log("Invoking Player Team Loading!");
+        LoadPlayerTeamClientRpc();
+
+        yield return new WaitUntil(() => playerTeamsLoaded == 2);
+
         Debug.Log("Starting Game! Setting state to Player One's Turn!");
         GameBattleState = MultiplayerBattleState.PLAYERONETURN;
         UpdateGameStateClientRpc(MultiplayerBattleState.START, MultiplayerBattleState.PLAYERONETURN);
@@ -140,12 +154,25 @@ public class Multiplayer_GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
+    private void LoadPlayerTeamClientRpc()
+    {
+        LoadPlayerTeams?.Invoke();
+    }
+
+
+    [ClientRpc]
     private void UpdateGameStateClientRpc(MultiplayerBattleState previousState, MultiplayerBattleState newState)
     {
         Debug.Log("Changing Game State!");
         GameBattleState = newState;
         Debug.Log("Game Battle State : " + GameBattleState);
         OnChangeTurn?.Invoke(previousState, newState);
+    }
+
+    private void OnPlayerPartyLoaded(Multiplayer_Player player)
+    {
+        Debug.Log("A party has been loaded! Counter increased! " + playerTeamsLoaded);
+        playerTeamsLoaded++;
     }
 
     public void ChangeTurn()

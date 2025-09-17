@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Unity.Netcode;
-using UnityEngine.SceneManagement;
-using System;
-using Unity.Services.Matchmaker.Models;
-using UnityEngine.Rendering.Universal;
-using Unity.Burst.CompilerServices;
-using System.Security.AccessControl;
 using System.IO;
+using System.Security.AccessControl;
+
+using Unity.Burst.CompilerServices;
+using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
+
+using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
+
+using static Multiplayer_GameManager;
 // Tyler Arroyo
 // Multiplayer Player Class
 // Manages the Player Class for Multiplayer Battles
@@ -37,6 +41,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public static event PlayerHandler FindingPossibleTargets;
     public static event PlayerHandler OnCompletedMoveEffect;
     public static event PlayerHandler OnCompletedExternalMove;
+    public static event PlayerHandler OnPartyLoaded;
     #endregion
 
     #region Data Fields
@@ -73,12 +78,7 @@ public class Multiplayer_Player : NetworkBehaviour
     {
         UpdateBattleFigures += UpdateBattleFigure;
 
-        string savedTeamString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
-
-        if (IsOwner)
-        {
-            SendPlayerTeamToServerRpc(savedTeamString);
-        }
+        
     }
 
     // Start is called before the first frame update
@@ -98,7 +98,9 @@ public class Multiplayer_Player : NetworkBehaviour
         Multiplayer_GameManager.OnCancelledMoveEffect += CancelMoveEffect;
 
         Debug.Log("Waiting for Scene to Change...");
-        NetworkManager.SceneManager.OnLoadEventCompleted += GamePreparation;
+        //NetworkManager.SceneManager.OnLoadEventCompleted += GamePreparation;
+        Multiplayer_GameManager.OnChangeTurn += GamePreparation;
+        Multiplayer_GameManager.LoadPlayerTeams += LoadPlayerTeams;
 
         // Runs Delegates that only the owner of this player should run
         if (!IsOwner) { return; }
@@ -119,6 +121,17 @@ public class Multiplayer_Player : NetworkBehaviour
 
     }
     #endregion
+
+    private void LoadPlayerTeams()
+    {
+        Debug.Log("Loading Player Teams after event was invoked!");
+        string savedTeamString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
+
+        if (IsOwner)
+        {
+            SendPlayerTeamToServerRpc(savedTeamString);
+        }
+    }
 
     #region Player Interaction
     private void PlayerInteract()
@@ -691,11 +704,13 @@ public class Multiplayer_Player : NetworkBehaviour
     [ServerRpc]
     public void SendPlayerTeamToServerRpc(string savedTeamString, ServerRpcParams serverRpcParams = default)
     {
+        Debug.Log("Loading Player Team Data!");
         PlayerTeamData playerTeamData = JsonUtility.FromJson<PlayerTeamData>(savedTeamString);
         for (int i = 0; i < playerTeamData.figureNames.Length; i++)
         {
             playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
         }
+        OnPartyLoaded?.Invoke(this);
 
         UpdatePlayerTeamClientRpc(savedTeamString);
     }
@@ -731,7 +746,12 @@ public class Multiplayer_Player : NetworkBehaviour
     /// Runs for the both player objects
     /// </summary>
     /// <param name="sceneEvent"></param>
-    public void GamePreparation(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
+    public void GamePreparation(MultiplayerBattleState previousState, MultiplayerBattleState newState)
+    {
+        GamePreparation();
+    }
+
+    public void GamePreparation()
     {
         Debug.Log("Preparing Game!");
 
