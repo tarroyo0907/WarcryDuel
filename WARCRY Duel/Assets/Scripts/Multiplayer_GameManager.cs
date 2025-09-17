@@ -446,14 +446,20 @@ public class Multiplayer_GameManager : NetworkBehaviour
                             MoveEffectState = MoveEffectStateEnum.PLAYERONE;
                         }
 
+                        Debug.Log("Enemy Battle Figure Name : " + moveEffectPlayer.playerBattleFigure);
                         // Check Move Effect
-                        List<Tile>[] enemyPossiblePositions = moveEffectPlayer.enemyBattleFigure.GetPossiblePositions();
+                        List<Tile>[] enemyPossiblePositions = moveEffectPlayer.playerBattleFigure.GetPossiblePositions();
                         if (enemyPossiblePositions == null)
                         {
+                            Debug.Log("CANCELLING MOVE EFFECT");
                             Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
                             CancelMoveEffectClientRpc();
-                            waitingForCompletedMoveEffect = true;
+                            waitingForCompletedMoveEffect = false;
                             break;
+                        }
+                        else
+                        {
+                            Debug.Log("Enemy Possible Positions is not null : " + enemyPossiblePositions.Length);
                         }
 
                         InitiateMoveEffectClientRpc(moveEffect.Key.ToString(), MoveEffectState.ToString());

@@ -13,7 +13,8 @@ public class FigurineEffect
         Stealth,
         Stunned,
         Lifesteal,
-        Wait
+        Wait,
+        Decay
     }
 
     public enum MoveEffects

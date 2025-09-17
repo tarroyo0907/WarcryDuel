@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
 using Unity.Netcode;
+
+using UnityEngine;
+
+using static Multiplayer_GameManager;
 // Tyler Arroyo
 // Section Manager
 // Manages the bench/infirmary section of a team
@@ -22,6 +26,7 @@ public class SectionManager : NetworkBehaviour
     {
         Figurine.DefeatedEvent += FigureDefeated;
         Multiplayer_GameManager.EndCombatEvent += SendUnitsToInfirmary;
+        PlayerUI.OnEndTurn += SendUnitsToInfirmary;
         Figurine.OnStopMoving += SendUnitsToInfirmary;
     }
 
@@ -51,10 +56,16 @@ public class SectionManager : NetworkBehaviour
         // Iterates through each defeated figurine to send them to the infirmary
         for (int i = 0; i < defeatedFigurines.Count; i++)
         {
+            Debug.Log("Defeated Figurine : " + defeatedFigurines[i].name);
             Figurine figurine = defeatedFigurines[i];
             if (figurine.isSpawnable)
             {
-                figurine.GetComponent<NetworkObject>().Despawn();
+                if (IsServer)
+                {
+                    Debug.Log("DESPAWNING ROCK");
+                    figurine.GetComponent<NetworkObject>().Despawn();
+                }
+                //Destroy(figurine.gameObject);
                 continue;
             }
 

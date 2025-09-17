@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Lifesteal
   m_EditorClassIdentifier: 
   abilityName: Lifesteal
-  abilityDescription: Every time this unit deals damage, apply to itself 1 Healing
-    stack.
+  abilityDescription: Every time this unit deals damage with a basic ability, gain
+    1 Lifesteal stack.

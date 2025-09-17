@@ -216,6 +216,11 @@ public class Multiplayer_Player : NetworkBehaviour
 
     public bool DetectMoveFigure(GameObject hit, ServerRpcParams serverRpcParams)
     {
+        if(hit == null)
+        {
+            return false;
+        }
+
         if (hit.tag == "BoardSpace")
         {
             if (Multiplayer_GameManager.Instance.MovementTurns >= 1)
@@ -239,13 +244,17 @@ public class Multiplayer_Player : NetworkBehaviour
                 Tile tile = boardSpace.GetComponent<Tile>();
 
                 bool isPossibleSpace = false;
-                foreach (List<Tile> tiles in selectedFigurine.PossiblePositions)
+                if (selectedFigurine.PossiblePositions != null)
                 {
-                    if (tiles.Contains(tile))
+                    foreach (List<Tile> tiles in selectedFigurine.PossiblePositions)
                     {
-                        isPossibleSpace = true;
+                        if (tiles.Contains(tile))
+                        {
+                            isPossibleSpace = true;
+                        }
                     }
                 }
+                
 
                 if (isPossibleSpace)
                 {
@@ -342,6 +351,11 @@ public class Multiplayer_Player : NetworkBehaviour
     public bool DetectSelectFigure(GameObject hit, ServerRpcParams serverRpcParams)
     {
         // Detects if you click on one of your Figurines
+        if (hit == null)
+        {
+            return false;
+        }
+
         if (hit.tag == "Figurine")
         {
             selectedFigurine = hit.GetComponent<Figurine>();
@@ -417,6 +431,10 @@ public class Multiplayer_Player : NetworkBehaviour
 
     public bool DetectAttackFigure(GameObject hit, ServerRpcParams serverRpcParams)
     {
+        if (hit == null)
+        {
+            return false;
+        }
         // Detects if you clicked on a figurine
         if (hit.tag == "Figurine")
         {
@@ -542,20 +560,30 @@ public class Multiplayer_Player : NetworkBehaviour
                 List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
                 foreach(Tile possibleSpawnLoc in possibleSpawnLocations[0])
                 {
+                    GameObject rockWallPrefab = Resources.Load<GameObject>("Spawnables/Rock_Spawnable");
                     if (hitObject == possibleSpawnLoc.gameObject)
                     {
                         Debug.Log("Completed Fortification External Move!");
+                        GameObject oldRockWall = GameObject.Find(selectedFigurine.Team + " - " + "Rock_Spawnable(Clone)");
+                        if (oldRockWall != null)
+                        {
+                            Destroy(oldRockWall);
+                        }
 
                         // Spawns in the Boulder Wall
-                        Vector3 spawnLoc = possibleSpawnLoc.transform.position += new Vector3(0, 5f, 0);
-                        GameObject rockWallPrefab = Resources.Load<GameObject>("Spawnables/Rock_Spawnable");
+                        Vector3 spawnLoc = possibleSpawnLoc.transform.position + new Vector3(0, 5f, 0);
+                        
                         GameObject prefabInstance = Instantiate(rockWallPrefab, spawnLoc, selectedFigurine.transform.rotation);
                         Figurine wallFigurine = prefabInstance.GetComponent<Figurine>();
+                        string originalName = wallFigurine.name;
                         wallFigurine.CurrentSpacePos = possibleSpawnLoc.gameObject;
                         wallFigurine.Team = selectedFigurine.Team;
                         prefabInstance.GetComponent<NetworkObject>().Spawn();
-
+                        wallFigurine.name = wallFigurine.Team + " - " + wallFigurine.name;
+                        wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
+                        wallFigurine.TakeEffect();
                         activeExternalMove = "";
+                        FortificationClientRpc(originalName, wallFigurine.name);
                         OnCompletedExternalMove?.Invoke(this);
                         CompleteExternalMoveClientRpc();
                         break;
@@ -565,6 +593,17 @@ public class Multiplayer_Player : NetworkBehaviour
             default:
                 break;
         }
+    }
+
+    [ClientRpc]
+    private void FortificationClientRpc(string originalRockName, string newRockName)
+    {
+
+        GameObject rockWallGO = GameObject.Find(originalRockName);
+        rockWallGO.name = newRockName;
+        Figurine wallFigurine = rockWallGO.GetComponent<Figurine>(); 
+        wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
+        wallFigurine.TakeEffect();
     }
 
     [ClientRpc]

@@ -231,6 +231,13 @@ public class Figurine : NetworkBehaviour
 
             case FigurineEffect.StatusEffects.Burn:
                 break;
+            case FigurineEffect.StatusEffects.Decay:
+                // Going to Decay
+                if (debuffs[statusEffect] - 1 == 0)
+                {
+                    currentHealth = 0;
+                }
+                break;
 
             default:
                 break;

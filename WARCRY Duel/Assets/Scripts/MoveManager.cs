@@ -143,7 +143,7 @@ public class MoveManager : NetworkBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            enemyFigurine.incomingEffect.IncomingDamage += 3;
+            enemyFigurine.incomingEffect.IncomingDamage += 2;
             enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Bleed, 1);
 
             yield return new WaitForSeconds(0.25f);
@@ -205,6 +205,11 @@ public class MoveManager : NetworkBehaviour
         Figurine enemyFigurine = (Figurine) parameters[1];
 
         enemyFigurine.incomingEffect.IncomingDamage += 5;
+
+        if (playerFigurine.ability.abilityName == "Lifesteal")
+        {
+            playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Lifesteal, 1);
+        }
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
