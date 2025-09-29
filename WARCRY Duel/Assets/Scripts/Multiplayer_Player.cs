@@ -2,15 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.AccessControl;
+using System.Linq;
 
-using Unity.Burst.CompilerServices;
 using Unity.Netcode;
-using Unity.Services.Matchmaker.Models;
 
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
 
 using static Multiplayer_GameManager;
 // Tyler Arroyo
@@ -51,7 +47,7 @@ public class Multiplayer_Player : NetworkBehaviour
     #endregion
 
     #region Gameplay Fields
-    [SerializeField] private Figurine selectedFigurine;
+    [SerializeField] public Figurine selectedFigurine;
     [SerializeField] public int playerID;
     [SerializeField] public bool isHighlightingPositions;
     [SerializeField] public string playerTeam;
@@ -100,6 +96,7 @@ public class Multiplayer_Player : NetworkBehaviour
         Debug.Log("Waiting for Scene to Change...");
         //NetworkManager.SceneManager.OnLoadEventCompleted += GamePreparation;
         Multiplayer_GameManager.OnChangeTurn += GamePreparation;
+        Multiplayer_GameManager.OnChangeTurn += ClearSelectedFigurine;
         Multiplayer_GameManager.LoadPlayerTeams += LoadPlayerTeams;
 
         // Runs Delegates that only the owner of this player should run
@@ -121,17 +118,6 @@ public class Multiplayer_Player : NetworkBehaviour
 
     }
     #endregion
-
-    private void LoadPlayerTeams()
-    {
-        Debug.Log("Loading Player Teams after event was invoked!");
-        string savedTeamString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
-
-        if (IsOwner)
-        {
-            SendPlayerTeamToServerRpc(savedTeamString);
-        }
-    }
 
     #region Player Interaction
     private void PlayerInteract()
@@ -165,6 +151,10 @@ public class Multiplayer_Player : NetworkBehaviour
         // Checks if it's the clients turn
         ulong playerID = serverRpcParams.Receive.SenderClientId;
         GameObject hit = GameObject.Find(hitName);
+        if (hit == null)
+        {
+            return;
+        }
 
         var clientRpcParams = new ClientRpcParams
         {
@@ -182,13 +172,13 @@ public class Multiplayer_Player : NetworkBehaviour
             if (playerID == 1 && currentMoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERONE)
             {
                 CompleteMoveEffect(hit);
-                OnPlayerInteractCompleteClientRpc(clientRpcParams);
+                OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams);
                 return;
             }
             else if (playerID == 2 && currentMoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERTWO)
             {
                 CompleteMoveEffect(hit);
-                OnPlayerInteractCompleteClientRpc(clientRpcParams);
+                OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams);
                 return;
             }
             else
@@ -201,35 +191,41 @@ public class Multiplayer_Player : NetworkBehaviour
         if (activeExternalMove != "" && OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
         {
             CompleteExternalMove(hit);
-            OnPlayerInteractCompleteClientRpc(clientRpcParams);
+            OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams);
             return;
         }
 
         // Checks if its the player's turn
         if (OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
         {
-            if (DetectAttackFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(clientRpcParams); return; }
+            if (DetectAttackFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams); return; }
             if (DetectMoveFigure(hit, serverRpcParams))
             {
                 OnEndTurn?.Invoke(this);
-                OnPlayerInteractCompleteClientRpc(clientRpcParams);
+                OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams);
                 return;
             }
         }
 
-        if (DetectSelectFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(clientRpcParams); return; }
-        OnPlayerInteractCompleteClientRpc(clientRpcParams);
+        if (DetectSelectFigure(hit, serverRpcParams)) { OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams); return; }
+        OnPlayerInteractCompleteClientRpc(hit.name, clientRpcParams);
     }
 
     [ClientRpc]
-    private void OnPlayerInteractCompleteClientRpc(ClientRpcParams clientRpcParams = default)
+    private void OnPlayerInteractCompleteClientRpc(string hitName, ClientRpcParams clientRpcParams = default)
     {
+        GameObject hitObject = GameObject.Find(hitName);
         canInteract = true;
+
+        if (hitObject.tag == "Figurine")
+        {
+            selectedFigurine = hitObject.GetComponent<Figurine>();
+        }
     }
 
     public bool DetectMoveFigure(GameObject hit, ServerRpcParams serverRpcParams)
     {
-        if(hit == null)
+        if(hit == null || selectedFigurine == null)
         {
             return false;
         }
@@ -375,20 +371,10 @@ public class Multiplayer_Player : NetworkBehaviour
 
             if (hit.GetComponent<Figurine>().Team == $"Player {playerID}")
             {
-
-                try
-                {
-                    if (hit.GetInstanceID() == selectedFigurine.GetInstanceID()
-                        || hit.GetComponent<Figurine>().CurrentSpacePos.name.Contains("Infirmary"))
-                    {
-                        return false;
-                    }
-                }
-                catch (System.Exception) { }
-
                 IsHighlightingPositions = false;
 
-                if (OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState)
+                if (OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState &&
+                    !selectedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
                 {
                     // Checks if the player can still move this turn
                     if (Multiplayer_GameManager.Instance.MovementTurns >= 1 && !selectedFigurine.debuffs.ContainsKey(FigurineEffect.StatusEffects.Wait))
@@ -456,8 +442,15 @@ public class Multiplayer_Player : NetworkBehaviour
             // Checks if the figure is an enemy
             if (enemyFigure.Team != $"Player {playerID}")
             {
+                if (selectedFigurine == null)
+                {
+                    return false;
+                }
+
+                selectedFigurine.GetPossibleTargets();
+
                 // Checks if it is a possible target to your selected figurine
-                if (selectedFigurine != null && selectedFigurine.PossibleTargets.Contains(enemyFigure.gameObject))
+                if (selectedFigurine.PossibleTargets.Contains(enemyFigure.gameObject))
                 {
                     // Returns False if the figurine is attacking from a bench
                     if (selectedFigurine.CurrentSpacePos.name.Contains("Bench"))
@@ -530,7 +523,7 @@ public class Multiplayer_Player : NetworkBehaviour
                     if (hitObject == possiblePosition.gameObject)
                     {
                         Debug.Log("Completed Pushback Move Effect!");
-                        StartCoroutine(enemyBattleFigure.MoveFigure(enemyBattleFigure.CurrentSpacePos.GetComponent<Tile>(), possiblePosition, 1.5f));
+                        StartCoroutine(enemyBattleFigure.MovementSequence(possiblePosition));
                         CompleteMoveEffectClientRpc();
                         OnCompletedMoveEffect?.Invoke(this);
                         break;
@@ -570,6 +563,11 @@ public class Multiplayer_Player : NetworkBehaviour
         switch (activeExternalMove)
         {
             case "Fortification":
+                if (hitObject.tag != "BoardSpace")
+                {
+                    return;
+                }
+
                 List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
                 foreach(Tile possibleSpawnLoc in possibleSpawnLocations[0])
                 {
@@ -594,20 +592,137 @@ public class Multiplayer_Player : NetworkBehaviour
                         prefabInstance.GetComponent<NetworkObject>().Spawn();
                         wallFigurine.name = wallFigurine.Team + " - " + wallFigurine.name;
                         wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
-                        wallFigurine.TakeEffect();
-                        activeExternalMove = "";
+                        wallFigurine.CheckForSurroundKill();
                         FortificationClientRpc(originalName, wallFigurine.name);
-                        OnCompletedExternalMove?.Invoke(this);
-                        CompleteExternalMoveClientRpc();
                         break;
+                    }
+                }
+                break;
+            case "Fruitful Fury":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Fruitfury Fury Effect
+                        if (selectedFigurine.buffs.ContainsKey(FigurineEffect.StatusEffects.Lifesteal))
+                        {
+                            // Safe to use selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal]
+                            int lifestealValue = selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+                            clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+                            if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
+                            {
+                                clickedFigurine.currentHealth = clickedFigurine.totalHealth;
+                            }
+                            clickedFigurine.TakeEffect();
+                            selectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+                            FruitfulFuryClientRpc(selectedFigurine.name, clickedFigurine.name);
+                        }
+                    }
+                }
+                break;
+            case "Cleansing Rose":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Cleansing Rose Effect
+                        if (clickedFigurine.debuffs.Count > 0)
+                        {
+                            int randomDebuffIndex = UnityEngine.Random.Range(0, clickedFigurine.debuffs.Count);
+                            FigurineEffect.StatusEffects randomDebuff = clickedFigurine.debuffs.ElementAt(randomDebuffIndex).Key;
+                            clickedFigurine.debuffs.Remove(randomDebuff);
+                            RemoveDebuffClientRpc(clickedFigurine.name, randomDebuff);
+                        }
+                    }
+                }
+                break;
+            case "Rejuvinate":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Rejuvinate Effect
+                        FigurineEffect.StatusEffects statusEffect = FigurineEffect.StatusEffects.AttackUp;
+                        clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + 2;
+                        clickedFigurine.TakeEffect();
+                        ApplyBuffClientRpc(clickedFigurine.name, statusEffect, 2);
                     }
                 }
                 break;
             default:
                 break;
         }
+        OnCompletedExternalMove?.Invoke(this);
+        CompleteExternalMoveClientRpc();
+        activeExternalMove = "";
+    }
+    #endregion
+
+    #region Update Status Effect Client Rpcs
+    [ClientRpc]
+    private void ApplyBuffClientRpc(string clickedFigurineName, FigurineEffect.StatusEffects statusEffect, int stacks)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + stacks;
+        clickedFigurine.TakeEffect();
     }
 
+    [ClientRpc]
+    private void ApplyDebuffClientRpc(string clickedFigurineName, FigurineEffect.StatusEffects statusEffect, int stacks)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        clickedFigurine.debuffs[statusEffect] = clickedFigurine.debuffs.GetValueOrDefault(statusEffect) + stacks;
+        clickedFigurine.TakeEffect();
+    }
+
+    [ClientRpc]
+    private void RemoveDebuffClientRpc(string clickedFigurineName, FigurineEffect.StatusEffects statusEffect)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        clickedFigurine.debuffs.Remove(statusEffect);
+        clickedFigurine.TakeEffect();
+    }
+
+    [ClientRpc]
+    private void RemoveBuffClientRpc(string clickedFigurineName, FigurineEffect.StatusEffects statusEffect)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        clickedFigurine.buffs.Remove(statusEffect);
+        clickedFigurine.TakeEffect();
+    }
+    #endregion
+
+    #region External Move Client Rpc
     [ClientRpc]
     private void FortificationClientRpc(string originalRockName, string newRockName)
     {
@@ -616,8 +731,23 @@ public class Multiplayer_Player : NetworkBehaviour
         rockWallGO.name = newRockName;
         Figurine wallFigurine = rockWallGO.GetComponent<Figurine>(); 
         wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
-        wallFigurine.TakeEffect();
     }
+
+    [ClientRpc]
+    private void FruitfulFuryClientRpc(string selectedFigureName, string clickedFigurineName)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        Figurine externalMoveSelectedFigurine = GameObject.Find(selectedFigureName).GetComponent<Figurine>();
+        int lifestealValue = externalMoveSelectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+        clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+        if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
+        {
+            clickedFigurine.currentHealth = clickedFigurine.totalHealth;
+        }
+        clickedFigurine.TakeEffect();
+        externalMoveSelectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+    }
+    
 
     [ClientRpc]
     private void CompleteExternalMoveClientRpc()
@@ -645,6 +775,7 @@ public class Multiplayer_Player : NetworkBehaviour
 
     }
 
+    #region Manage Figurine Memory
     private void UpdateBattleFigure(Figurine attackerFigurine, Figurine enemyFigurine, ulong attackerID)
     {
         Debug.Log("Attacker ID : " + attackerID);
@@ -668,6 +799,12 @@ public class Multiplayer_Player : NetworkBehaviour
             combatMove = Resources.Load<FigurineMove>("Moves/Empty Move");
         }
     }
+
+    private void ClearSelectedFigurine(MultiplayerBattleState previousState, MultiplayerBattleState newState)
+    {
+        selectedFigurine = null;
+    }
+    #endregion
 
     [ClientRpc]
     private void SelectOwnFigurineClientRpc(NetworkObjectReference figurineNetworkObject, bool IsHighlightingPositions, ClientRpcParams clientRpcParams = default)
@@ -701,6 +838,18 @@ public class Multiplayer_Player : NetworkBehaviour
 
     }
 
+    #region Player Teams
+    private void LoadPlayerTeams()
+    {
+        Debug.Log("Loading Player Teams after event was invoked!");
+        string savedTeamString = File.ReadAllText(Application.persistentDataPath + "/savedTeam.txt");
+
+        if (IsOwner)
+        {
+            SendPlayerTeamToServerRpc(savedTeamString);
+        }
+    }
+
     [ServerRpc]
     public void SendPlayerTeamToServerRpc(string savedTeamString, ServerRpcParams serverRpcParams = default)
     {
@@ -724,6 +873,7 @@ public class Multiplayer_Player : NetworkBehaviour
             playerTeamPrefabs[i] = Resources.Load<GameObject>($"Figurines/{playerTeamData.figureNames[i]}");
         }
     }
+    #endregion
 
     #region Game Preparation
     /// <summary>
@@ -754,6 +904,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public void GamePreparation()
     {
         Debug.Log("Preparing Game!");
+        Multiplayer_GameManager.OnChangeTurn -= GamePreparation;
 
         if (playerID == 1)
         {
@@ -784,6 +935,7 @@ public class Multiplayer_Player : NetworkBehaviour
         }
     }
     #endregion
+
     public void StartTurn(Multiplayer_GameManager gameManager)
     {
         TurnStart(this);

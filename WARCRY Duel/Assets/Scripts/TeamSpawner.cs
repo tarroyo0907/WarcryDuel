@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Unity.Services.Matchmaker.Models;
 using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.UI;
 
 // Tyler Arroyo
 // Team Spawner
@@ -175,7 +176,9 @@ public class TeamSpawner : NetworkBehaviour
         }
         else
         {
-            figurineObject.transform.Find("Figurine UI").Rotate(new Vector3(0, 180, 0));
+            Transform FigurineUI = figurineObject.transform.Find("Figurine UI");
+            FigurineUI.Rotate(new Vector3(0, 180, 0));
+            FigurineUI.Find("MovementPoints").GetComponent<Image>().color = Color.red;
         }
         
     }

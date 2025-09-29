@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Empowered Strike
   m_EditorClassIdentifier: 
   moveName: Empowered Strike
-  moveDescription: Deals 15 damage to the enemy.
+  moveDescription: Deals 300% attack damage to the enemy.
   moveIcon: {fileID: 21300000, guid: 88cc147b65a60cf42b2e23dd3dec4966, type: 3}
   moveCooldown: 4
   moveType: 1

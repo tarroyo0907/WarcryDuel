@@ -14,7 +14,11 @@ public class FigurineEffect
         Stunned,
         Lifesteal,
         Wait,
-        Decay
+        Decay,
+        AttackUp,
+        AttackDown,
+        DefenseUp,
+        DefenseDown
     }
 
     public enum MoveEffects
@@ -22,6 +26,11 @@ public class FigurineEffect
         None,
         Pushback
     }
+
+    public static readonly HashSet<StatusEffects> PersistentEffects = new()
+    {
+        StatusEffects.Lifesteal
+    };
 
     [SerializeField] public Dictionary<StatusEffects, int> SelfBuffsToApply = new Dictionary<StatusEffects, int>();
     [SerializeField] public Dictionary<StatusEffects, int> SelfDebuffsToApply = new Dictionary<StatusEffects, int>();

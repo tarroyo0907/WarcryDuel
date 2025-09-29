@@ -54,6 +54,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     [SerializeField] private int combatMovesCompleted = 0;
     [SerializeField] private GameObject BattleObjectLoc1;
     [SerializeField] private GameObject BattleObjectLoc2;
+    public int currentTurn = 0;
 
     [SerializeField] private int playerDamage = 0;
     [SerializeField] private int enemyDamage = 0;
@@ -148,6 +149,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
         Debug.Log("Starting Game! Setting state to Player One's Turn!");
         GameBattleState = MultiplayerBattleState.PLAYERONETURN;
         UpdateGameStateClientRpc(MultiplayerBattleState.START, MultiplayerBattleState.PLAYERONETURN);
+        currentTurn++;
 
         Debug.Log("Invoking Game Start Event!");
         OnGameStart?.Invoke();
@@ -166,6 +168,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
         Debug.Log("Changing Game State!");
         GameBattleState = newState;
         Debug.Log("Game Battle State : " + GameBattleState);
+        currentTurn++;
         OnChangeTurn?.Invoke(previousState, newState);
     }
 
@@ -198,6 +201,9 @@ public class Multiplayer_GameManager : NetworkBehaviour
             canAttack = true;
             activeMoveEffect = FigurineEffect.MoveEffects.None;
             MoveEffectState = MoveEffectStateEnum.INACTIVE;
+            player1.selectedFigurine = null;
+            player2.selectedFigurine = null;
+            currentTurn++;
 
             UpdateMoveCooldowns(GameBattleState);
 

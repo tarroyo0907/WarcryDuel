@@ -66,12 +66,15 @@ MonoBehaviour:
   figurineName: Bulwark
   currentHealth: 25
   totalHealth: 25
+  attackStat: 5
+  defenseStat: 1
   movementPoints: 2
   isSpawnable: 0
   isAbleToFight: 0
   move1: {fileID: 11400000, guid: e94ecf94efc9a4d4aa7b534cde4ae45f, type: 2}
   move2: {fileID: 11400000, guid: f74d215d8678c0b4089bca7f75564f99, type: 2}
   move3: {fileID: 11400000, guid: aefce13d48ce22944a4d448c44811dd7, type: 2}
+  ability: {fileID: 0}
   incomingEffect:
     incomingDamage: 0
     blockIncomingDamage: 0

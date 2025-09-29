@@ -332,24 +332,63 @@ public class PFXManager : NetworkBehaviour
     {
         ClearFigureSelectParticles();
         Multiplayer_Player localPlayer = NetworkManager.Singleton.LocalClient.PlayerObject.gameObject.GetComponent<Multiplayer_Player>();
-        switch (externalMoveName)
+
+        // Only display for local player
+        if (localPlayer.OwnerClientId == (ulong)Multiplayer_GameManager.Instance.GameBattleState)
         {
-            case "Fortification":
-                // Only Display if it's the local player's turn
-                if (localPlayer.OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
-                {
+            switch (externalMoveName)
+            {
+                case "Fortification":
                     List<Tile>[] possiblePositions = localPlayer.SelectedFigurine.GetPossiblePositions();
                     foreach (Tile boardSpace in possiblePositions[0])
                     {
                         Vector3 particlePos = boardSpace.gameObject.transform.position;
                         Instantiate(boardSpaceEffect, particlePos, boardSpaceEffect.transform.rotation, boardSpace.gameObject.transform);
                     }
-                }
-                break;
-            default:
-                break;
+                    break;
+                case "Fruitful Fury":
+                    SelectAllyFigurineParticles(localPlayer);
+                    break;
+                case "Cleansing Rose":
+                    SelectAllyFigurineParticles(localPlayer);
+                    break;
+                case "Rejuvinate":
+                    SelectAllyFigurineParticles(localPlayer);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    }
+
+    #region Helper Functions
+    private void SelectAllyFigurineParticles(Multiplayer_Player localPlayer)
+    {
+        foreach (NetworkObjectReference FigurineNetworkObjectReference in localPlayer.PlayerTeamUnits)
+        {
+            if (FigurineNetworkObjectReference.TryGet(out NetworkObject figurineNetworkObject) == false)
+            {
+                return;
+            }
+
+            Figurine figurine = figurineNetworkObject.gameObject.GetComponent<Figurine>();
+
+            // Check if the unit isn't in the infirmary or bench
+            string parentName = figurine.CurrentSpacePos.transform.parent.gameObject.name;
+            Debug.Log(parentName);
+            if (parentName != "Player 1 Bench" && parentName != "Player 2 Bench")
+            {
+                // Creates the particle effect
+                Vector3 particlePos = figurine.transform.position;
+                BoxCollider figureCollider = figurine.GetComponent<BoxCollider>();
+                particlePos.y = figurine.transform.position.y + figureCollider.bounds.size.y;
+                Instantiate(enemyHighlightedEffect, particlePos, enemyHighlightedEffect.transform.rotation, figurine.transform);
+            }
+
         }
     }
+    #endregion
 
     public class StringContainer : INetworkSerializable
     {

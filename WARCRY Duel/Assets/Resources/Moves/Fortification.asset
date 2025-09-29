@@ -15,5 +15,5 @@ MonoBehaviour:
   moveName: Fortification
   moveDescription: Creates a wall on an open adjacent tile.
   moveIcon: {fileID: 21300000, guid: 64d798a5bce0f1246aa80d9ee7e7e69c, type: 3}
-  moveCooldown: 4
+  moveCooldown: 6
   moveType: 3

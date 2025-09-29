@@ -76,11 +76,14 @@ public class PlayerUI : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI externalMoveText;
     [SerializeField] private Button passiveDisplayButton;
     [SerializeField] private TextMeshProUGUI passiveDisplayButtonText;
+    [SerializeField] private TextMeshProUGUI attackStatText;
+    [SerializeField] private TextMeshProUGUI defenseStatText;
     #endregion
 
     #region Data Fields
     // Data Fields
     [SerializeField] private string selectedMoveName;
+    [SerializeField] private Figurine UIselectedFigurine;
     #endregion
 
     private void Awake()
@@ -163,6 +166,8 @@ public class PlayerUI : NetworkBehaviour
         move1Background.SetActive(false);
         move2Background.SetActive(false);
         move3Background.SetActive(false);
+        attackStatText.gameObject.SetActive(false);
+        defenseStatText.gameObject.SetActive(false);
 
         // Updates move description text and displays it
         selectedMoveName = figurineMove.moveName;
@@ -204,21 +209,14 @@ public class PlayerUI : NetworkBehaviour
                     // Checks if it is your turn
                     if (localPlayer.OwnerClientId == (ulong) Multiplayer_GameManager.Instance.GameBattleState)
                     {
-                        // Handles Move Specific Conditions
-                        switch (figurineMove.moveName)
+                        // Check if the unit isn't in the infirmary
+                        string parentName = localPlayer.SelectedFigurine.CurrentSpacePos.transform.parent.gameObject.name;
+                        if (parentName != "Player 1 Bench" && parentName != "Player 2 Bench")
                         {
-                            case "Fortification":
-                                // Check if the unit isn't in the infirmary
-                                string parentName = localPlayer.SelectedFigurine.CurrentSpacePos.transform.parent.gameObject.name;
-                                Debug.Log(parentName);
-                                if (parentName != "Player 1 Bench" && parentName != "Player 2 Bench")
-                                {
-                                    externalMoveBackground.SetActive(true);
-                                }
-                                break;
-                            default:
-                                break;
+                            // Activate external move background
+                            externalMoveBackground.SetActive(true);
                         }
+                        
                     }
                 }
             }
@@ -233,6 +231,7 @@ public class PlayerUI : NetworkBehaviour
     {
         Debug.Log("Displaying Figurine Overview!");
         Figurine selectedFigurine = player.SelectedFigurine;
+        UIselectedFigurine = selectedFigurine;
 
         // Enables Figurine Overview Panel
         figurineOverviewPanel.SetActive(true);
@@ -252,6 +251,11 @@ public class PlayerUI : NetworkBehaviour
         figurineHealth.maxValue = selectedFigurine.totalHealth;
         figurineHealth.value = selectedFigurine.currentHealth;
         figurineHealthText.text = $"{selectedFigurine.currentHealth} / {selectedFigurine.totalHealth}";
+        attackStatText.text = $"ATK : {selectedFigurine.attackStat}";
+        defenseStatText.text = $"DEF : {selectedFigurine.defenseStat}";
+
+        attackStatText.gameObject.SetActive(true);
+        defenseStatText.gameObject.SetActive(true);
 
         #region Update Move Buttons
         Button[] buttons = new Button[3] { move1Button, move2Button, move3Button };
@@ -484,7 +488,7 @@ public class PlayerUI : NetworkBehaviour
             buffConditionCounterText.text = selectedFigurine.buffs[statusCondition].ToString();
             buffIndex++;
 
-            if (buffIndex == selectedFigurine.buffs.Count)
+            if (buffIndex >= selectedFigurine.buffs.Count)
             {
                 buffIndex = 0;
             }

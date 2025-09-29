@@ -45,6 +45,24 @@ public class BattleUI : NetworkBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI move3OverlayText;
     [SerializeField] private TextMeshProUGUI move3PassiveText;
 
+    [Header("\n Enemy Move 1 Button")]
+    [SerializeField] private Button enemyMove1Button;
+    [SerializeField] private GameObject enemyMove1Overlay;
+    [SerializeField] private TMPro.TextMeshProUGUI enemyMove1OverlayText;
+    [SerializeField] private TextMeshProUGUI enemyMove1PassiveText;
+
+    [Header("\n Enemy Move 2 Button")]
+    [SerializeField] private Button enemyMove2Button;
+    [SerializeField] private GameObject enemyMove2Overlay;
+    [SerializeField] private TMPro.TextMeshProUGUI enemyMove2OverlayText;
+    [SerializeField] private TextMeshProUGUI enemyMove2PassiveText;
+
+    [Header("\n Enemy Move 3 Button")]
+    [SerializeField] private Button enemyMove3Button;
+    [SerializeField] private GameObject enemyMove3Overlay;
+    [SerializeField] private TMPro.TextMeshProUGUI enemyMove3OverlayText;
+    [SerializeField] private TextMeshProUGUI enemyMove3PassiveText;
+
     [Header("\n UI References")]
     [SerializeField] private Canvas battleCanvas;
     [SerializeField] private GameObject timerPanel;
@@ -148,7 +166,7 @@ public class BattleUI : NetworkBehaviour
         turnCounterPanel.SetActive(true);
 
         // Updates figure's health
-        #region
+        #region Update Status
         Figurine playerBattleFigure = localPlayer.playerBattleFigure;
         Figurine enemyBattleFigure = localPlayer.enemyBattleFigure;
 
@@ -204,11 +222,11 @@ public class BattleUI : NetworkBehaviour
         #endregion
 
         #region Displays Move Options
-        Button[] buttons = new Button[] { move1Button, move2Button, move3Button };
-        FigurineMove[] moveArray = new FigurineMove[] { playerBattleFigure.move1, playerBattleFigure.move2, playerBattleFigure.move3 };
-        GameObject[] moveOverlayArray = new GameObject[] { move1Overlay, move2Overlay, move3Overlay };
-        TextMeshProUGUI[] moveOverlayTextArray = new TextMeshProUGUI[] { move1OverlayText, move2OverlayText, move3OverlayText };
-        TextMeshProUGUI[] passiveTextArray = new TextMeshProUGUI[] { move1PassiveText, move2PassiveText, move3PassiveText };
+        Button[] buttons = new Button[] { move1Button, move2Button, move3Button, enemyMove1Button, enemyMove2Button, enemyMove3Button };
+        FigurineMove[] moveArray = new FigurineMove[] { playerBattleFigure.move1, playerBattleFigure.move2, playerBattleFigure.move3, enemyBattleFigure.move1, enemyBattleFigure.move2, enemyBattleFigure.move3 };
+        GameObject[] moveOverlayArray = new GameObject[] { move1Overlay, move2Overlay, move3Overlay, enemyMove1Overlay, enemyMove2Overlay, enemyMove3Overlay };
+        TextMeshProUGUI[] moveOverlayTextArray = new TextMeshProUGUI[] { move1OverlayText, move2OverlayText, move3OverlayText, enemyMove1OverlayText, enemyMove2OverlayText, enemyMove3OverlayText };
+        TextMeshProUGUI[] passiveTextArray = new TextMeshProUGUI[] { move1PassiveText, move2PassiveText, move3PassiveText, enemyMove1PassiveText, enemyMove2PassiveText, enemyMove3PassiveText };
         for (int i = 0; i < buttons.Length; i++)
         {
             if (moveArray[i].moveType == FigurineMove.moveTypes.Null)
@@ -227,10 +245,20 @@ public class BattleUI : NetworkBehaviour
                 passiveTextArray[i].gameObject.SetActive(false);
             }
 
-            if (playerBattleFigure.moveCooldowns[moveArray[i]] > 0)
+            Figurine currentBattleFigure;
+            if (buttons[i].name.Contains("Enemy"))
+            {
+                currentBattleFigure = enemyBattleFigure;
+            }
+            else
+            {
+                currentBattleFigure = playerBattleFigure;
+            }
+
+            if (currentBattleFigure.moveCooldowns[moveArray[i]] > 0)
             {
                 moveOverlayArray[i].SetActive(true);
-                moveOverlayTextArray[i].text = playerBattleFigure.moveCooldowns[moveArray[i]].ToString();
+                moveOverlayTextArray[i].text = currentBattleFigure.moveCooldowns[moveArray[i]].ToString();
             }
             else
             {

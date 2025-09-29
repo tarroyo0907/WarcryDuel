@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rock Swing
   m_EditorClassIdentifier: 
   moveName: Rock Swing
-  moveDescription: Deals 4 damage and has a 20% chance of stunning the enemy.
+  moveDescription: Deals 100% attack damage and has a 20% chance of stunning the
+    enemy.
   moveIcon: {fileID: 21300000, guid: 2347d545b90edec4c8769779d5e44b3c, type: 3}
   moveCooldown: 0
   moveType: 1

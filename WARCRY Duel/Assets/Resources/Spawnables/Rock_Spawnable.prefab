@@ -149,11 +149,15 @@ MonoBehaviour:
   figurineName: Rock
   currentHealth: 10
   totalHealth: 10
+  attackStat: 0
+  defenseStat: 0
   movementPoints: 0
   isSpawnable: 1
+  isAbleToFight: 0
   move1: {fileID: 11400000, guid: f011bf4237d51c540a39fa03b9752d23, type: 2}
   move2: {fileID: 11400000, guid: f011bf4237d51c540a39fa03b9752d23, type: 2}
   move3: {fileID: 11400000, guid: f011bf4237d51c540a39fa03b9752d23, type: 2}
+  ability: {fileID: 0}
   incomingEffect:
     incomingDamage: 0
     blockIncomingDamage: 0
@@ -162,10 +166,10 @@ MonoBehaviour:
   team: 
   possibleTargets: []
   isMoving: 0
+  isDefeated: 0
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   healthBar: {fileID: 34197316255816028}
   movementPointText: {fileID: 0}
-  isDefeated: 0
 --- !u!114 &8647823153077663497
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slash
   m_EditorClassIdentifier: 
   moveName: Slash
-  moveDescription: Deal 5 damage to the enemy.
+  moveDescription: Deal 100% attack damage to the enemy.
   moveIcon: {fileID: 21300000, guid: 177f1041be074fe4cac88c9666ec3dfa, type: 3}
   moveCooldown: 0
   moveType: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Earthquake
   m_EditorClassIdentifier: 
   moveName: Earthquake
-  moveDescription: Deals 7 Damage and pushes the enemy unit away 1 tile.
+  moveDescription: Deals 120% Attack Damage and pushes the enemy unit away 1 tile.
   moveIcon: {fileID: 21300000, guid: 080a06766bda21546b4dd00ca9c0d5e3, type: 3}
   moveCooldown: 3
   moveType: 1

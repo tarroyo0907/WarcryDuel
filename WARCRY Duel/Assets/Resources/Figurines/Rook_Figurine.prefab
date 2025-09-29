@@ -2202,12 +2202,15 @@ MonoBehaviour:
   figurineName: Rook
   currentHealth: 20
   totalHealth: 20
+  attackStat: 6
+  defenseStat: 1
   movementPoints: 2
   isSpawnable: 0
   isAbleToFight: 0
   move1: {fileID: 11400000, guid: 238e23876dba09541ba93c6b2bbb110a, type: 2}
   move2: {fileID: 11400000, guid: ab369ba57578e7b4c9bf5e083d5304ea, type: 2}
   move3: {fileID: 11400000, guid: 9f10b13269b3cea49bcd87699ae8a25b, type: 2}
+  ability: {fileID: 0}
   incomingEffect:
     incomingDamage: 0
     blockIncomingDamage: 0

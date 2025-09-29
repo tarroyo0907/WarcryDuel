@@ -27,6 +27,7 @@ public class SectionManager : NetworkBehaviour
         Figurine.DefeatedEvent += FigureDefeated;
         Multiplayer_GameManager.EndCombatEvent += SendUnitsToInfirmary;
         PlayerUI.OnEndTurn += SendUnitsToInfirmary;
+        Multiplayer_Player.OnCompletedExternalMove += SendUnitsToInfirmary;
         Figurine.OnStopMoving += SendUnitsToInfirmary;
     }
 
@@ -41,6 +42,11 @@ public class SectionManager : NetworkBehaviour
     {
         // Adds the defeated figurine to a list of defeated figurines this turn
         defeatedFigurines.Add(figurine);
+    }
+
+    private void SendUnitsToInfirmary(Multiplayer_Player player)
+    {
+        SendUnitsToInfirmary();
     }
 
     private void SendUnitsToInfirmary(Figurine figurine)

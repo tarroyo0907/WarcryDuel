@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using System.Linq.Expressions;
+using Unity.Mathematics;
+using System;
 // Tyler Arroyo
 // Move Manager
 // Manages all the attacking moves a unit can make
@@ -67,16 +69,25 @@ public class MoveManager : NetworkBehaviour
 
     IEnumerator UseMoveCoroutine(FigurineMove move, Figurine playerFigurine, Figurine enemyFigurine)
     {
-        object[] parameters = new object[2] { playerFigurine, enemyFigurine };
-        string coroutineName = move.moveName.Replace(" ", "");
+        int playerFigurineAttack = playerFigurine.attackStat;
+        int enemyFigurineAttack = playerFigurine.attackStat;
 
+        // Run calculations for all fights
+        if (playerFigurine.buffs.ContainsKey(FigurineEffect.StatusEffects.AttackUp))
+        {
+            Debug.Log("Increased Attack from Attack Up Buff!");
+            playerFigurineAttack = (int) (playerFigurineAttack * 1.5);
+        }
+
+        object[] parameters = new object[4] { playerFigurine, enemyFigurine, playerFigurineAttack, enemyFigurineAttack };
+        string coroutineName = move.moveName.Replace(" ", "");
         yield return StartCoroutine(coroutineName, parameters);
 
         // Resets Move Cooldown
         playerFigurine.moveCooldowns[move] = move.moveCooldown;
 
         // Abilities
-        CheckForAbilities(move, playerFigurine, enemyFigurine);
+        // CheckForAbilities(move, playerFigurine, enemyFigurine);
 
         yield return new WaitForSeconds(1f);
 
@@ -110,8 +121,9 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine) parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
-        enemyFigurine.incomingEffect.IncomingDamage += 5;
+        enemyFigurine.incomingEffect.IncomingDamage += (int) (playerFigurineAttack * 1.0); 
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
@@ -130,8 +142,9 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
-        enemyFigurine.incomingEffect.IncomingDamage += 15;
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 3.0);
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
@@ -140,10 +153,11 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
         for (int i = 0; i < 3; i++)
         {
-            enemyFigurine.incomingEffect.IncomingDamage += 2;
+            enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 0.5);
             enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Bleed, 1);
 
             yield return new WaitForSeconds(0.25f);
@@ -163,6 +177,17 @@ public class MoveManager : NetworkBehaviour
         enemyFigurine.TakeEffect();
     }
 
+    IEnumerator EnduringDefense(object[] parameters)
+    {
+        Figurine playerFigurine = (Figurine)parameters[0];
+        Figurine enemyFigurine = (Figurine)parameters[1];
+
+        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.DefenseUp, 3);
+        yield return new WaitForSeconds(MoveDelay);
+        enemyFigurine.TakeEffect();
+        
+    }
+
     IEnumerator ImperviousBastion(object[] parameters)
     {
         Figurine playerFigurine = (Figurine)parameters[0];
@@ -178,9 +203,10 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
-        enemyFigurine.incomingEffect.IncomingDamage += 4;
-        if (Random.Range(0,5) == 0)
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
+        if (UnityEngine.Random.Range(0,5) == 0)
         {
             //enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Stunned, 2);
         }
@@ -192,8 +218,9 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
-        enemyFigurine.incomingEffect.IncomingDamage += 7;
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.5);
         enemyFigurine.incomingEffect.moveEffects.Add(FigurineEffect.MoveEffects.Pushback, 1);
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
@@ -203,8 +230,9 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine) parameters[0];
         Figurine enemyFigurine = (Figurine) parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
-        enemyFigurine.incomingEffect.IncomingDamage += 5;
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
 
         if (playerFigurine.ability.abilityName == "Lifesteal")
         {
@@ -218,10 +246,26 @@ public class MoveManager : NetworkBehaviour
     {
         Figurine playerFigurine = (Figurine)parameters[0];
         Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
 
         int lifestealStacks = playerFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
-        enemyFigurine.incomingEffect.IncomingDamage += 5 + (5 * lifestealStacks);
+        enemyFigurine.incomingEffect.IncomingDamage += ((int)(playerFigurineAttack * 1.0)) * lifestealStacks;
         playerFigurine.incomingEffect.SelfBuffsToRemove.Add(FigurineEffect.StatusEffects.Lifesteal, lifestealStacks);
+        yield return new WaitForSeconds(MoveDelay);
+        enemyFigurine.TakeEffect();
+    }
+
+    IEnumerator ToxicBud(object[] parameters)
+    {
+        Figurine playerFigurine = (Figurine)parameters[0];
+        Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
+
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
+        if (UnityEngine.Random.Range(0, 2) == 0)
+        {
+            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 2);
+        }
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
@@ -248,7 +292,7 @@ public class MoveManager : NetworkBehaviour
         localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
         Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
         localPlayer.activeExternalMove = selectedExternalMove;
-        UseExternalMoveClientRpc(selectedExternalMove);
+        UseExternalMoveClientRpc(selectedExternalMove, localPlayer.SelectedFigurine.name);
         
         yield return new WaitUntil(() => waitingForCompletedExternalMove == false);
 
@@ -256,10 +300,11 @@ public class MoveManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void UseExternalMoveClientRpc(string selectedExternalMove)
+    private void UseExternalMoveClientRpc(string selectedExternalMove, string figurineName)
     {
+        Figurine figurine = GameObject.Find(figurineName).GetComponent<Figurine>();
         FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
-        localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
+        figurine.moveCooldowns[move] = move.moveCooldown;
         Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
         localPlayer.activeExternalMove = selectedExternalMove;
 

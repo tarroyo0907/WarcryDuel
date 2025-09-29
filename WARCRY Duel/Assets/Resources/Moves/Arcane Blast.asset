@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Arcane Blast
   m_EditorClassIdentifier: 
   moveName: Arcane Blast
-  moveDescription: Deals 5 damage to the enemy.
+  moveDescription: Deals 100% attack damage to the enemy.
   moveIcon: {fileID: 21300000, guid: 529b5b32c5b5f1c46b45e4443944c965, type: 3}
   moveCooldown: 0
   moveType: 1

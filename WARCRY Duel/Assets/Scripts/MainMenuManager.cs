@@ -249,17 +249,13 @@ public class MainMenuManager : NetworkBehaviour
     {
         string savedTeamPath = Application.persistentDataPath + "/savedTeam.txt";
         string playerCollectionPath = Application.persistentDataPath + "/playerCollection.txt";
-        if (File.Exists(savedTeamPath) && File.Exists(playerCollectionPath))
-        {
-            return;
-        }
-        else
+        if (true)
         {
             Debug.Log("Initializing Party Data");
             // Set Party Data
             CollectionObject partyTeam = new CollectionObject
             {
-                figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+                figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Kleptra_Figurine", "Shade_Figurine", "Rose_Figurine", "Rook_Figurine" }
             };
 
             // Convert Collection Object to JSON format string
@@ -271,7 +267,7 @@ public class MainMenuManager : NetworkBehaviour
             // Set Collection Data
             CollectionObject collectionObject = new CollectionObject
             {
-                figureNames = new string[12] { "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine", "Bulwark_Figurine", "Bastion_Figurine", "Shade_Figurine", "Shade_Figurine", "Rook_Figurine", "Rook_Figurine" }
+                figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Kleptra_Figurine", "Shade_Figurine", "Rose_Figurine", "Rook_Figurine" }
             };
 
             // Convert Collection Object to JSON format string

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Fruitful Fury
   m_EditorClassIdentifier: 
   moveName: Fruitful Fury
-  moveDescription: Converts all Healing Stacks to heal an ally for 5 HP per Healing
-    stack.
+  moveDescription: Converts all Lifesteal Stacks to heal an ally for 200 HP per stack.
   moveIcon: {fileID: 21300000, guid: 34d21066720febc43851ce397a1ee311, type: 3}
-  moveCooldown: 0
+  moveCooldown: 2
   moveType: 3

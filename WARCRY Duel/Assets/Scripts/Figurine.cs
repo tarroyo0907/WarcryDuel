@@ -34,6 +34,8 @@ public class Figurine : NetworkBehaviour
     public string figurineName;
     public int currentHealth;
     public int totalHealth;
+    public int attackStat;
+    public int defenseStat;
     public int movementPoints;
     public bool isSpawnable;
     public bool isAbleToFight;
@@ -105,6 +107,7 @@ public class Figurine : NetworkBehaviour
         }
         
         Multiplayer_GameManager.OnChangeTurn += ClearPossibleTargets;
+        // Multiplayer_GameManager.OnChangeTurn += MovementPenalty;
         PlayerUI.OnEndTurn += ClearPossibleTargets;
         #endregion
 
@@ -133,7 +136,13 @@ public class Figurine : NetworkBehaviour
     #region Inflict Status Effect
     public void InflictStatusEffect(MultiplayerBattleState previousState, MultiplayerBattleState newState)
     {
-        InflictStatusEffectServerRpc();
+        // if it's the player's turn
+        int figureOwnerID = int.Parse(team.Replace("Player ", ""));
+        Debug.Log("CHECKING STATUS EFFECT : " + figureOwnerID + " == " + (ulong)newState);
+        if (figureOwnerID == (int) newState)
+        {
+            InflictStatusEffectServerRpc();
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -192,6 +201,11 @@ public class Figurine : NetworkBehaviour
         }
 
         // Decrements the Status Effect Stack by 1
+        if (FigurineEffect.PersistentEffects.Contains(statusEffect))
+        {
+            yield break;
+        }
+
         Debug.Log($"Decreasing Status Effect of {statusEffect.ToString()} by 1");
         buffs[statusEffect]--;
 
@@ -244,6 +258,11 @@ public class Figurine : NetworkBehaviour
         }
 
         // Decrements the Status Effect Stack by 1
+        if (FigurineEffect.PersistentEffects.Contains(statusEffect))
+        {
+            yield break;
+        }
+
         Debug.Log($"Decreasing Status Effect of {statusEffect.ToString()} by 1");
         debuffs[statusEffect]--;
 
@@ -294,19 +313,16 @@ public class Figurine : NetworkBehaviour
         #region Status Effect Conditions
         if (buffs.ContainsKey(FigurineEffect.StatusEffects.Stealth))
         {
-            try
+            if (buffs[FigurineEffect.StatusEffects.Stealth] >= 1)
             {
-                if (buffs[FigurineEffect.StatusEffects.Stealth] >= 1)
-                {
-                    incomingEffect.BlockIncomingDamage = true;
-                }
-
+                incomingEffect.BlockIncomingDamage = true;
             }
-            catch (Exception)
-            {
-                Debug.Log("No Stealth Detected!");
-            }
+        }
 
+        int figurineDefense = defenseStat;
+        if (buffs.ContainsKey(FigurineEffect.StatusEffects.DefenseUp))
+        {
+            figurineDefense = (int) Math.Ceiling(figurineDefense * 1.5);
         }
         #endregion
 
@@ -324,7 +340,15 @@ public class Figurine : NetworkBehaviour
         }
 
         // Reduces current health by the specified damage
-        currentHealth -= incomingEffect.IncomingDamage;
+        int incDmg = incomingEffect.IncomingDamage;
+        int figDef = figurineDefense;
+        int finalDamage = 0;
+        if (incDmg > 0)
+        {
+            finalDamage = Math.Max(1, incDmg - figDef);
+        }
+        
+        currentHealth -= finalDamage;
         healthBar.value = currentHealth;
         if (incomingEffect.IncomingDamage != 0)
         {
@@ -358,6 +382,26 @@ public class Figurine : NetworkBehaviour
             }
 
         }
+
+        foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfBuff in incomingEffect.SelfBuffsToRemove)
+        {
+            try
+            {
+                buffs.Remove(selfBuff.Key);
+            }
+            catch (Exception) {}
+        }
+
+        foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfDebuff in incomingEffect.SelfDebuffsToRemove)
+        {
+            try
+            {
+                debuffs.Remove(selfDebuff.Key);
+            }
+            catch (Exception) {}
+
+        }
+
 
         // Appends the enemies status effects after
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> enemyBuff in incomingEffect.EnemyBuffsToApply)
@@ -410,6 +454,8 @@ public class Figurine : NetworkBehaviour
     {
         Debug.Log("Figurine Defeated");
         isDefeated = true;
+        buffs.Clear();
+        debuffs.Clear();
         DefeatedEvent?.Invoke(this);
     }
 
@@ -418,15 +464,11 @@ public class Figurine : NetworkBehaviour
         OnStartMoving?.Invoke(this);
         List<Tile> tilePath = new List<Tile>();
         tilePath = FindEndingPoint(currentSpacePos.gameObject.GetComponent<Tile>(), endingPoint, null, 0);
-        Debug.Log("Tile Path Count : " + tilePath.Count);
         for (int i = 0; i < tilePath.Count - 1; i++)
         {
-            Debug.Log("Tile Path Iteration : " + tilePath[i]);
             StartCoroutine(MoveFigure(tilePath[i], tilePath[i + 1], 1f));
             yield return new WaitUntil(() => isMoving == false);
         }
-
-        Debug.Log("Finishing Movement Sequence");
 
         // Grabs Possible Targets that the Figurine can attack
         GetPossibleTargets();
@@ -480,7 +522,6 @@ public class Figurine : NetworkBehaviour
         // Ends Search Early if Depth is beyond Figure's Movement Points
         if (depth == movementPoints)
         {
-            Debug.Log("Figurine - Couldn't Find Ending Point!");
             return new List<Tile>() { };
         }
 
@@ -494,7 +535,6 @@ public class Figurine : NetworkBehaviour
                 }
             }
 
-            Debug.Log($"Child Tile : {childTile}");
             if (childTile.Equals(endingPoint))
             {
                 List<Tile> tiles = new List<Tile> { startingPoint, endingPoint };
@@ -722,6 +762,31 @@ public class Figurine : NetworkBehaviour
         yield return new WaitForSeconds(0.2f);
 
         figureMeshRenderer.material.color = originalColor;
+    }
+
+    private void MovementPenalty(MultiplayerBattleState previousState, MultiplayerBattleState newState)
+    {
+        Debug.Log("APPLYING MOVEMENT PENALTY : " + Multiplayer_GameManager.Instance.currentTurn);
+        if (Multiplayer_GameManager.Instance.currentTurn == 1)
+        {
+            movementPoints--;
+            if (movementPointText != null)
+            {
+                // Update Movement Points
+                movementPointText.text = movementPoints.ToString();
+            }
+        }
+        else
+        {
+            movementPoints++;
+            if (movementPointText != null)
+            {
+                // Update Movement Points
+                movementPointText.text = movementPoints.ToString();
+            }
+            Multiplayer_GameManager.OnChangeTurn -= MovementPenalty;
+        }
+
     }
 
     #region Helper Methods

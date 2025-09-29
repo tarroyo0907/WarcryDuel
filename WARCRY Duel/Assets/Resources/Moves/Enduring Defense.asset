@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enduring Defense
   m_EditorClassIdentifier: 
   moveName: Enduring Defense
-  moveDescription: Reduces all incoming damage by 10%.
+  moveDescription: Gain 3 Stacks of Defense Up
   moveIcon: {fileID: 21300000, guid: 0d50cd70c9a226c4fb4185d95a904aba, type: 3}
-  moveCooldown: 0
-  moveType: 2
+  moveCooldown: 3
+  moveType: 1

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e702e7e060d265b4bb6ebb208777c59f, type: 3}
+  m_Name: Rejuvinate
+  m_EditorClassIdentifier: 
+  moveName: Rejuvinate
+  moveDescription: Apply ATK Up to an ally for 2 turns
+  moveIcon: {fileID: 21300000, guid: a50bac3efe00f4544aa4e6b664e47225, type: 3}
+  moveCooldown: 2
+  moveType: 3
