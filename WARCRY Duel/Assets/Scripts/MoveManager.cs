@@ -262,9 +262,9 @@ public class MoveManager : NetworkBehaviour
         int playerFigurineAttack = (int)parameters[2];
 
         enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
-        if (UnityEngine.Random.Range(0, 2) == 0)
+        if (UnityEngine.Random.Range(0, 1) == 0)
         {
-            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 2);
+            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
         }
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();

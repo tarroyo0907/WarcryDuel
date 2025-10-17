@@ -56,22 +56,23 @@ public class SectionManager : NetworkBehaviour
 
     private void SendUnitsToInfirmary()
     {
-        Debug.Log("Send Units to Infirmary");
         OnSendUnitsToInfirmary?.Invoke();
 
         // Iterates through each defeated figurine to send them to the infirmary
         for (int i = 0; i < defeatedFigurines.Count; i++)
         {
-            Debug.Log("Defeated Figurine : " + defeatedFigurines[i].name);
             Figurine figurine = defeatedFigurines[i];
+            if (figurine == null)
+            {
+                continue;
+            }
+
             if (figurine.isSpawnable)
             {
                 if (IsServer)
                 {
-                    Debug.Log("DESPAWNING ROCK");
                     figurine.GetComponent<NetworkObject>().Despawn();
                 }
-                //Destroy(figurine.gameObject);
                 continue;
             }
 
@@ -91,7 +92,7 @@ public class SectionManager : NetworkBehaviour
         int FigureBenchCount = 8;
         figurine.currentHealth = figurine.totalHealth;
         figurine.healthBar.value = figurine.currentHealth;
-        UpdateFigureHPClientRpc(figurine.figurineName);
+        UpdateFigureHPClientRpc(figurine.name);
         figurine.isDefeated = false;
 
         // Grabs the bench that the figure will be moved to
@@ -178,6 +179,7 @@ public class SectionManager : NetworkBehaviour
     [ClientRpc]
     public void UpdateFigureHPClientRpc(string figurineName)
     {
+        Debug.Log("Updating Figure HP Client RPC : " + figurineName);
         try
         {
             GameObject selectedFigurine = GameObject.Find(figurineName);
@@ -185,6 +187,9 @@ public class SectionManager : NetworkBehaviour
 
             figurine.currentHealth = figurine.totalHealth;
             figurine.healthBar.value = figurine.currentHealth;
+            figurine.buffs.Clear();
+            figurine.debuffs.Clear();
+            Debug.Log("Finished Updating Figure HP!");
         }
         catch (System.Exception)
         {

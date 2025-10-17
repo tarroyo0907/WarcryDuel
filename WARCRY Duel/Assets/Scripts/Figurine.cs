@@ -322,7 +322,12 @@ public class Figurine : NetworkBehaviour
         int figurineDefense = defenseStat;
         if (buffs.ContainsKey(FigurineEffect.StatusEffects.DefenseUp))
         {
-            figurineDefense = (int) Math.Ceiling(figurineDefense * 1.5);
+            figurineDefense = figurineDefense + (int) Math.Ceiling(defenseStat * 0.5);
+        }
+
+        if (debuffs.ContainsKey(FigurineEffect.StatusEffects.DefenseDown))
+        {
+            figurineDefense = figurineDefense - (int) Math.Ceiling(defenseStat * 0.5);
         }
         #endregion
 

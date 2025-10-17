@@ -19,6 +19,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public delegate void PlayerHandler(Multiplayer_Player player);
     public delegate void FigurineHandler(Figurine figurine);
     public delegate void BattleHandler(Figurine attackerFigure, Figurine enemyFigure, ulong attackerID);
+    public delegate void AnnouncementHandler(string announcement);
     #endregion
 
     #region Event Initialization
@@ -38,6 +39,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public static event PlayerHandler OnCompletedMoveEffect;
     public static event PlayerHandler OnCompletedExternalMove;
     public static event PlayerHandler OnPartyLoaded;
+    public static event AnnouncementHandler ExternalMoveAnnouncement;
     #endregion
 
     #region Data Fields
@@ -682,8 +684,18 @@ public class Multiplayer_Player : NetworkBehaviour
             default:
                 break;
         }
+
+        
+        string externalMoveAnnouncement = null;
+        if (selectedFigurine != null)
+        {
+            externalMoveAnnouncement = $"{selectedFigurine.figurineName} used {activeExternalMove}";
+            if (hitObject.tag == "Figurine") { externalMoveAnnouncement += $" on {hitObject.GetComponent<Figurine>().figurineName}"; }
+            ;
+            externalMoveAnnouncement += "!";
+        }
         OnCompletedExternalMove?.Invoke(this);
-        CompleteExternalMoveClientRpc();
+        CompleteExternalMoveClientRpc(externalMoveAnnouncement);
         activeExternalMove = "";
     }
     #endregion
@@ -750,10 +762,11 @@ public class Multiplayer_Player : NetworkBehaviour
     
 
     [ClientRpc]
-    private void CompleteExternalMoveClientRpc()
+    private void CompleteExternalMoveClientRpc(string externalMoveAnnouncement)
     {
         activeExternalMove = "";
         OnCompletedExternalMove?.Invoke(this);
+        ExternalMoveAnnouncement?.Invoke(externalMoveAnnouncement);
     }
     #endregion
 

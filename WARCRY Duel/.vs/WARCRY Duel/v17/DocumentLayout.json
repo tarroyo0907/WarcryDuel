@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\assets\\scripts\\figurine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\figurine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\playerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\multiplayer_player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\multiplayer_player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\assets\\scripts\\sectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\sectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\movemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\movemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\multiplayer_player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\multiplayer_player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\figurine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\figurine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\multiplayer_gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,16 +31,8 @@
       "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\battleui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\sectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\sectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\playerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CF92BEA-135A-ECF5-5F28-9A78B2EBD881}|Assembly-CSharp.csproj|C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\assets\\scripts\\registernetworkprefabs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -90,7 +90,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,54 +102,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Multiplayer_Player.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Multiplayer_Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Multiplayer_Player.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Multiplayer_Player.cs",
               "RelativeToolTip": "Assets\\Scripts\\Multiplayer_Player.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAYwC4AAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAALECAAAAAAAAAAAAAPYCAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-26T19:02:41.715Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Figurine.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Figurine.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Figurine.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Figurine.cs",
               "RelativeToolTip": "Assets\\Scripts\\Figurine.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAYwG0AAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAJgBAAAAAAAAAAAowCkBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T19:02:41.723Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T19:02:41.723Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Multiplayer_GameManager.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Multiplayer_GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Multiplayer_GameManager.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\Multiplayer_GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\Multiplayer_GameManager.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAkwKsAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAUwKsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T19:02:41.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T19:02:41.696Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "PlayerUI.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\PlayerUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerUI.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\PlayerUI.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerUI.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAmwJABAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAQwGoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T19:02:41.742Z"
+              "WhenOpened": "2024-06-26T19:02:41.742Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -165,28 +164,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "MoveManager.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\MoveManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MoveManager.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\MoveManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\MoveManager.cs",
-              "ViewState": "AgIAAJ8AAAAAAAAAAAAiwJsAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAALMAAAAAAAAAAAAuwCEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T19:02:41.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T19:02:41.71Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "SectionManager.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\SectionManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SectionManager.cs",
               "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\SectionManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\SectionManager.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAUwB8AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T18:58:14.106Z"
+              "WhenOpened": "2025-09-11T18:58:14.106Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -226,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "MainMenuManager.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\MainMenuManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenuManager.cs",
@@ -298,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "BattleUI.cs",
               "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\Assets\\Scripts\\BattleUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\BattleUI.cs",

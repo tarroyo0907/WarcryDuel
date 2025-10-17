@@ -24,6 +24,7 @@ public class PlayerUI : NetworkBehaviour
     [Header("Misc References")]
     [SerializeField] private Canvas playerCanvas;
     [SerializeField] private TMPro.TextMeshProUGUI TurnIndicatorText;
+    [SerializeField] private TMPro.TextMeshProUGUI MoveIndicatorText;
     [SerializeField] private Button EndTurnButton;
     #endregion
 
@@ -102,6 +103,7 @@ public class PlayerUI : NetworkBehaviour
             Multiplayer_Player.OnCompletedMoveEffect += EnablePlayerUICanvas;
 
             Multiplayer_Player.OnCompletedExternalMove += ClearFigurineOverview;
+            Multiplayer_Player.ExternalMoveAnnouncement += DisplayAnnouncement;
 
             Multiplayer_Player.SelectOwnFigurine += DisplayFigurineOverview;
             Multiplayer_Player.SelectEnemyFigurine += DisplayFigurineOverview;
@@ -225,6 +227,21 @@ public class PlayerUI : NetworkBehaviour
         {
             externalMoveBackground.SetActive(false);
         }
+    }
+
+    private void DisplayAnnouncement(string externalMoveAnnouncement)
+    {
+        StartCoroutine(DisplayAnnouncementCoroutine(externalMoveAnnouncement));
+    }
+
+    private IEnumerator DisplayAnnouncementCoroutine(string externalMoveAnnouncement)
+    {
+        MoveIndicatorText.text = externalMoveAnnouncement;
+        MoveIndicatorText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2.5f);
+
+        MoveIndicatorText.gameObject.SetActive(false);
     }
 
     private void DisplayFigurineOverview(Multiplayer_Player player)
