@@ -1,0 +1,13 @@
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Debug\net6.0\EdgegapBridge.deps.json
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Debug\net6.0\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Debug\net6.0\EdgegapBridge.pdb
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.csproj.AssemblyReference.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.AssemblyInfoInputs.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.AssemblyInfo.cs
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.csproj.CoreCompileInputs.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.sourcelink.json
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\refint\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\EdgegapBridge.pdb
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Debug\net6.0\ref\EdgegapBridge.dll

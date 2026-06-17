@@ -15,7 +15,6 @@ using UnityEngine.UI;
 using static Multiplayer_Network;
 
 #if DEDICATED_SERVER
-using Unity.Services.Multiplay;
 #endif
 
 // Tyler Arroyo
@@ -81,7 +80,6 @@ public class MainMenuManager : NetworkBehaviour
 #if DEDICATED_SERVER
     private float autoAllocateTimer = 9999999f;
     private bool alreadyAutoAllocated;
-    private static IServerQueryHandler serverQueryHandler;
     
     private string backfillTicketId;
     private float acceptBackfillTicketsTimer;
@@ -107,43 +105,19 @@ public class MainMenuManager : NetworkBehaviour
 #if DEDICATED_SERVER
         await UnityServices.InitializeAsync();
 
-        backfillTicketId = null;
-        serverQueryHandler = null;
-
-        // Handles Backfill Tickets
-        //SetupBackfillTickets();
-
-        var serviceConfig = MultiplayService.Instance.ServerConfig;
-        ushort port = serviceConfig.Port;
+        string envPort = Environment.GetEnvironmentVariable("ARBITRIUM_PORT_GAMEPORT_INTERNAL");
+        ushort port = 7777; // Default port
+        if (envPort != null)
+        {
+            port = ushort.Parse(envPort);
+        }
         NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData("0.0.0.0", port);
+        Debug.Log("EnvPort = " + envPort);
 
-        Debug.Log("Starting as Server!");
         if (!NetworkManager.Singleton.IsServer && !NetworkManager.Singleton.IsClient)
         {
             NetworkManager.Singleton.StartServer();
         }
-        else
-        {
-            Debug.Log("Server already running, skipping StartServer().");
-        }
-
-
-
-        // Read ports & paths that Multiplay injected
-        Debug.Log($"ServerId:{serviceConfig.ServerId} AllocId:{serviceConfig.AllocationId} Port:{serviceConfig.Port} Query:{serviceConfig.QueryPort} Logs:{serviceConfig.ServerLogDirectory}");
-
-        // Start SQP and keep it updated
-        serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(
-            maxPlayers: 2, serverName: "RankedMatch", gameType: "Ranked",
-            buildId: Application.version, map: "Battle");
-
-        serverQueryHandler.CurrentPlayers = 0;
-        serverQueryHandler.Port = port;            // expose the same port clients use
-        serverQueryHandler.MaxPlayers = 2;
-        serverQueryHandler.UpdateServerCheck();
-
-        // Only after allocation completes and your game is ready:
-        await MultiplayService.Instance.ReadyServerForPlayersAsync();
 #endif
     }
 
@@ -197,23 +171,6 @@ public class MainMenuManager : NetworkBehaviour
             }
         }
         #endregion
-
-#if DEDICATED_SERVER
-        if (serverQueryHandler != null)
-        {
-            serverQueryHandler.UpdateServerCheck();
-        }
-
-        if (backfillTicketId != null)
-        {
-            acceptBackfillTicketsTimer -= Time.deltaTime;
-            if (acceptBackfillTicketsTimer <= 0f)
-            {
-                acceptBackfillTicketsTimer = acceptBackfillTicketsTimerMax;
-                HandleBackfillTickets();
-            }
-        }
-#endif
 
         #region Player Input
         // Checks if the player clicks/taps on an object
@@ -616,148 +573,33 @@ public class MainMenuManager : NetworkBehaviour
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             Debug.Log("Signed In Anonymously");
 #endif
-
-#if DEDICATED_SERVER
-            Debug.Log("Dedicated_Server Lobby");
-
-            MultiplayEventCallbacks multiplayEventCallbacks = new MultiplayEventCallbacks();
-            multiplayEventCallbacks.Allocate += MultiplayEventCallbacks_Allocate;
-            multiplayEventCallbacks.Deallocate += MultiplayEventCallbacks_Deallocate;
-            multiplayEventCallbacks.Error += MultiplayEventCallbacks_Error;
-            multiplayEventCallbacks.SubscriptionStateChanged += MultiplayEventCallbacks_SubscriptionStateChanged;
-            IServerEvents serverEvents = await MultiplayService.Instance.SubscribeToServerEventsAsync(multiplayEventCallbacks);
-
-            IServerQueryHandler serverQueryHandler = await MultiplayService.Instance.StartServerQueryHandlerAsync(2, "Ranked Match", "WARCRY DUEL", "1.0", "Default");
-
-            var serverConfig = MultiplayService.Instance.ServerConfig;
-            if (serverConfig.AllocationId != "")
-            {
-                // Already Allocated
-                MultiplayEventCallbacks_Allocate(new MultiplayAllocation("", serverConfig.ServerId, serverConfig.AllocationId));
-            }
-#endif
-        }
-        else
-        {
-#if DEDICATED_SERVER
-            // Already Initialized
-            var serverConfig = MultiplayService.Instance.ServerConfig;
-            if (serverConfig.AllocationId != "")
-            {
-                // Already Allocated
-                MultiplayEventCallbacks_Allocate(new MultiplayAllocation("", serverConfig.ServerId, serverConfig.AllocationId));
-            }
-#endif
         }
     }
 
     private async void PollMatchmakerTicket()
     {
-        Debug.Log("PollMatchmakerTicket");
 
         // Returns the status of the client's ticket
-        TicketStatusResponse ticketStatusResponse = await MatchmakerService.Instance.GetTicketAsync(createTicketResponse.Id);
+        var ticketStatusResponse = await MatchmakerService.Instance.GetTicketAsync(createTicketResponse.Id);
 
-        if (ticketStatusResponse == null)
+        if (ticketStatusResponse.Type == typeof(IpPortAssignment))
         {
-            // Null means no updates to this ticket, keep waiting
-            Debug.Log("Null means no updates to this ticket, keep waiting");
-            return;
-        }
+            var assignment = ticketStatusResponse.Value as IpPortAssignment;
+            Debug.Log("Ticket Status : " + assignment.Status);
 
-        // Not null means there is an update to the ticket
-        if (ticketStatusResponse.Type == typeof(MultiplayAssignment))
-        {
-            // It's a Multiplay Assignment
-            MultiplayAssignment multiplayAssignment = ticketStatusResponse.Value as MultiplayAssignment;
-
-            Debug.Log("multiplayAssignment.Status " + multiplayAssignment.Status);
-            switch (multiplayAssignment.Status)
+            if (assignment != null)
             {
-                case MultiplayAssignment.StatusOptions.Timeout:
-                    createTicketResponse = null;
-                    Debug.Log("Multiplay Timeout!");
-                    
-                    GameObject sceneManager = GameObject.Find("SceneManager");
-                    GameObject networkManager = GameObject.Find("NetworkManager");
-                    GameObject soundManager = GameObject.Find("SoundManager");
-                    Destroy(sceneManager);
-                    Destroy(networkManager);
-                    Destroy(soundManager);
+                NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(assignment.Ip, (ushort)assignment.Port);
 
-                    SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-                    break;
-
-                case MultiplayAssignment.StatusOptions.Failed:
-                    createTicketResponse = null;
-                    Debug.Log("Failed to create Multiplay server!");
-
-                    sceneManager = GameObject.Find("SceneManager");
-                    networkManager = GameObject.Find("NetworkManager");
-                    soundManager = GameObject.Find("SoundManager");
-
-                    Destroy(sceneManager);
-                    Destroy(networkManager);
-                    Destroy(soundManager);
-
-                    SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-                    break;
-
-                case MultiplayAssignment.StatusOptions.InProgress:
-                    // Still waiting...
-                    break;
-
-                case MultiplayAssignment.StatusOptions.Found:
-                    createTicketResponse = null;
-
-                    Debug.Log(multiplayAssignment.Ip + " " + multiplayAssignment.Port);
-
-                    string ipv4Address = multiplayAssignment.Ip;
-                    ushort port = (ushort)multiplayAssignment.Port;
-                    NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ipv4Address, port);
-
-                    Debug.Log("Starting as Client!");
-                    NetworkManager.Singleton.StartClient();
-                    break;
-
-                default:
-                    break;
+                Debug.Log("Starting as Client!");
+                NetworkManager.StartClient();
+                createTicketResponse = null;
             }
         }
     }
 
-    private async void SetupBackfillTickets()
-    {
-#if DEDICATED_SERVER
-        Debug.Log("SetupBackfillTickets");
-        PayloadAllocation payloadAllocation = await MultiplayService.Instance.GetPayloadAllocationFromJsonAs<PayloadAllocation>();
-
-        backfillTicketId = payloadAllocation.BackfillTicketId;
-        Debug.Log("backfillTicketId: " + backfillTicketId);
-
-        acceptBackfillTicketsTimer = acceptBackfillTicketsTimerMax;
-#endif
-    }
-    private async void HandleBackfillTickets()
-    {
-#if DEDICATED_SERVER
-        if (NetworkManager.Singleton.ConnectedClients.Count < 2)
-        {
-            BackfillTicket backfillTicket = await MatchmakerService.Instance.ApproveBackfillTicketAsync(backfillTicketId);
-            backfillTicketId = backfillTicketId;
-        }
-#endif
-    }
-
     private void ChangeNetworkScene(ulong clientID)
     {
-        #if DEDICATED_SERVER
-        if (serverQueryHandler != null)
-        {
-            serverQueryHandler.CurrentPlayers = (ushort) NetworkManager.Singleton.ConnectedClients.Count;
-        }
-        #endif
-
         if (NetworkManager.Singleton.ConnectedClients.Count == 2 && loadingStarted == false)
         {
             SceneEventProgressStatus eventStatus = NetworkManager.Singleton.SceneManager.LoadScene("Battle", LoadSceneMode.Single);
@@ -765,7 +607,8 @@ public class MainMenuManager : NetworkBehaviour
             loadingStarted = true;
         }
     }
-#endregion
+
+    #endregion
 
     #region Data Manipulation
     public class CollectionObject
@@ -854,58 +697,8 @@ public class MainMenuManager : NetworkBehaviour
 
         return null;
     }
-
-
-
     #endregion
-
-#if DEDICATED_SERVER
-    private void MultiplayEventCallbacks_SubscriptionStateChanged(MultiplayServerSubscriptionState obj)
-    {
-        Debug.Log("DEDICATED_SERVER MultiplayEventCallbacks_SubscriptionStateChanged");
-        Debug.Log(obj);
-    }
-
-    private void MultiplayEventCallbacks_Error(MultiplayError obj)
-    {
-        Debug.Log("DEDICATED_SERVER MultiplayEventCallbacks_Error");
-        Debug.Log(obj.Reason);
-    }
-
-    private void MultiplayEventCallbacks_Deallocate(MultiplayDeallocation obj)
-    {
-        Debug.Log("DEDICATED_SERVER MultiplayEventCallbacks_Deallocate");
-    }
-
-    private void MultiplayEventCallbacks_Allocate(MultiplayAllocation obj)
-    {
-        Debug.Log("DEDICATED_SERVER MultiplayEventCallbacks_Allocate");
-
-        if (alreadyAutoAllocated)
-        {
-            Debug.Log("Already auto allocated!");
-            return;
-        }
-
-        alreadyAutoAllocated = true;
-
-        var serverConfig = MultiplayService.Instance.ServerConfig;
-        Debug.Log($"Server ID[{serverConfig.ServerId}]");
-        Debug.Log($"AllocationID[{serverConfig.AllocationId}]");
-        Debug.Log($"Port[{serverConfig.Port}]");
-        Debug.Log($"QueryPort[{serverConfig.QueryPort}]");
-        Debug.Log($"LogDirectory[{serverConfig.ServerLogDirectory}]");
-
-        string ipv4Address = "0.0.0.0";
-        ushort port = serverConfig.Port;
-        NetworkManager.Singleton.GetComponent<UnityTransport>().SetConnectionData(ipv4Address, port, "0.0.0.0");
-
-        Debug.Log("Starting as Server!");
-        NetworkManager.Singleton.StartServer();
-        
-    }
-#endif
-
+    
     [Serializable]
     public class PayloadAllocation
     {

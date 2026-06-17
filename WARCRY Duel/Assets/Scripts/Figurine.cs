@@ -138,7 +138,6 @@ public class Figurine : NetworkBehaviour
     {
         // if it's the player's turn
         int figureOwnerID = int.Parse(team.Replace("Player ", ""));
-        Debug.Log("CHECKING STATUS EFFECT : " + figureOwnerID + " == " + (ulong)newState);
         if (figureOwnerID == (int) newState)
         {
             InflictStatusEffectServerRpc();
@@ -163,7 +162,6 @@ public class Figurine : NetworkBehaviour
         // Inflicts All Debuffs
         for (int i = 0; i < debuffs.Keys.Count; i++)
         {
-            Debug.Log("DEBUFF INDEX : " + i);
             FigurineEffect.StatusEffects statusEffect = debuffs.ElementAt(i).Key;
 
             // Inflict Status Effect On Server
@@ -189,7 +187,6 @@ public class Figurine : NetworkBehaviour
     IEnumerator InflictBuffCoroutine(int statusEffectEnum)
     {
         // Inflicts all the status effects that the figurine currently has
-        Debug.Log("Inflicting Status Effect on Figurine!");
         FigurineEffect.StatusEffects statusEffect = (FigurineEffect.StatusEffects)statusEffectEnum;
         switch (statusEffect)
         {
@@ -206,7 +203,6 @@ public class Figurine : NetworkBehaviour
             yield break;
         }
 
-        Debug.Log($"Decreasing Status Effect of {statusEffect.ToString()} by 1");
         buffs[statusEffect]--;
 
         if (buffs[statusEffect] == 0)
@@ -230,7 +226,6 @@ public class Figurine : NetworkBehaviour
     IEnumerator InflictDebuffCoroutine(int statusEffectEnum)
     {
         // Inflicts all the status effects that the figurine currently has
-        Debug.Log("Inflicting Status Effect on Figurine!");
         FigurineEffect.StatusEffects statusEffect = (FigurineEffect.StatusEffects)statusEffectEnum;
         switch (statusEffect)
         {
@@ -263,7 +258,6 @@ public class Figurine : NetworkBehaviour
             yield break;
         }
 
-        Debug.Log($"Decreasing Status Effect of {statusEffect.ToString()} by 1");
         debuffs[statusEffect]--;
 
         if (debuffs[statusEffect] == 0)
@@ -287,7 +281,6 @@ public class Figurine : NetworkBehaviour
 
     public void TakeEffect()
     {
-        Debug.Log("Figurine Taking Damage");
 
         // Check for Passive Conditions
         #region Passive Ability Conditions
@@ -420,7 +413,6 @@ public class Figurine : NetworkBehaviour
                 buffs[enemyBuff.Key] += enemyBuff.Value;
             }
 
-            Debug.Log($"{figurineName} now has {buffs[enemyBuff.Key]} stacks of {enemyBuff.Key.ToString()}");
         }
 
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> enemyDebuff in incomingEffect.EnemyDebuffsToApply)
@@ -434,7 +426,6 @@ public class Figurine : NetworkBehaviour
                 debuffs[enemyDebuff.Key] += enemyDebuff.Value;
             }
 
-            Debug.Log($"{figurineName} now has {debuffs[enemyDebuff.Key]} stacks of {enemyDebuff.Key.ToString()}");
         }
 
         // Appends Move Effects Next
@@ -457,7 +448,6 @@ public class Figurine : NetworkBehaviour
 
     public void Defeated()
     {
-        Debug.Log("Figurine Defeated");
         isDefeated = true;
         buffs.Clear();
         debuffs.Clear();
@@ -665,7 +655,6 @@ public class Figurine : NetworkBehaviour
 
     public List<GameObject> GetPossibleTargets()
     {
-        Debug.Log("FINDING POSSIBLE TARGETS");
         List<GameObject> possibleTargets = new List<GameObject>();
 
         // Grabs the Tile Component of this figurine's current space
@@ -703,7 +692,6 @@ public class Figurine : NetworkBehaviour
         }
 
         // Returns list of possible targets
-        Debug.Log(string.Join(", ", possibleTargets));
         this.possibleTargets = possibleTargets;
         return possibleTargets;
 
@@ -711,7 +699,6 @@ public class Figurine : NetworkBehaviour
 
     public void CheckForSurroundKill()
     {
-        Debug.Log("Checking for Surround Kill");
         List<GameObject> surroundingEnemies = GetPossibleTargets();
         List<GameObject> defeatedEnemies = new List<GameObject>();
         foreach (GameObject enemy in surroundingEnemies)
@@ -771,7 +758,6 @@ public class Figurine : NetworkBehaviour
 
     private void MovementPenalty(MultiplayerBattleState previousState, MultiplayerBattleState newState)
     {
-        Debug.Log("APPLYING MOVEMENT PENALTY : " + Multiplayer_GameManager.Instance.currentTurn);
         if (Multiplayer_GameManager.Instance.currentTurn == 1)
         {
             movementPoints--;

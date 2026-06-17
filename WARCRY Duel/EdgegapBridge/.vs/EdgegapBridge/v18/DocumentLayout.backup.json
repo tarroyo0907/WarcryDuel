@@ -1,0 +1,125 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\project\\edgegapallocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\project\\edgegapallocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\edgegapbridge.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\edgegapbridge.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\project\\client\\models\\deploymentstatusresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\project\\client\\models\\deploymentstatusresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\project\\client\\edgegapclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\project\\client\\edgegapclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\project\\client\\models\\deploymentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\project\\client\\models\\deploymentrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|c:\\users\\iamty\\documents\\github\\warcryduel\\warcry duel\\edgegapbridge\\project\\project\\client\\models\\deploymentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0151F5A6-D5D6-462A-AC42-1F1890CCD8BC}|Project\\EdgegapBridge.csproj|solutionrelative:project\\project\\client\\models\\deploymentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DeploymentStatusResponse.cs",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentStatusResponse.cs",
+              "RelativeDocumentMoniker": "Project\\Project\\Client\\Models\\DeploymentStatusResponse.cs",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentStatusResponse.cs",
+              "RelativeToolTip": "Project\\Project\\Client\\Models\\DeploymentStatusResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T01:37:34.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DeploymentResponse.cs",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentResponse.cs",
+              "RelativeDocumentMoniker": "Project\\Project\\Client\\Models\\DeploymentResponse.cs",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentResponse.cs",
+              "RelativeToolTip": "Project\\Project\\Client\\Models\\DeploymentResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T01:37:26.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DeploymentRequest.cs",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentRequest.cs",
+              "RelativeDocumentMoniker": "Project\\Project\\Client\\Models\\DeploymentRequest.cs",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\Models\\DeploymentRequest.cs",
+              "RelativeToolTip": "Project\\Project\\Client\\Models\\DeploymentRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T01:37:17.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EdgegapClient.cs",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\EdgegapClient.cs",
+              "RelativeDocumentMoniker": "Project\\Project\\Client\\EdgegapClient.cs",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\Client\\EdgegapClient.cs",
+              "RelativeToolTip": "Project\\Project\\Client\\EdgegapClient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T01:36:45.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EdgegapAllocator.cs",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\EdgegapAllocator.cs",
+              "RelativeDocumentMoniker": "Project\\Project\\EdgegapAllocator.cs",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\Project\\EdgegapAllocator.cs",
+              "RelativeToolTip": "Project\\Project\\EdgegapAllocator.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAIwGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-31T18:56:20.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EdgegapBridge.csproj",
+              "DocumentMoniker": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\EdgegapBridge.csproj",
+              "RelativeDocumentMoniker": "Project\\EdgegapBridge.csproj",
+              "ToolTip": "C:\\Users\\iamty\\Documents\\GitHub\\WarcryDuel\\WARCRY Duel\\EdgegapBridge\\Project\\EdgegapBridge.csproj",
+              "RelativeToolTip": "Project\\EdgegapBridge.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-31T18:56:10.801Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Release\net9.0\linux-x64\EdgegapBridge.deps.json
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Release\net9.0\linux-x64\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\bin\Release\net9.0\linux-x64\EdgegapBridge.pdb
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.csproj.AssemblyReference.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.AssemblyInfoInputs.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.AssemblyInfo.cs
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.csproj.CoreCompileInputs.cache
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.sourcelink.json
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\refint\EdgegapBridge.dll
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\EdgegapBridge.pdb
+C:\Users\iamty\Documents\GitHub\WarcryDuel\WARCRY Duel\EdgegapBridge\Project\obj\Release\net9.0\linux-x64\ref\EdgegapBridge.dll

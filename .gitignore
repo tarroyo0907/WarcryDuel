@@ -4,4 +4,6 @@ WARCRY Duel/Obj/*
 WARCRY Duel_clone_0/*
 WARCRY Duel_clone_1/*
 WARCRY Duel_BurstDebugInformation_DoNotShip/*
+WARCRY Duel/.utmp/*
+WARCRY Duel/.vs/*
 *.log

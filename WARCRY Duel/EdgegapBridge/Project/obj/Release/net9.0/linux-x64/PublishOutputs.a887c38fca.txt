@@ -1,0 +1,13 @@
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\EdgegapBridge.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\EdgegapBridge.deps.json
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\EdgegapBridge.pdb
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Unity.Services.CloudCode.Apis.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Unity.Services.CloudCode.Core.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Google.Protobuf.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Grpc.Core.Api.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Grpc.Net.Client.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Grpc.Net.Common.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\JsonSubTypes.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\iamty\AppData\Local\Temp\EdgegapBridge\module-compilation\Newtonsoft.Json.dll

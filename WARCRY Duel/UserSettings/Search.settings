@@ -1,18 +1,14 @@
 trackSelection = true
+refreshSearchWindowsInPlayMode = false
+pickerAdvancedUI = false
 fetchPreview = true
 defaultFlags = 0
-keepOpen = false
+keepOpen = true
 queryFolder = "Assets"
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.785D90A9" = ""
-	"InspectorPreview.785D90A9" = "0"
-	"currentGroup.785D90A9" = "all"
-	"last_search.384D8B0E" = ""
-	"OpenInspectorPreview.384D8B0E" = "0"
-	"currentGroup.384D8B0E" = "all"
 }
 providers = {
 	asset = {
@@ -20,34 +16,9 @@ providers = {
 		priority = 25
 		defaultAction = null
 	}
-	store = {
-		active = true
-		priority = 100
-		defaultAction = null
-	}
-	find = {
-		active = true
-		priority = 25
-		defaultAction = null
-	}
-	log = {
-		active = false
-		priority = 210
-		defaultAction = null
-	}
-	packages = {
-		active = true
-		priority = 90
-		defaultAction = null
-	}
 	scene = {
 		active = true
 		priority = 50
-		defaultAction = null
-	}
-	query = {
-		active = true
-		priority = 100
 		defaultAction = null
 	}
 	adb = {
@@ -55,9 +26,39 @@ providers = {
 		priority = 2500
 		defaultAction = null
 	}
+	presets_provider = {
+		active = false
+		priority = -10
+		defaultAction = null
+	}
+	find = {
+		active = true
+		priority = 25
+		defaultAction = null
+	}
+	packages = {
+		active = false
+		priority = 90
+		defaultAction = null
+	}
+	profilermarkers = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
 	performance = {
 		active = false
 		priority = 100
+		defaultAction = null
+	}
+	store = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
+	log = {
+		active = false
+		priority = 210
 		defaultAction = null
 	}
 }
@@ -69,9 +70,15 @@ searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+hideTabs = false
+indexOnEditorStartup = true
+logIndexingPerformanceReport = false
 expandedQueries = [
 ]
-queryBuilder = false
+queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "all"
 disabledIndexers = ""
+minIndexVariations = 2
+findProviderIndexHelper = true
+itemIconSize = 32

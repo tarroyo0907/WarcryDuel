@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 
-#if DEDICATED_SERVER
-using Unity.Services.Multiplay;
-#endif
 
 public class Multiplayer_GameManager : NetworkBehaviour
 {
@@ -87,10 +84,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        Debug.Log("GameManager Start!");
-#if DEDICATED_SERVER
-        await MultiplayService.Instance.UnreadyServerAsync();
-#endif
         if (IsServer)
         {
             Debug.Log("Subcribing Events in GameManager as Server!");
@@ -182,7 +175,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     {
         if (IsServer)
         {
-            Debug.Log("Changing Turn!");
             MultiplayerBattleState previousState = GameBattleState;
             switch (GameBattleState)
             {
@@ -219,8 +211,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     {
         if (IsServer)
         {
-            Debug.Log("Checking for Win!");
-
             // If player 2's figurine lands on Player 1's Goal Space.
             if (figure.CurrentSpacePos.name == "PlayerOneGoalSpace" &&
                 figure.Team == "Player 2")
@@ -270,8 +260,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
         // Ensures that the function is only running on the server
         if (IsServer)
         {
-            Debug.Log("Updating Move Cooldowns on the Server!");
-
             // Compiles a list of the figurines who are owned by the player whose turn it is
             List<Figurine> figurineList = new List<Figurine>();
             List<NetworkObjectReference> objectReferenceList = new List<NetworkObjectReference>();
@@ -318,8 +306,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     [ClientRpc]
     private void UpdateMoveCooldownsClientRpc(NetworkObjectReference networkObject, string moveName, int moveCooldownValue)
     {
-        Debug.Log("Updating Move Cooldown on Client Side");
-
         // Grabs the Figurine Component from the Network Object Reference
         networkObject.TryGet(out NetworkObject figurineNetworkObject);
         Figurine figurine = figurineNetworkObject.gameObject.GetComponent<Figurine>();
@@ -365,7 +351,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     [ClientRpc]
     private void UpdateCombatStateClientRpc(FigureCombatEnum previousState, FigureCombatEnum newState)
     {
-        Debug.Log("Updating Combat State");
         FigureCombatState = newState;
         OnChangeCombatTurn?.Invoke(previousState, newState);
         activeMoveEffect = FigurineEffect.MoveEffects.None;
@@ -375,14 +360,10 @@ public class Multiplayer_GameManager : NetworkBehaviour
     private void CombatClash()
     {
         // Checks if both players have moves selected
-        Debug.Log("Player 1 Combat Move : " + player1.combatMove);
-        Debug.Log("Player 2 Combat Move : " + player2.combatMove);
-
         if (player1.combatMove != null &&
             player2.combatMove != null)
         {
             // Start Clash
-            Debug.Log("Starting Clash!");
             InitiateMoves?.Invoke();
             CombatClashClientRpc();
         }
@@ -412,7 +393,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
 
     private IEnumerator EndCombatCoroutine()
     {
-        Debug.Log("Ending Combat");
         // Waits a bit before ending the combat
         yield return new WaitForSeconds(2.5f);
 
@@ -431,8 +411,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
         if (GameBattleState == MultiplayerBattleState.PLAYERONETURN) { attacker = player1; defender = player2; }
         else if (GameBattleState == MultiplayerBattleState.PLAYERTWOTURN) { attacker = player2; defender = player1; }
 
-        Debug.Log("ATTACKER MOVE EFFECT COUNT : " + attacker.moveEffects.Count);
-        Debug.Log("DEFENDER MOVE EFFECT COUNT : " + defender.moveEffects.Count);
         if (attacker.moveEffects.Count > 0 || defender.moveEffects.Count > 0)
         {
             StartCoroutine(InitiatingMoveEffects(attacker, defender));
@@ -448,7 +426,6 @@ public class Multiplayer_GameManager : NetworkBehaviour
     [ClientRpc]
     private void EndCombatClientRpc()
     {
-        Debug.Log("Ending Combat Client Rpc");
         // Invokes the End Combat Event
         EndCombatEvent?.Invoke();
     }
@@ -479,22 +456,15 @@ public class Multiplayer_GameManager : NetworkBehaviour
                             MoveEffectState = MoveEffectStateEnum.PLAYERONE;
                         }
 
-                        Debug.Log("Enemy Battle Figure Name : " + moveEffectPlayer.playerBattleFigure);
                         // Check Move Effect
                         List<Tile>[] enemyPossiblePositions = moveEffectPlayer.playerBattleFigure.GetPossiblePositions();
                         if (enemyPossiblePositions == null)
                         {
-                            Debug.Log("CANCELLING MOVE EFFECT");
                             Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
                             CancelMoveEffectClientRpc();
                             waitingForCompletedMoveEffect = false;
                             break;
                         }
-                        else
-                        {
-                            Debug.Log("Enemy Possible Positions is not null : " + enemyPossiblePositions.Length);
-                        }
-
                         InitiateMoveEffectClientRpc(moveEffect.Key.ToString(), MoveEffectState.ToString());
                         waitingForCompletedMoveEffect = true;
                         break;
