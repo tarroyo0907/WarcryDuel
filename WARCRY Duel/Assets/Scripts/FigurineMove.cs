@@ -15,4 +15,7 @@ public class FigurineMove : ScriptableObject
     
     public enum moveTypes {Null, Action, Passive, External}
     public moveTypes moveType;
+
+    public MoveExecutor executor;
+    public ExternalMoveExecutor externalExecutor;
 }

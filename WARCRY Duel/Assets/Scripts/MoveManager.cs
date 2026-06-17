@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using System.Linq.Expressions;
-using Unity.Mathematics;
 using System;
 // Tyler Arroyo
 // Move Manager
@@ -26,7 +24,6 @@ public class MoveManager : NetworkBehaviour
     #region Gameplay Fields
     [SerializeField] private Multiplayer_Player localPlayer;
     [SerializeField] private bool waitingForCompletedExternalMove = false;
-    private const float MoveDelay = 0.1f;
     #endregion
 
     // Start is called before the first frame update
@@ -79,9 +76,7 @@ public class MoveManager : NetworkBehaviour
             playerFigurineAttack = (int) (playerFigurineAttack * 1.5);
         }
 
-        object[] parameters = new object[4] { playerFigurine, enemyFigurine, playerFigurineAttack, enemyFigurineAttack };
-        string coroutineName = move.moveName.Replace(" ", "");
-        yield return StartCoroutine(coroutineName, parameters);
+        yield return StartCoroutine(move.executor.Execute(playerFigurine, enemyFigurine, playerFigurineAttack));
 
         // Resets Move Cooldown
         playerFigurine.moveCooldowns[move] = move.moveCooldown;
@@ -115,162 +110,6 @@ public class MoveManager : NetworkBehaviour
         }
         
     }
-
-    #region Moves
-    IEnumerator Slash(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine) parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int) (playerFigurineAttack * 1.0); 
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator Block(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-
-        playerFigurine.incomingEffect.BlockIncomingDamage = true;
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator EmpoweredStrike(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 3.0);
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator ShurikenThrow(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        for (int i = 0; i < 3; i++)
-        {
-            enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 0.5);
-            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Bleed, 1);
-
-            yield return new WaitForSeconds(0.25f);
-
-            enemyFigurine.TakeEffect();
-        }
-    }
-
-    IEnumerator Smokebomb(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-
-        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Stealth, 2);
-        playerFigurine.incomingEffect.BlockIncomingDamage = true;
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator EnduringDefense(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-
-        playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.DefenseUp, 3);
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-        
-    }
-
-    IEnumerator ImperviousBastion(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-
-        playerFigurine.incomingEffect.BlockIncomingDamage = true;
-        playerFigurine.incomingEffect.RemoveAllDebuffs = false;
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator RockSwing(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
-        if (UnityEngine.Random.Range(0,5) == 0)
-        {
-            //enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Stunned, 2);
-        }
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator Earthquake(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.5);
-        enemyFigurine.incomingEffect.moveEffects.Add(FigurineEffect.MoveEffects.Pushback, 1);
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator ArcaneBlast(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine) parameters[0];
-        Figurine enemyFigurine = (Figurine) parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
-
-        if (playerFigurine.ability.abilityName == "Lifesteal")
-        {
-            playerFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.Lifesteal, 1);
-        }
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator DeceptiveEnergy(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        int lifestealStacks = playerFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
-        enemyFigurine.incomingEffect.IncomingDamage += ((int)(playerFigurineAttack * 1.0)) * lifestealStacks;
-        playerFigurine.incomingEffect.SelfBuffsToRemove.Add(FigurineEffect.StatusEffects.Lifesteal, lifestealStacks);
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    IEnumerator ToxicBud(object[] parameters)
-    {
-        Figurine playerFigurine = (Figurine)parameters[0];
-        Figurine enemyFigurine = (Figurine)parameters[1];
-        int playerFigurineAttack = (int)parameters[2];
-
-        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
-        if (UnityEngine.Random.Range(0, 1) == 0)
-        {
-            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
-        }
-        yield return new WaitForSeconds(MoveDelay);
-        enemyFigurine.TakeEffect();
-    }
-
-    #endregion
 
     #region External Moves
     private void UseExternalMove(string selectedExternalMove)
@@ -317,12 +156,5 @@ public class MoveManager : NetworkBehaviour
         localPlayer.activeExternalMove = "";
     }
 
-    #endregion
-
-    #region Abilities
-    public void Lifesteal()
-    {
-        
-    }
     #endregion
 }
