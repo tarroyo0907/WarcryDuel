@@ -56,89 +56,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: '
-
-    Transform ''middle_02_l'' has been deleted
-
-    Transform
-    ''middle_01_l'' has been deleted
-
-    Transform ''thumb_03_l'' has been deleted
-
-    Transform
-    ''thumb_02_l'' has been deleted
-
-    Transform ''thumb_01_l'' has been deleted
-
-    Transform
-    ''hand_l'' has been deleted
-
-    Transform ''lowerarm_l'' has been deleted
-
-    Transform
-    ''upperarm_l'' has been deleted
-
-    Transform ''clavicle_l'' has been deleted
-
-    Transform
-    ''middle_02_r'' has been deleted
-
-    Transform ''middle_01_r'' has been deleted
-
-    Transform
-    ''thumb_03_r'' has been deleted
-
-    Transform ''thumb_02_r'' has been deleted
-
-    Transform
-    ''thumb_01_r'' has been deleted
-
-    Transform ''hand_r'' has been deleted
-
-    Transform
-    ''lowerarm_r'' has been deleted
-
-    Transform ''upperarm_r'' has been deleted
-
-    Transform
-    ''clavicle_r'' has been deleted
-
-    Transform ''head'' has been deleted
-
-    Transform
-    ''neck_01'' has been deleted
-
-    Transform ''spine_03'' has been deleted
-
-    Transform
-    ''spine_02'' has been deleted
-
-    Transform ''spine_01'' has been deleted
-
-    Transform
-    ''ball_l'' has been deleted
-
-    Transform ''foot_l'' has been deleted
-
-    Transform
-    ''calf_l'' has been deleted
-
-    Transform ''thigh_l'' has been deleted
-
-    Transform
-    ''ball_r'' has been deleted
-
-    Transform ''foot_r'' has been deleted
-
-    Transform
-    ''calf_r'' has been deleted
-
-    Transform ''thigh_r'' has been deleted
-
-    Transform
-    ''pelvis'' has been deleted
-
-    Transform ''root'' has been deleted'
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -605,7 +523,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
-  m_ActiveFontFeatures: 00000000
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1

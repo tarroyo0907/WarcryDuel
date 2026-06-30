@@ -1319,17 +1319,20 @@
     <ProjectReference Include="Unity.Multiplayer.Tools.MetricTypes.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Runtime.csproj" />
     <ProjectReference Include="Unity.Services.CloudCode.csproj" />
+    <ProjectReference Include="Unity.Bindings.OpenImageIO.Editor.csproj" />
+    <ProjectReference Include="Unity.Recorder.Base.csproj" />
     <ProjectReference Include="Unity.Services.Core.Components.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Configuration.csproj" />
     <ProjectReference Include="Nobi.UiRoundedCorners.Editor.csproj" />
     <ProjectReference Include="Unity.UnifiedRayTracing.Runtime.csproj" />
     <ProjectReference Include="Unity.Sysroot.Linux_x86_64.csproj" />
     <ProjectReference Include="Unity.Services.Authentication.csproj" />
-    <ProjectReference Include="Unity.Rider.Editor.csproj" />
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
+    <ProjectReference Include="Unity.Rider.Editor.csproj" />
+    <ProjectReference Include="Unity.Recorder.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj" />
-    <ProjectReference Include="Unity.Services.Authentication.Editor.Shared.csproj" />
     <ProjectReference Include="Unity.Services.Multiplayer.Editor.Matchmaker.Authoring.csproj" />
+    <ProjectReference Include="Unity.Services.Authentication.Editor.Shared.csproj" />
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
     <ProjectReference Include="Unity.Services.Authentication.PlayerAccounts.csproj" />
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj" />
@@ -1353,10 +1356,12 @@
     <ProjectReference Include="Unity.AI.Navigation.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.NetworkSimulator.Runtime.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.DependencyInjection.csproj" />
+    <ProjectReference Include="Unity.Recorder.Editor.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides.csproj" />
     <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.NetworkProfiler.Runtime.csproj" />
     <ProjectReference Include="Unity.VSCode.Editor.csproj" />
+    <ProjectReference Include="Unity.Timeline.csproj" />
     <ProjectReference Include="Nobi.UiRoundedCorners.csproj" />
     <ProjectReference Include="Unity.Searcher.Editor.csproj" />
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj" />
@@ -1375,6 +1380,7 @@
     <ProjectReference Include="Unity.Toolchain.Win-x86_64-Linux.csproj" />
     <ProjectReference Include="Unity.Collections.csproj" />
     <ProjectReference Include="Unity.Networking.Transport.csproj" />
+    <ProjectReference Include="Unity.Timeline.Editor.csproj" />
     <ProjectReference Include="Unity.VisualEffectGraph.Runtime.csproj" />
     <ProjectReference Include="Unity.Mathematics.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.NetworkProfiler.Editor.csproj" />
@@ -1393,8 +1399,8 @@
     <ProjectReference Include="Unity.Multiplayer.Tools.NetworkSimulator.Editor.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.Initialization.csproj" />
     <ProjectReference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Component.csproj" />
-    <ProjectReference Include="Unity.Multiplayer.Tools.NetVis.Editor.UI.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
+    <ProjectReference Include="Unity.Multiplayer.Tools.NetVis.Editor.UI.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>

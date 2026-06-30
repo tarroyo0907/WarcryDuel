@@ -239,6 +239,9 @@ public class Figurine : NetworkBehaviour
                 break;
 
             case FigurineEffect.StatusEffects.Burn:
+                // Take Burn Damage
+                currentHealth -= 2;
+                healthBar.value = currentHealth;
                 break;
             case FigurineEffect.StatusEffects.Decay:
                 // Going to Decay
@@ -321,6 +324,11 @@ public class Figurine : NetworkBehaviour
         if (debuffs.ContainsKey(FigurineEffect.StatusEffects.DefenseDown))
         {
             figurineDefense = figurineDefense - (int) Math.Ceiling(defenseStat * 0.5);
+        }
+
+        if (debuffs.ContainsKey(FigurineEffect.StatusEffects.Burn))
+        {
+            incomingEffect.IncomingDamage = (int)(incomingEffect.IncomingDamage * 1.5f);
         }
         #endregion
 

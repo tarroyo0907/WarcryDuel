@@ -106,12 +106,12 @@
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Session\Options\ReconnectSessionOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\SDK\LobbyUpdates\ILobbyChanges.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\DistributedAuthority\ErrorMitigation\RetryPolicy.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Modules\Network\Models\DirectNetworkOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Session\Migration\EntitiesMigrationDataHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Modules\Network\Models\DirectNetworkOptions.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\Http\IError.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\DistributedAuthority\SDK\Exceptions\ApiErrorsExtenders.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\MultiplayerInitializer.Da.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\Models\JoinByIdRequest.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\MultiplayerInitializer.Da.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Http\JsonHelpers.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\DistributedAuthority\Http\DeserializationSettings.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Models\ConnectionDetails.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\SDK\ILobbyServiceInternal.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Models\Team.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\Apis\LobbyApiRequests.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Http\DeserializationException.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\DistributedAuthority\Http\JsonHelpers.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Http\DeserializationException.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Utils\JWT\JwtDecoder.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\ErrorMitigation\StatusCodePolicyConfig.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\SDK\JoinLobbyByIdOptions.cs" />
@@ -261,8 +261,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Utils\IUserAgentProvider.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Utils\MPConstants.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Session\Models\IValueProperty.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Session\Models\PropertyIndex.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Matchmaking\QosCalculator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Session\Models\PropertyIndex.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\Http\BasicError.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Relay\ErrorMitigation\StatusCodePolicyConfig.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\DistributedAuthority\Http\JsonObjectConverter.cs" />
@@ -403,8 +403,8 @@
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Relay\SDK\Exceptions\ApiErrorsExtenders.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\SDK\LobbyUpdates\Internal\LobbyPatcher.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Models\NoneAssignment.cs" />
-    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\MultiplayerService.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Lobbies\Http\BaseApiClient.cs" />
+    <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\MultiplayerService.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\Components\MultiplayerSession.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Multiplayer\SessionBrowser\SortOption.cs" />
     <Compile Include="Library\PackageCache\com.unity.services.multiplayer@1c7846287c66\Runtime\Matchmaker\Http\JsonObjectConverter.cs" />
