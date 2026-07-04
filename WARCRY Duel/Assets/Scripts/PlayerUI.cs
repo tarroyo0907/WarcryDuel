@@ -481,7 +481,7 @@ public class PlayerUI : NetworkBehaviour
         TogglePlayerUICanvas();
     }
 
-    private void DisablePlayerUICanvas(MoveEffect moveEffect)
+    private void DisablePlayerUICanvas(FigurineEffect.MoveEffects moveEffect)
     {
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false;

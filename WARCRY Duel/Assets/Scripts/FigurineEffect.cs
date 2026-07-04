@@ -24,8 +24,7 @@ public class FigurineEffect
     public enum MoveEffects
     {
         None,
-        Pushback,
-
+        Pushback
     }
 
     public static readonly HashSet<StatusEffects> PersistentEffects = new()
@@ -45,7 +44,7 @@ public class FigurineEffect
     [SerializeField] public Dictionary<StatusEffects, int> EnemyBuffsToRemove = new Dictionary<StatusEffects, int>();
     [SerializeField] public Dictionary<StatusEffects, int> EnemyDebuffsToRemove = new Dictionary<StatusEffects, int>();
 
-    [SerializeField] public List<MoveEffect> moveEffects = new List<MoveEffect>();
+    [SerializeField] public Dictionary<MoveEffects, int> moveEffects = new Dictionary<MoveEffects, int>();
 
     [SerializeField] private int incomingDamage = 0;
     [SerializeField] private bool blockIncomingDamage = false;

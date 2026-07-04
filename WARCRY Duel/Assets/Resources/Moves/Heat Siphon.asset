@@ -11,12 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e702e7e060d265b4bb6ebb208777c59f, type: 3}
   m_Name: Heat Siphon
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   moveName: Heat Siphon
-  moveDescription: For every unit that has burn applied, heal 3 HP and gain 1 Stack
-    of ATK Up. Remove Burn from that unit.
-  moveIcon: {fileID: 21300000, guid: c4f242a9a61f1224ca907375d4fadf01, type: 3}
+  moveDescription: 'For every unit that has burn applied, heal 3 HP and gain 1 Stack
+    of ATK Up. Remove Burn from that unit.'
+  moveIcon: {fileID: 0}
   moveCooldown: 3
   moveType: 3
-  executor: {fileID: 0}
-  externalExecutor: {fileID: 11400000, guid: 5c2b3542108f0e14b93cde2056248327, type: 2}

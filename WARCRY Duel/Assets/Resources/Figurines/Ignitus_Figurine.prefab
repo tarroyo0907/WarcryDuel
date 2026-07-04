@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2282923055
+  GlobalObjectIdHash: 3629756213
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -312,19 +312,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   figurineName: Ignitus
-  currentHealth: 20
-  totalHealth: 20
-  attackStat: 6
+  currentHealth: 25
+  totalHealth: 25
+  attackStat: 7
   defenseStat: 1
   movementPoints: 2
   isSpawnable: 0
-  isAbleToFight: 1
+  isAbleToFight: 0
   move1: {fileID: 11400000, guid: a1f3c2e4b5d607894a2b3c4d5e6f7a8b, type: 2}
   move2: {fileID: 11400000, guid: b2e4d6f8a0c21345678901bcdef23456, type: 2}
   move3: {fileID: 11400000, guid: c3f5e7a9b1d3456789012cdef3456789, type: 2}
   ability: {fileID: 0}
   incomingEffect:
-    moveEffects: []
     incomingDamage: 0
     blockIncomingDamage: 0
     removeAllDebuffs: 0

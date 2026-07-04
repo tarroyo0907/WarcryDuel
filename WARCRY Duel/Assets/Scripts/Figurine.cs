@@ -18,7 +18,7 @@ public class Figurine : NetworkBehaviour
     #region Delegates
     public delegate void FigurineHandler(Figurine figure);
     public delegate void StatusEffectHandler(FigurineEffect.StatusEffects statusEffect);
-    public delegate void MoveEffectHandler(Figurine sender, MoveEffect moveEffect);
+    public delegate void MoveEffectHandler(Figurine sender, KeyValuePair<FigurineEffect.MoveEffects, int> moveEffect);
     #endregion
 
     #region Events
@@ -239,9 +239,6 @@ public class Figurine : NetworkBehaviour
                 break;
 
             case FigurineEffect.StatusEffects.Burn:
-                // Take Burn Damage
-                currentHealth -= 2;
-                healthBar.value = currentHealth;
                 break;
             case FigurineEffect.StatusEffects.Decay:
                 // Going to Decay
@@ -325,11 +322,6 @@ public class Figurine : NetworkBehaviour
         {
             figurineDefense = figurineDefense - (int) Math.Ceiling(defenseStat * 0.5);
         }
-
-        if (debuffs.ContainsKey(FigurineEffect.StatusEffects.Burn))
-        {
-            incomingEffect.IncomingDamage = (int)(incomingEffect.IncomingDamage * 1.5f);
-        }
         #endregion
 
         // If the figure blocks all incoming damage, set incoming damage to 0
@@ -360,8 +352,9 @@ public class Figurine : NetworkBehaviour
         {
             StartCoroutine(TakeDamageAnimation());
         }
+        
 
-        #region Manage Status Effects
+        // Appends the self status effects first
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfBuff in incomingEffect.SelfBuffsToApply)
         {
             try
@@ -434,12 +427,11 @@ public class Figurine : NetworkBehaviour
             }
 
         }
-        #endregion
 
         // Appends Move Effects Next
-        foreach (MoveEffect moveEffect in incomingEffect.moveEffects)
+        foreach (KeyValuePair<FigurineEffect.MoveEffects, int> incomingMoveEffect in incomingEffect.moveEffects)
         {
-            OnApplyMoveEffect?.Invoke(this, moveEffect);
+            OnApplyMoveEffect?.Invoke(this, incomingMoveEffect);
         }
 
         // Checks if the figure's health is below 0 and therefore defeated

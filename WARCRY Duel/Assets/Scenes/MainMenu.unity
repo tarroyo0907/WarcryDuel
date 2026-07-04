@@ -14315,7 +14315,7 @@ PrefabInstance:
       objectReference: {fileID: 421809615}
     - target: {fileID: 3251191587934413919, guid: ecc8dd92c88459640a633dfb7f469892, type: 3}
       propertyPath: localTesting
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3251191587934413919, guid: ecc8dd92c88459640a633dfb7f469892, type: 3}
       propertyPath: homeCanvasView

@@ -11,11 +11,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e702e7e060d265b4bb6ebb208777c59f, type: 3}
   m_Name: Ignite
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   moveName: Ignite
   moveDescription: Deal 100% attack damage to the enemy.
-  moveIcon: {fileID: 21300000, guid: 69e4002db793a8f4d9da654aba7fe11a, type: 3}
+  moveIcon: {fileID: 0}
   moveCooldown: 0
   moveType: 1
-  executor: {fileID: 11400000, guid: d477a9134bdaa5948afedb6e2eb08c70, type: 2}
-  externalExecutor: {fileID: 0}

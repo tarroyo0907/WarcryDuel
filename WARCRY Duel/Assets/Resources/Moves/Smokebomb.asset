@@ -17,4 +17,3 @@ MonoBehaviour:
   moveIcon: {fileID: 21300000, guid: bfb295435c556c34e9eb95d97ed9fa33, type: 3}
   moveCooldown: 4
   moveType: 1
-  executor: {fileID: 11400000, guid: 86a57aeacb23d654a8fea4b2f4a6df2e, type: 2}

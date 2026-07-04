@@ -59,7 +59,7 @@ public class Multiplayer_Player : NetworkBehaviour
     private bool hasFigurineStartedMoving = false;
 
     public FigurineMove combatMove;
-    public List<MoveEffect> moveEffects = new List<MoveEffect>();
+    public Dictionary<FigurineEffect.MoveEffects, int> moveEffects = new Dictionary<FigurineEffect.MoveEffects, int>();
     public string activeExternalMove;
     #endregion
 
@@ -496,31 +496,52 @@ public class Multiplayer_Player : NetworkBehaviour
     #endregion
 
     #region MoveEffects
-    public void ApplyMoveEffect(Figurine sender, MoveEffect moveEffect)
+    public void ApplyMoveEffect(Figurine sender, KeyValuePair<FigurineEffect.MoveEffects, int> moveEffect)
     {
         Debug.Log("Player Responding to ApplyMoveEffect Event!");
+        // Only Apply Move Effect if the Figurine is part of the same team as the player
         if (sender.Team != playerTeam) { return; }
 
+        // Add Move Effect
         Debug.Log("Applying Move Effect to Player!");
-        moveEffects.Add(moveEffect);
+        moveEffects.Add(moveEffect.Key, moveEffect.Value);
     }
 
     public void CompleteMoveEffect(GameObject hitObject)
     {
-        Multiplayer_GameManager.Instance.activeMoveEffect?.OnPlayerInteract(hitObject, this);
-    }
+        switch (Multiplayer_GameManager.Instance.activeMoveEffect)
+        {
+            case FigurineEffect.MoveEffects.Pushback:
+                List<Tile>[] enemyPossiblePositions = enemyBattleFigure.GetPossiblePositions();
+                if (enemyPossiblePositions == null)
+                {
+                    CompleteMoveEffectClientRpc();
+                    OnCompletedMoveEffect?.Invoke(this);
+                    return;
+                }
 
-    public void FinalizeMoveEffect()
-    {
-        CompleteMoveEffectClientRpc();
-        OnCompletedMoveEffect?.Invoke(this);
+                foreach (Tile possiblePosition in enemyPossiblePositions[0])
+                {
+                    if (hitObject == possiblePosition.gameObject)
+                    {
+                        Debug.Log("Completed Pushback Move Effect!");
+                        StartCoroutine(enemyBattleFigure.MovementSequence(possiblePosition));
+                        CompleteMoveEffectClientRpc();
+                        OnCompletedMoveEffect?.Invoke(this);
+                        break;
+                    }
+                }
+                break;
+            default:
+                break;
+        }
     }
 
     [ClientRpc]
     private void CompleteMoveEffectClientRpc()
     {
         OnCompletedMoveEffect?.Invoke(this);
-        Multiplayer_GameManager.Instance.activeMoveEffect = null;
+        Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
         
     }
 
@@ -541,20 +562,140 @@ public class Multiplayer_Player : NetworkBehaviour
     #region External Moves
     public void CompleteExternalMove(GameObject hitObject)
     {
-        FigurineMove move = Resources.Load<FigurineMove>($"Moves/{activeExternalMove}");
-        string[] clientParams = move.externalExecutor.ExecuteOnServer(hitObject, this, selectedFigurine);
+        switch (activeExternalMove)
+        {
+            case "Fortification":
+                if (hitObject.tag != "BoardSpace")
+                {
+                    return;
+                }
 
-        if (clientParams == null) return;
+                List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
+                foreach(Tile possibleSpawnLoc in possibleSpawnLocations[0])
+                {
+                    GameObject rockWallPrefab = Resources.Load<GameObject>("Spawnables/Rock_Spawnable");
+                    if (hitObject == possibleSpawnLoc.gameObject)
+                    {
+                        Debug.Log("Completed Fortification External Move!");
+                        GameObject oldRockWall = GameObject.Find(selectedFigurine.Team + " - " + "Rock_Spawnable(Clone)");
+                        if (oldRockWall != null)
+                        {
+                            Destroy(oldRockWall);
+                        }
 
+                        // Spawns in the Boulder Wall
+                        Vector3 spawnLoc = possibleSpawnLoc.transform.position + new Vector3(0, 5f, 0);
+                        
+                        GameObject prefabInstance = Instantiate(rockWallPrefab, spawnLoc, selectedFigurine.transform.rotation);
+                        Figurine wallFigurine = prefabInstance.GetComponent<Figurine>();
+                        string originalName = wallFigurine.name;
+                        wallFigurine.CurrentSpacePos = possibleSpawnLoc.gameObject;
+                        wallFigurine.Team = selectedFigurine.Team;
+                        prefabInstance.GetComponent<NetworkObject>().Spawn();
+                        wallFigurine.name = wallFigurine.Team + " - " + wallFigurine.name;
+                        wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
+                        wallFigurine.CheckForSurroundKill();
+                        FortificationClientRpc(originalName, wallFigurine.name);
+                        break;
+                    }
+                }
+                break;
+            case "Fruitful Fury":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Fruitfury Fury Effect
+                        if (selectedFigurine.buffs.ContainsKey(FigurineEffect.StatusEffects.Lifesteal))
+                        {
+                            // Safe to use selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal]
+                            int lifestealValue = selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+                            clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+                            if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
+                            {
+                                clickedFigurine.currentHealth = clickedFigurine.totalHealth;
+                            }
+                            clickedFigurine.TakeEffect();
+                            selectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+                            FruitfulFuryClientRpc(selectedFigurine.name, clickedFigurine.name);
+                        }
+                    }
+                }
+                break;
+            case "Cleansing Rose":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Cleansing Rose Effect
+                        if (clickedFigurine.debuffs.Count > 0)
+                        {
+                            int randomDebuffIndex = UnityEngine.Random.Range(0, clickedFigurine.debuffs.Count);
+                            FigurineEffect.StatusEffects randomDebuff = clickedFigurine.debuffs.ElementAt(randomDebuffIndex).Key;
+                            clickedFigurine.debuffs.Remove(randomDebuff);
+                            RemoveDebuffClientRpc(clickedFigurine.name, randomDebuff);
+                        }
+                    }
+                }
+                break;
+            case "Rejuvinate":
+                if (hitObject.tag == "Figurine")
+                {
+                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+                    if (clickedFigurine.Team == $"Player {playerID}")
+                    {
+                        try
+                        {
+                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                            {
+                                break;
+                            }
+                        }
+                        catch (System.Exception) { }
+
+                        // Rejuvinate Effect
+                        FigurineEffect.StatusEffects statusEffect = FigurineEffect.StatusEffects.AttackUp;
+                        clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + 2;
+                        clickedFigurine.TakeEffect();
+                        ApplyBuffClientRpc(clickedFigurine.name, statusEffect, 2);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+
+        
         string externalMoveAnnouncement = null;
         if (selectedFigurine != null)
         {
             externalMoveAnnouncement = $"{selectedFigurine.figurineName} used {activeExternalMove}";
             if (hitObject.tag == "Figurine") { externalMoveAnnouncement += $" on {hitObject.GetComponent<Figurine>().figurineName}"; }
+            ;
             externalMoveAnnouncement += "!";
         }
         OnCompletedExternalMove?.Invoke(this);
-        ExternalMoveClientRpc(activeExternalMove, string.Join("|", clientParams), externalMoveAnnouncement);
+        CompleteExternalMoveClientRpc(externalMoveAnnouncement);
         activeExternalMove = "";
     }
     #endregion
@@ -595,10 +736,34 @@ public class Multiplayer_Player : NetworkBehaviour
 
     #region External Move Client Rpc
     [ClientRpc]
-    private void ExternalMoveClientRpc(string moveName, string serializedParams, string externalMoveAnnouncement)
+    private void FortificationClientRpc(string originalRockName, string newRockName)
     {
-        ExternalMoveExecutor executor = Resources.Load<ExternalMoveExecutor>($"Moves/Executors/{moveName.Replace(" ", "")}Executor");
-        executor.ExecuteOnClient(serializedParams.Split('|'));
+
+        GameObject rockWallGO = GameObject.Find(originalRockName);
+        rockWallGO.name = newRockName;
+        Figurine wallFigurine = rockWallGO.GetComponent<Figurine>(); 
+        wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
+    }
+
+    [ClientRpc]
+    private void FruitfulFuryClientRpc(string selectedFigureName, string clickedFigurineName)
+    {
+        Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
+        Figurine externalMoveSelectedFigurine = GameObject.Find(selectedFigureName).GetComponent<Figurine>();
+        int lifestealValue = externalMoveSelectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+        clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+        if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
+        {
+            clickedFigurine.currentHealth = clickedFigurine.totalHealth;
+        }
+        clickedFigurine.TakeEffect();
+        externalMoveSelectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+    }
+    
+
+    [ClientRpc]
+    private void CompleteExternalMoveClientRpc(string externalMoveAnnouncement)
+    {
         activeExternalMove = "";
         OnCompletedExternalMove?.Invoke(this);
         ExternalMoveAnnouncement?.Invoke(externalMoveAnnouncement);
