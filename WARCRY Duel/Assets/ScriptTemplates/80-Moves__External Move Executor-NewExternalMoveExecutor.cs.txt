@@ -1,0 +1,15 @@
+using UnityEngine;
+[CreateAssetMenu(menuName = "Moves/Executors/#SCRIPTNAME#")]
+public class #SCRIPTNAME# : ExternalMoveExecutor
+{
+    // Runs server-side logic. Returns null if validation fails, otherwise returns params to sync to clients.
+    public override string[] ExecuteOnServer(GameObject hitObject, Multiplayer_Player player, Figurine selectedFigurine)
+    {
+        return null;
+    }
+
+    // Runs client-side sync using params returned from ExecuteOnServer.
+    public override void ExecuteOnClient(string[] parameters)
+    {
+    }
+}

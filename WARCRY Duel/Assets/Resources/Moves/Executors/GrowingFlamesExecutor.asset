@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d19b351f46f6440b509f07b4faddbc, type: 3}
-  m_Name: EarthquakeExecutor
-  m_EditorClassIdentifier: Assembly-CSharp::EarthquakeExecutor
-  pushbackEffect: {fileID: 11400000, guid: 6229d750bb359564b88b7ee46484f53c, type: 2}
+  m_Script: {fileID: 11500000, guid: 4f91f0e4872bd104da19013ca6afb587, type: 3}
+  m_Name: GrowingFlamesExecutor
+  m_EditorClassIdentifier: Assembly-CSharp::GrowingFlamesExecutor
+  growingFlamesEffect: {fileID: 11400000, guid: ec38cebc8a6df6349b891b415a26ffcb, type: 2}

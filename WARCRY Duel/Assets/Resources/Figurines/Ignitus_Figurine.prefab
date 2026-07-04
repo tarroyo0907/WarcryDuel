@@ -312,18 +312,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   figurineName: Ignitus
-  currentHealth: 25
-  totalHealth: 25
-  attackStat: 7
+  currentHealth: 20
+  totalHealth: 20
+  attackStat: 6
   defenseStat: 1
   movementPoints: 2
   isSpawnable: 0
-  isAbleToFight: 0
+  isAbleToFight: 1
   move1: {fileID: 11400000, guid: a1f3c2e4b5d607894a2b3c4d5e6f7a8b, type: 2}
   move2: {fileID: 11400000, guid: b2e4d6f8a0c21345678901bcdef23456, type: 2}
   move3: {fileID: 11400000, guid: c3f5e7a9b1d3456789012cdef3456789, type: 2}
   ability: {fileID: 0}
   incomingEffect:
+    moveEffects: []
     incomingDamage: 0
     blockIncomingDamage: 0
     removeAllDebuffs: 0
@@ -488,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &694099428454700887
 RectTransform:
   m_ObjectHideFlags: 0
@@ -696,7 +697,7 @@ RectTransform:
   m_Father: {fileID: 6385116692443613087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -18,7 +18,7 @@ public class Figurine : NetworkBehaviour
     #region Delegates
     public delegate void FigurineHandler(Figurine figure);
     public delegate void StatusEffectHandler(FigurineEffect.StatusEffects statusEffect);
-    public delegate void MoveEffectHandler(Figurine sender, KeyValuePair<FigurineEffect.MoveEffects, int> moveEffect);
+    public delegate void MoveEffectHandler(Figurine sender, MoveEffect moveEffect);
     #endregion
 
     #region Events
@@ -360,9 +360,8 @@ public class Figurine : NetworkBehaviour
         {
             StartCoroutine(TakeDamageAnimation());
         }
-        
 
-        // Appends the self status effects first
+        #region Manage Status Effects
         foreach (KeyValuePair<FigurineEffect.StatusEffects, int> selfBuff in incomingEffect.SelfBuffsToApply)
         {
             try
@@ -435,11 +434,12 @@ public class Figurine : NetworkBehaviour
             }
 
         }
+        #endregion
 
         // Appends Move Effects Next
-        foreach (KeyValuePair<FigurineEffect.MoveEffects, int> incomingMoveEffect in incomingEffect.moveEffects)
+        foreach (MoveEffect moveEffect in incomingEffect.moveEffects)
         {
-            OnApplyMoveEffect?.Invoke(this, incomingMoveEffect);
+            OnApplyMoveEffect?.Invoke(this, moveEffect);
         }
 
         // Checks if the figure's health is below 0 and therefore defeated

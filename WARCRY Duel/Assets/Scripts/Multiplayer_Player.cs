@@ -59,7 +59,7 @@ public class Multiplayer_Player : NetworkBehaviour
     private bool hasFigurineStartedMoving = false;
 
     public FigurineMove combatMove;
-    public Dictionary<FigurineEffect.MoveEffects, int> moveEffects = new Dictionary<FigurineEffect.MoveEffects, int>();
+    public List<MoveEffect> moveEffects = new List<MoveEffect>();
     public string activeExternalMove;
     #endregion
 
@@ -496,52 +496,31 @@ public class Multiplayer_Player : NetworkBehaviour
     #endregion
 
     #region MoveEffects
-    public void ApplyMoveEffect(Figurine sender, KeyValuePair<FigurineEffect.MoveEffects, int> moveEffect)
+    public void ApplyMoveEffect(Figurine sender, MoveEffect moveEffect)
     {
         Debug.Log("Player Responding to ApplyMoveEffect Event!");
-        // Only Apply Move Effect if the Figurine is part of the same team as the player
         if (sender.Team != playerTeam) { return; }
 
-        // Add Move Effect
         Debug.Log("Applying Move Effect to Player!");
-        moveEffects.Add(moveEffect.Key, moveEffect.Value);
+        moveEffects.Add(moveEffect);
     }
 
     public void CompleteMoveEffect(GameObject hitObject)
     {
-        switch (Multiplayer_GameManager.Instance.activeMoveEffect)
-        {
-            case FigurineEffect.MoveEffects.Pushback:
-                List<Tile>[] enemyPossiblePositions = enemyBattleFigure.GetPossiblePositions();
-                if (enemyPossiblePositions == null)
-                {
-                    CompleteMoveEffectClientRpc();
-                    OnCompletedMoveEffect?.Invoke(this);
-                    return;
-                }
+        Multiplayer_GameManager.Instance.activeMoveEffect?.OnPlayerInteract(hitObject, this);
+    }
 
-                foreach (Tile possiblePosition in enemyPossiblePositions[0])
-                {
-                    if (hitObject == possiblePosition.gameObject)
-                    {
-                        Debug.Log("Completed Pushback Move Effect!");
-                        StartCoroutine(enemyBattleFigure.MovementSequence(possiblePosition));
-                        CompleteMoveEffectClientRpc();
-                        OnCompletedMoveEffect?.Invoke(this);
-                        break;
-                    }
-                }
-                break;
-            default:
-                break;
-        }
+    public void FinalizeMoveEffect()
+    {
+        CompleteMoveEffectClientRpc();
+        OnCompletedMoveEffect?.Invoke(this);
     }
 
     [ClientRpc]
     private void CompleteMoveEffectClientRpc()
     {
         OnCompletedMoveEffect?.Invoke(this);
-        Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
+        Multiplayer_GameManager.Instance.activeMoveEffect = null;
         
     }
 

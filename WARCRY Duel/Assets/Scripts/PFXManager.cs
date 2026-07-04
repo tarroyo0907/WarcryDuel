@@ -292,7 +292,7 @@ public class PFXManager : NetworkBehaviour
     }
     #endregion
 
-    private void HandleMoveEffectParticles(FigurineEffect.MoveEffects moveEffect)
+    private void HandleMoveEffectParticles(MoveEffect moveEffect)
     {
         Multiplayer_Player activePlayer = null;
         if (Multiplayer_GameManager.Instance.MoveEffectState == Multiplayer_GameManager.MoveEffectStateEnum.PLAYERONE)
@@ -304,27 +304,16 @@ public class PFXManager : NetworkBehaviour
             activePlayer = Multiplayer_GameManager.Instance.player2;
         }
 
-        // Check which Move Effect is being initiated
-        switch (moveEffect)
+        if (moveEffect is PushbackEffect)
         {
-            case FigurineEffect.MoveEffects.Pushback:
-                if (NetworkManager.Singleton.LocalClient.PlayerObject.gameObject.GetComponent<Multiplayer_Player>() == activePlayer)
-                {
-                    List<Tile>[] possiblePositions = activePlayer.enemyBattleFigure.GetPossiblePositions();
-                    foreach (Tile boardSpace in possiblePositions[0])
-                    {
-                        Vector3 particlePos = boardSpace.gameObject.transform.position;
-                        Instantiate(boardSpaceEffect, particlePos, boardSpaceEffect.transform.rotation, boardSpace.gameObject.transform);
-                    }
-                }
-                else
-                {
-                    return;
-                }
+            if (NetworkManager.Singleton.LocalClient.PlayerObject.gameObject.GetComponent<Multiplayer_Player>() != activePlayer) return;
 
-                break;
-            default:
-                break;
+            List<Tile>[] possiblePositions = activePlayer.enemyBattleFigure.GetPossiblePositions();
+            foreach (Tile boardSpace in possiblePositions[0])
+            {
+                Vector3 particlePos = boardSpace.gameObject.transform.position;
+                Instantiate(boardSpaceEffect, particlePos, boardSpaceEffect.transform.rotation, boardSpace.gameObject.transform);
+            }
         }
     }
 

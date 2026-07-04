@@ -9,6 +9,7 @@ public class IgniteExecutor : MoveExecutor
     public override IEnumerator Execute(Figurine attacker, Figurine defender, int attackStat)
     {
         defender.incomingEffect.IncomingDamage += (int)(attackStat * 1.0);
+        defender.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Burn, 2);
         yield return new WaitForSeconds(0.1f);
         defender.TakeEffect();
     }

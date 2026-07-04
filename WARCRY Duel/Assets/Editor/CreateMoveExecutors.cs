@@ -44,6 +44,16 @@ public class CreateMoveExecutors
             }
         }
 
+        // Create MoveEffect assets
+        string moveEffectFolder = "Assets/Resources/MoveEffects";
+        string pushbackPath = $"{moveEffectFolder}/PushbackEffect.asset";
+        if (AssetDatabase.LoadAssetAtPath<MoveEffect>(pushbackPath) == null)
+        {
+            MoveEffect pushback = ScriptableObject.CreateInstance<PushbackEffect>();
+            AssetDatabase.CreateAsset(pushback, pushbackPath);
+            Debug.Log($"Created MoveEffect asset: {pushbackPath}");
+        }
+
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("Done! All executor assets created and wired.");

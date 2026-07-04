@@ -1,0 +1,10 @@
+using System.Collections;
+using UnityEngine;
+[CreateAssetMenu(menuName = "MoveEffects/#SCRIPTNAME#")]
+public class #SCRIPTNAME# : MoveEffect
+{
+    public override IEnumerator Execute(Multiplayer_Player moveEffectPlayer, Multiplayer_Player attacker, Multiplayer_Player defender)
+    {
+        yield return new WaitForSeconds(0.1f);
+    }
+}

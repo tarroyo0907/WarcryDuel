@@ -206,7 +206,7 @@ public class MainMenuManager : NetworkBehaviour
     {
         string savedTeamPath = Application.persistentDataPath + "/savedTeam.txt";
         string playerCollectionPath = Application.persistentDataPath + "/playerCollection.txt";
-        if (true)
+        if (!(File.Exists(savedTeamPath) && File.Exists(playerCollectionPath)))
         {
             Debug.Log("Initializing Party Data");
             // Set Party Data

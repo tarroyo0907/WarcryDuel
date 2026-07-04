@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\FigurineMove.cs" />
+    <Compile Include="Assets\Scripts\Moves\MoveEffect.cs" />
     <Compile Include="Assets\Scripts\Moves\EarthquakeExecutor.cs" />
     <Compile Include="Assets\Scripts\Moves\EmpoweredStrikeExecutor.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Assets\Scripts\PFXManager.cs" />
     <Compile Include="Assets\Scripts\Moves\ArcaneBlastExecutor.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
+    <Compile Include="Assets\Scripts\Moves\MoveEffects\GrowingFlamesEffect.cs" />
     <Compile Include="Assets\Scripts\BattleUI.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
     <Compile Include="Assets\Scripts\MoveManager.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
     <Compile Include="Assets\Scripts\Moves\IgniteExecutor.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\PathSplines.cs" />
+    <Compile Include="Assets\Scripts\Moves\ExternalMoves\HeatSiphonExecutor.cs" />
     <Compile Include="Assets\Scripts\Moves\ImperviousBastionExecutor.cs" />
     <Compile Include="Assets\Scripts\Multiplayer_GameManager.cs" />
     <Compile Include="Assets\Scripts\Moves\BlockExecutor.cs" />
@@ -116,6 +119,7 @@
     <Compile Include="Assets\Scripts\Moves\EnduringDefenseExecutor.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\ExternalTools\LeanTween\Examples\Scripts\GeneralBasic.cs" />
+    <Compile Include="Assets\Scripts\Moves\PushbackEffect.cs" />
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\Moves\ToxicBudExecutor.cs" />
     <Compile Include="Assets\Scripts\CombatMoveButton.cs" />
@@ -148,6 +152,8 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\SDFFunctions.hlsl" />
+    <None Include="Assets\ScriptTemplates\80-Moves__External Move Executor-NewExternalMoveExecutor.cs.txt" />
+    <None Include="Assets\ScriptTemplates\80-Moves__Move Effect-NewMoveEffect.cs.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

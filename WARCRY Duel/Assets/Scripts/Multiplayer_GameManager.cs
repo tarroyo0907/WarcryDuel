@@ -14,7 +14,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     public delegate void GameManagerHandler();
     public delegate void ChangeTurnHandler(MultiplayerBattleState previousState, MultiplayerBattleState newState);
     public delegate void CombatTurnHandler(FigureCombatEnum previousState, FigureCombatEnum newState);
-    public delegate void MoveEffectHandler(FigurineEffect.MoveEffects moveEffect);
+    public delegate void MoveEffectHandler(MoveEffect moveEffect);
     #endregion
 
     #region Events
@@ -56,7 +56,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     [SerializeField] private int playerDamage = 0;
     [SerializeField] private int enemyDamage = 0;
 
-    public FigurineEffect.MoveEffects activeMoveEffect;
+    public MoveEffect activeMoveEffect;
     public bool waitingForCompletedMoveEffect = false;
 
     // Player References
@@ -191,7 +191,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
             }
             movementTurns = 1;
             canAttack = true;
-            activeMoveEffect = FigurineEffect.MoveEffects.None;
+            activeMoveEffect = null;
             MoveEffectState = MoveEffectStateEnum.INACTIVE;
             player1.selectedFigurine = null;
             player2.selectedFigurine = null;
@@ -353,7 +353,7 @@ public class Multiplayer_GameManager : NetworkBehaviour
     {
         FigureCombatState = newState;
         OnChangeCombatTurn?.Invoke(previousState, newState);
-        activeMoveEffect = FigurineEffect.MoveEffects.None;
+        activeMoveEffect = null;
         MoveEffectState = MoveEffectStateEnum.INACTIVE;
     }
 
@@ -438,68 +438,38 @@ public class Multiplayer_GameManager : NetworkBehaviour
         Multiplayer_Player moveEffectPlayer = attacker;
         for (int i = 0; i < 2; i++)
         {
-            for (int k = 0; k < moveEffectPlayer.moveEffects.Count; k++)
+            foreach (MoveEffect moveEffect in new List<MoveEffect>(moveEffectPlayer.moveEffects))
             {
-                KeyValuePair<FigurineEffect.MoveEffects, int> moveEffect = moveEffectPlayer.moveEffects.ElementAt(k);
-
-                switch (moveEffect.Key)
-                {
-                    case FigurineEffect.MoveEffects.Pushback:
-                        activeMoveEffect = FigurineEffect.MoveEffects.Pushback;
-                        if (moveEffectPlayer == player1)
-                        {
-
-                            MoveEffectState = MoveEffectStateEnum.PLAYERTWO;
-                        }
-                        else if (moveEffectPlayer == player2)
-                        {
-                            MoveEffectState = MoveEffectStateEnum.PLAYERONE;
-                        }
-
-                        // Check Move Effect
-                        List<Tile>[] enemyPossiblePositions = moveEffectPlayer.playerBattleFigure.GetPossiblePositions();
-                        if (enemyPossiblePositions == null)
-                        {
-                            Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
-                            CancelMoveEffectClientRpc();
-                            waitingForCompletedMoveEffect = false;
-                            break;
-                        }
-                        InitiateMoveEffectClientRpc(moveEffect.Key.ToString(), MoveEffectState.ToString());
-                        waitingForCompletedMoveEffect = true;
-                        break;
-                    default:
-                        break;
-                }
-
-                yield return new WaitUntil(() => waitingForCompletedMoveEffect == false);
-
-                activeMoveEffect = FigurineEffect.MoveEffects.None;
+                yield return StartCoroutine(moveEffect.Execute(moveEffectPlayer, attacker, defender));
+                activeMoveEffect = null;
             }
-
             moveEffectPlayer = defender;
         }
 
         MoveEffectState = MoveEffectStateEnum.INACTIVE;
-        activeMoveEffect = FigurineEffect.MoveEffects.None;
+        activeMoveEffect = null;
         ChangeTurn();
-        
+    }
+
+    public void InitiateMoveEffect(string moveEffectName, MoveEffectStateEnum state)
+    {
+        InitiateMoveEffectClientRpc(moveEffectName, state.ToString());
+    }
+
+    public void CancelMoveEffect()
+    {
+        activeMoveEffect = null;
+        waitingForCompletedMoveEffect = false;
+        CancelMoveEffectClientRpc();
     }
 
     [ClientRpc]
-    void InitiateMoveEffectClientRpc(string moveEffect, string newMoveEffectState)
+    void InitiateMoveEffectClientRpc(string moveEffectName, string newMoveEffectState)
     {
-        // Updates the Game Battle State
         Enum.TryParse(newMoveEffectState, out MoveEffectStateEnum newMoveEffectStateEnum);
         MoveEffectState = newMoveEffectStateEnum;
-
-        // Grabs the Move Effect Enum
-        Enum.TryParse(moveEffect, out FigurineEffect.MoveEffects MoveEffectEnum);
-        activeMoveEffect = MoveEffectEnum;
-
-        // Announces that the move effect is currently being initiated
-        OnInitiateMoveEffect?.Invoke(MoveEffectEnum);
-
+        activeMoveEffect = Resources.Load<MoveEffect>($"MoveEffects/{moveEffectName}");
+        OnInitiateMoveEffect?.Invoke(activeMoveEffect);
     }
 
     [ClientRpc]
