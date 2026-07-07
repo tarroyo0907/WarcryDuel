@@ -965,21 +965,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1432870334583513071, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432870334583513071, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.21
-      objectReference: {fileID: 0}
     - target: {fileID: 3938840255650828405, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: m_Name
       value: Rose_Figurine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4459200228526115535, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4459200228526115535, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -987,7 +975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4459200228526115535, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.32949543
+      value: -0.379
       objectReference: {fileID: 0}
     - target: {fileID: 4459200228526115535, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1020,18 +1008,6 @@ PrefabInstance:
     - target: {fileID: 4459200228526115535, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4699934802458949415, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4699934802458949415, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 7062751321531939662, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
-      propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
-      value: 1801810542
       objectReference: {fileID: 0}
     - target: {fileID: 7311162265982328718, guid: a39f187492fe63a47a57f0450c134ca7, type: 3}
       propertyPath: GlobalObjectIdHash

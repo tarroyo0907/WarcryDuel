@@ -11,10 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e702e7e060d265b4bb6ebb208777c59f, type: 3}
   m_Name: Growing Flames
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   moveName: Growing Flames
-  moveDescription: 'Create flames that attacks the next 2 spaces in front of him.
-    Starting at 100% ATK for the first space and 200% ATK for the second space.'
-  moveIcon: {fileID: 0}
+  moveDescription: Create flames that attacks the next 2 spaces in front of him.
+    Starting at 100% ATK for the first space and 200% ATK for the second space.
+  moveIcon: {fileID: 21300000, guid: 1e069d71e66eeb340912c3176ba4d2e7, type: 3}
   moveCooldown: 3
   moveType: 1

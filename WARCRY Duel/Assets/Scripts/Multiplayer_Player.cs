@@ -92,6 +92,7 @@ public class Multiplayer_Player : NetworkBehaviour
         Multiplayer_GameManager.EndCombatEvent += UpdateToCombatEnding;
         Figurine.OnApplyMoveEffect += ApplyMoveEffect;
         PlayerUI.OnEndTurn += EndingTurn;
+        //MoveManager.OnUseExternalMove += CheckAutomaticExternalMoves;
         OnCompletedMoveEffect += ClearMoveEffect;
         Multiplayer_GameManager.OnCancelledMoveEffect += CancelMoveEffect;
 
@@ -542,7 +543,12 @@ public class Multiplayer_Player : NetworkBehaviour
     {
         OnCompletedMoveEffect?.Invoke(this);
         Multiplayer_GameManager.Instance.activeMoveEffect = FigurineEffect.MoveEffects.None;
-        
+
+    }
+
+    public void NotifyMoveEffectCompleted()
+    {
+        OnCompletedMoveEffect?.Invoke(this);
     }
 
     private void ClearMoveEffect(Multiplayer_Player player)
@@ -565,121 +571,19 @@ public class Multiplayer_Player : NetworkBehaviour
         switch (activeExternalMove)
         {
             case "Fortification":
-                if (hitObject.tag != "BoardSpace")
-                {
-                    return;
-                }
-
-                List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
-                foreach(Tile possibleSpawnLoc in possibleSpawnLocations[0])
-                {
-                    GameObject rockWallPrefab = Resources.Load<GameObject>("Spawnables/Rock_Spawnable");
-                    if (hitObject == possibleSpawnLoc.gameObject)
-                    {
-                        Debug.Log("Completed Fortification External Move!");
-                        GameObject oldRockWall = GameObject.Find(selectedFigurine.Team + " - " + "Rock_Spawnable(Clone)");
-                        if (oldRockWall != null)
-                        {
-                            Destroy(oldRockWall);
-                        }
-
-                        // Spawns in the Boulder Wall
-                        Vector3 spawnLoc = possibleSpawnLoc.transform.position + new Vector3(0, 5f, 0);
-                        
-                        GameObject prefabInstance = Instantiate(rockWallPrefab, spawnLoc, selectedFigurine.transform.rotation);
-                        Figurine wallFigurine = prefabInstance.GetComponent<Figurine>();
-                        string originalName = wallFigurine.name;
-                        wallFigurine.CurrentSpacePos = possibleSpawnLoc.gameObject;
-                        wallFigurine.Team = selectedFigurine.Team;
-                        prefabInstance.GetComponent<NetworkObject>().Spawn();
-                        wallFigurine.name = wallFigurine.Team + " - " + wallFigurine.name;
-                        wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
-                        wallFigurine.CheckForSurroundKill();
-                        FortificationClientRpc(originalName, wallFigurine.name);
-                        break;
-                    }
-                }
+                Fortification(hitObject);
                 break;
             case "Fruitful Fury":
-                if (hitObject.tag == "Figurine")
-                {
-                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
-                    if (clickedFigurine.Team == $"Player {playerID}")
-                    {
-                        try
-                        {
-                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
-                            {
-                                break;
-                            }
-                        }
-                        catch (System.Exception) { }
-
-                        // Fruitfury Fury Effect
-                        if (selectedFigurine.buffs.ContainsKey(FigurineEffect.StatusEffects.Lifesteal))
-                        {
-                            // Safe to use selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal]
-                            int lifestealValue = selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
-                            clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
-                            if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
-                            {
-                                clickedFigurine.currentHealth = clickedFigurine.totalHealth;
-                            }
-                            clickedFigurine.TakeEffect();
-                            selectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
-                            FruitfulFuryClientRpc(selectedFigurine.name, clickedFigurine.name);
-                        }
-                    }
-                }
+                FruitfulFury(hitObject);
                 break;
             case "Cleansing Rose":
-                if (hitObject.tag == "Figurine")
-                {
-                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
-                    if (clickedFigurine.Team == $"Player {playerID}")
-                    {
-                        try
-                        {
-                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
-                            {
-                                break;
-                            }
-                        }
-                        catch (System.Exception) { }
-
-                        // Cleansing Rose Effect
-                        if (clickedFigurine.debuffs.Count > 0)
-                        {
-                            int randomDebuffIndex = UnityEngine.Random.Range(0, clickedFigurine.debuffs.Count);
-                            FigurineEffect.StatusEffects randomDebuff = clickedFigurine.debuffs.ElementAt(randomDebuffIndex).Key;
-                            clickedFigurine.debuffs.Remove(randomDebuff);
-                            RemoveDebuffClientRpc(clickedFigurine.name, randomDebuff);
-                        }
-                    }
-                }
+                CleansingRose(hitObject);
                 break;
             case "Rejuvinate":
-                if (hitObject.tag == "Figurine")
-                {
-                    Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
-                    if (clickedFigurine.Team == $"Player {playerID}")
-                    {
-                        try
-                        {
-                            if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
-                            {
-                                break;
-                            }
-                        }
-                        catch (System.Exception) { }
-
-                        // Rejuvinate Effect
-                        FigurineEffect.StatusEffects statusEffect = FigurineEffect.StatusEffects.AttackUp;
-                        clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + 2;
-                        clickedFigurine.TakeEffect();
-                        ApplyBuffClientRpc(clickedFigurine.name, statusEffect, 2);
-                    }
-                }
+                Rejuvinate(hitObject);
+                break;
+            case "Heat Siphon":
+                HeatSiphon();
                 break;
             default:
                 break;
@@ -690,7 +594,7 @@ public class Multiplayer_Player : NetworkBehaviour
         if (selectedFigurine != null)
         {
             externalMoveAnnouncement = $"{selectedFigurine.figurineName} used {activeExternalMove}";
-            if (hitObject.tag == "Figurine") { externalMoveAnnouncement += $" on {hitObject.GetComponent<Figurine>().figurineName}"; }
+            if (hitObject != null && hitObject.tag == "Figurine") { externalMoveAnnouncement += $" on {hitObject.GetComponent<Figurine>().figurineName}"; }
             ;
             externalMoveAnnouncement += "!";
         }
@@ -698,6 +602,208 @@ public class Multiplayer_Player : NetworkBehaviour
         CompleteExternalMoveClientRpc(externalMoveAnnouncement);
         activeExternalMove = "";
     }
+
+    public bool CheckAutomaticExternalMoves(string externalMoveName)
+    {
+        Debug.Log("Checking Automatic External Moves for : " + externalMoveName);
+        Debug.Log("Current Active External Move : " + activeExternalMove);
+        switch (externalMoveName)
+        {
+            case "Heat Siphon":
+                CompleteExternalMove(null);
+                return true;
+                break;
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
+
+    #region External Move Functions
+    private void Fortification(GameObject hitObject)
+    {
+        if (hitObject.tag != "BoardSpace")
+        {
+            return;
+        }
+
+        List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
+        foreach (Tile possibleSpawnLoc in possibleSpawnLocations[0])
+        {
+            GameObject rockWallPrefab = Resources.Load<GameObject>("Spawnables/Rock_Spawnable");
+            if (hitObject == possibleSpawnLoc.gameObject)
+            {
+                Debug.Log("Completed Fortification External Move!");
+                GameObject oldRockWall = GameObject.Find(selectedFigurine.Team + " - " + "Rock_Spawnable(Clone)");
+                if (oldRockWall != null)
+                {
+                    Destroy(oldRockWall);
+                }
+
+                // Spawns in the Boulder Wall
+                Vector3 spawnLoc = possibleSpawnLoc.transform.position + new Vector3(0, 5f, 0);
+
+                GameObject prefabInstance = Instantiate(rockWallPrefab, spawnLoc, selectedFigurine.transform.rotation);
+                Figurine wallFigurine = prefabInstance.GetComponent<Figurine>();
+                string originalName = wallFigurine.name;
+                wallFigurine.CurrentSpacePos = possibleSpawnLoc.gameObject;
+                wallFigurine.Team = selectedFigurine.Team;
+                prefabInstance.GetComponent<NetworkObject>().Spawn();
+                wallFigurine.name = wallFigurine.Team + " - " + wallFigurine.name;
+                wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
+                wallFigurine.CheckForSurroundKill();
+                FortificationClientRpc(originalName, wallFigurine.name);
+                break;
+            }
+        }
+    }
+    
+    private void FruitfulFury(GameObject hitObject)
+    {
+        if (hitObject.tag == "Figurine")
+        {
+            Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+            if (clickedFigurine.Team == $"Player {playerID}")
+            {
+                try
+                {
+                    if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                    {
+                        return;
+                    }
+                }
+                catch (System.Exception) { }
+
+                // Fruitfury Fury Effect
+                if (selectedFigurine.buffs.ContainsKey(FigurineEffect.StatusEffects.Lifesteal))
+                {
+                    // Safe to use selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal]
+                    int lifestealValue = selectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
+                    clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+                    if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
+                    {
+                        clickedFigurine.currentHealth = clickedFigurine.totalHealth;
+                    }
+                    clickedFigurine.TakeEffect();
+                    selectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+                    FruitfulFuryClientRpc(selectedFigurine.name, clickedFigurine.name);
+                }
+            }
+        }
+    }
+    
+    private void CleansingRose(GameObject hitObject)
+    {
+        if (hitObject.tag == "Figurine")
+        {
+            Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+            if (clickedFigurine.Team == $"Player {playerID}")
+            {
+                try
+                {
+                    Tile selectedFigurineTile = selectedFigurine.CurrentSpacePos.GetComponent<Tile>();
+                    Tile clickedFigurineTile = clickedFigurine.CurrentSpacePos.GetComponent<Tile>();
+                    // Check for Adjacent Unit
+                    if (selectedFigurineTile.AccessibleTiles.Contains(clickedFigurineTile))
+                    {
+                        if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+                catch (System.Exception) { return; }
+
+                // Cleansing Rose Effect
+                if (clickedFigurine.debuffs.Count > 0)
+                {
+                    int randomDebuffIndex = UnityEngine.Random.Range(0, clickedFigurine.debuffs.Count);
+                    FigurineEffect.StatusEffects randomDebuff = clickedFigurine.debuffs.ElementAt(randomDebuffIndex).Key;
+                    clickedFigurine.debuffs.Remove(randomDebuff);
+                    RemoveDebuffClientRpc(clickedFigurine.name, randomDebuff);
+                }
+            }
+        }
+    }
+
+    private void Rejuvinate(GameObject hitObject)
+    {
+        if (hitObject.tag == "Figurine")
+        {
+            Figurine clickedFigurine = hitObject.GetComponent<Figurine>();
+            if (clickedFigurine.Team == $"Player {playerID}") 
+            {
+                
+                try
+                {
+                    Tile selectedFigurineTile = selectedFigurine.CurrentSpacePos.GetComponent<Tile>();
+                    Tile clickedFigurineTile = clickedFigurine.CurrentSpacePos.GetComponent<Tile>();
+                    // Check for Adjacent Unit
+                    if (selectedFigurineTile.AccessibleTiles.Contains(clickedFigurineTile))
+                    {
+                        if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+                }
+                catch (System.Exception) { return;  }
+
+                // Rejuvinate Effect
+                FigurineEffect.StatusEffects statusEffect = FigurineEffect.StatusEffects.AttackUp;
+                clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + 2;
+                clickedFigurine.TakeEffect();
+                ApplyBuffClientRpc(clickedFigurine.name, statusEffect, 2);
+            }
+        }
+    }
+
+    private void HeatSiphon()
+    {
+        Debug.Log("Heat Siphon Selected Figurine : " + selectedFigurine.name);
+        // Grabs all the figurines on the board
+        GameObject[] Figurines = GameObject.FindGameObjectsWithTag("Figurine");
+        int totalBurnStacksRemoved = 0;
+        foreach (GameObject figure in Figurines)
+        {
+            Figurine figurine = figure.GetComponent<Figurine>();
+            // Check if the figurine has burn
+            if (figurine.debuffs.ContainsKey(FigurineEffect.StatusEffects.Burn))
+            {
+                // Remove burn from the figurine
+                int burnStacks = figurine.debuffs[FigurineEffect.StatusEffects.Burn];
+                figurine.debuffs.Remove(FigurineEffect.StatusEffects.Burn);
+                totalBurnStacksRemoved++;
+
+                // Heal the selected figurine based on the number of burn stacks removed
+                selectedFigurine.currentHealth += 3;
+                if (selectedFigurine.currentHealth > selectedFigurine.totalHealth)
+                    selectedFigurine.currentHealth = selectedFigurine.totalHealth;
+
+            }
+        }
+        if (totalBurnStacksRemoved > 0)
+        {
+            selectedFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.AttackUp, totalBurnStacksRemoved);
+        }
+        selectedFigurine.TakeEffect();
+
+        HeatSiphonClientRpc(selectedFigurine.name);
+    }
+    #endregion
     #endregion
 
     #region Update Status Effect Client Rpcs
@@ -759,7 +865,39 @@ public class Multiplayer_Player : NetworkBehaviour
         clickedFigurine.TakeEffect();
         externalMoveSelectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
     }
-    
+
+    [ClientRpc]
+    private void HeatSiphonClientRpc(string selectedFigureName)
+    {
+        Figurine selectedFigurine = GameObject.Find(selectedFigureName).GetComponent<Figurine>();
+
+        // Grabs all the figurines on the board
+        GameObject[] Figurines = GameObject.FindGameObjectsWithTag("Figurine");
+        int totalBurnStacksRemoved = 0;
+        foreach (GameObject figure in Figurines)
+        {
+            Figurine figurine = figure.GetComponent<Figurine>();
+            // Check if the figurine has burn
+            if (figurine.debuffs.ContainsKey(FigurineEffect.StatusEffects.Burn))
+            {
+                // Remove burn from the figurine
+                int burnStacks = figurine.debuffs[FigurineEffect.StatusEffects.Burn];
+                figurine.debuffs.Remove(FigurineEffect.StatusEffects.Burn);
+                totalBurnStacksRemoved++;
+
+                // Heal the selected figurine based on the number of burn stacks removed
+                selectedFigurine.currentHealth += 3;
+                if (selectedFigurine.currentHealth > selectedFigurine.totalHealth)
+                    selectedFigurine.currentHealth = selectedFigurine.totalHealth;
+
+            }
+        }
+        if (totalBurnStacksRemoved > 0)
+        {
+            selectedFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.AttackUp, totalBurnStacksRemoved);
+        }
+        selectedFigurine.TakeEffect();
+    }
 
     [ClientRpc]
     private void CompleteExternalMoveClientRpc(string externalMoveAnnouncement)

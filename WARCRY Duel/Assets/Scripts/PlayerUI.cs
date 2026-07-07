@@ -56,21 +56,32 @@ public class PlayerUI : NetworkBehaviour
     #region Figurine Moveset References
     [Header("Figurine Moveset References")]
     [SerializeField] private GameObject figurineMovesetPanel;
+
+    [Header("Move 1 References")]
     [SerializeField] private GameObject move1Background;
     [SerializeField] private Button move1Button;
     [SerializeField] private TextMeshProUGUI move1PassiveText;
+    [SerializeField] private GameObject move1PassiveBackground;
     [SerializeField] private GameObject move1CooldownPanel;
     [SerializeField] private TextMeshProUGUI move1CooldownCounter;
+
+    [Header("Move 2 References")]
     [SerializeField] private GameObject move2Background;
     [SerializeField] private Button move2Button;
+    [SerializeField] private GameObject move2PassiveBackground;
     [SerializeField] private TextMeshProUGUI move2PassiveText;
     [SerializeField] private GameObject move2CooldownPanel;
     [SerializeField] private TextMeshProUGUI move2CooldownCounter;
+
+    [Header("Move 3 References")]
     [SerializeField] private GameObject move3Background;
     [SerializeField] private Button move3Button;
+    [SerializeField] private GameObject move3PassiveBackground;
     [SerializeField] private TextMeshProUGUI move3PassiveText;
     [SerializeField] private GameObject move3CooldownPanel;
     [SerializeField] private TextMeshProUGUI move3CooldownCounter;
+
+    [Header("Misc References")]
     [SerializeField] private TMPro.TextMeshProUGUI moveDescriptionText;
     [SerializeField] private GameObject externalMoveBackground;
     [SerializeField] private Button externalMoveButton;
@@ -281,17 +292,20 @@ public class PlayerUI : NetworkBehaviour
         TextMeshProUGUI[] moveCooldownCounters = new TextMeshProUGUI[3] { move1CooldownCounter, move2CooldownCounter, move3CooldownCounter };
         GameObject[] moveBackgrounds = new GameObject[3] { move1Background, move2Background, move3Background };
         TextMeshProUGUI[] passiveTextArray = new TextMeshProUGUI[] { move1PassiveText, move2PassiveText, move3PassiveText };
+        GameObject[] passiveBackgrounds = new GameObject[] {move1PassiveBackground, move2PassiveBackground, move3PassiveBackground };
         for (int i = 0; i < moveArray.Length; i++)
         {
             buttons[i].image.sprite = moveArray[i].moveIcon;
             buttons[i].name = moveArray[i].moveName;
             if (moveArray[i].moveType != FigurineMove.moveTypes.Action)
             {
+                passiveBackgrounds[i].SetActive(true);
                 passiveTextArray[i].gameObject.SetActive(true);
                 passiveTextArray[i].text = moveArray[i].moveType.ToString();
             }
             else
             {
+                passiveBackgrounds[i].SetActive(false);
                 passiveTextArray[i].gameObject.SetActive(false);
             }
 

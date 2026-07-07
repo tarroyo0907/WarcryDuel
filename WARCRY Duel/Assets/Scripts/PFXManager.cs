@@ -350,10 +350,10 @@ public class PFXManager : NetworkBehaviour
                     SelectAllyFigurineParticles(localPlayer);
                     break;
                 case "Cleansing Rose":
-                    SelectAllyFigurineParticles(localPlayer);
+                    SelectAdjacentAllyFigurineParticles(localPlayer);
                     break;
                 case "Rejuvinate":
-                    SelectAllyFigurineParticles(localPlayer);
+                    SelectAdjacentAllyFigurineParticles(localPlayer);
                     break;
                 default:
                     break;
@@ -384,6 +384,39 @@ public class PFXManager : NetworkBehaviour
                 BoxCollider figureCollider = figurine.GetComponent<BoxCollider>();
                 particlePos.y = figurine.transform.position.y + figureCollider.bounds.size.y;
                 Instantiate(enemyHighlightedEffect, particlePos, enemyHighlightedEffect.transform.rotation, figurine.transform);
+            }
+
+        }
+    }
+
+    private void SelectAdjacentAllyFigurineParticles(Multiplayer_Player localPlayer)
+    {
+        foreach (NetworkObjectReference FigurineNetworkObjectReference in localPlayer.PlayerTeamUnits)
+        {
+            if (FigurineNetworkObjectReference.TryGet(out NetworkObject figurineNetworkObject) == false)
+            {
+                return;
+            }
+
+            Figurine figurine = figurineNetworkObject.gameObject.GetComponent<Figurine>();
+
+            // Check if the unit isn't in the infirmary or bench
+            string parentName = figurine.CurrentSpacePos.transform.parent.gameObject.name;
+            Debug.Log(parentName);
+            if (parentName != "Player 1 Bench" && parentName != "Player 2 Bench")
+            {
+                // Checks if Adjacent Ally
+                Tile selectedFigurineTile = localPlayer.SelectedFigurine.CurrentSpacePos.GetComponent<Tile>();
+                Tile currentFigurineTile = figurine.CurrentSpacePos.GetComponent<Tile>();
+                if (selectedFigurineTile.AccessibleTiles.Contains(currentFigurineTile))
+                {
+                    // Creates the particle effect
+                    Vector3 particlePos = figurine.transform.position;
+                    BoxCollider figureCollider = figurine.GetComponent<BoxCollider>();
+                    particlePos.y = figurine.transform.position.y + figureCollider.bounds.size.y;
+                    Instantiate(enemyHighlightedEffect, particlePos, enemyHighlightedEffect.transform.rotation, figurine.transform);
+                }
+                
             }
 
         }

@@ -239,6 +239,9 @@ public class Figurine : NetworkBehaviour
                 break;
 
             case FigurineEffect.StatusEffects.Burn:
+                // Take Burn Damage
+                currentHealth -= 2;
+                healthBar.value = currentHealth;
                 break;
             case FigurineEffect.StatusEffects.Decay:
                 // Going to Decay

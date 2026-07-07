@@ -37,9 +37,10 @@ public class MoveManager : NetworkBehaviour
         localPlayer = this.GetComponent<Multiplayer_Player>();
 
         Debug.Log("MOVE MANAGER : " + IsOwner);
+        Multiplayer_Player.OnCompletedExternalMove += CompletedExternalMove;
+
         if (!IsOwner) { return; }
         PlayerUI.OnPressExternalMoveButton += UseExternalMove;
-        Multiplayer_Player.OnCompletedExternalMove += CompletedExternalMove;
     }
 
     // Update is called once per frame
@@ -264,8 +265,33 @@ public class MoveManager : NetworkBehaviour
         enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
         if (UnityEngine.Random.Range(0, 1) == 0)
         {
-            enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
+            //enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
         }
+        yield return new WaitForSeconds(MoveDelay);
+        enemyFigurine.TakeEffect();
+    }
+
+    IEnumerator Ignite(object[] paramters)
+    {
+        Figurine playerFigurine = (Figurine)paramters[0];
+        Figurine enemyFigurine = (Figurine)paramters[1];
+        int playerFigurineAttack = (int)paramters[2];
+
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
+        enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Burn, 2);
+        yield return new WaitForSeconds(MoveDelay);
+        enemyFigurine.TakeEffect();
+    }
+
+    IEnumerator GrowingFlames(object[] parameters)
+    {
+        Figurine playerFigurine = (Figurine)parameters[0];
+        Figurine enemyFigurine = (Figurine)parameters[1];
+        int playerFigurineAttack = (int)parameters[2];
+
+        enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
+        enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.Burn, 2);
+        enemyFigurine.incomingEffect.moveEffects.Add(FigurineEffect.MoveEffects.GrowingFlames, 1);
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
@@ -292,11 +318,16 @@ public class MoveManager : NetworkBehaviour
         localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
         Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
         localPlayer.activeExternalMove = selectedExternalMove;
-        UseExternalMoveClientRpc(selectedExternalMove, localPlayer.SelectedFigurine.name);
-        
-        yield return new WaitUntil(() => waitingForCompletedExternalMove == false);
 
-        Multiplayer_GameManager.Instance.ChangeTurn();
+        if (!localPlayer.CheckAutomaticExternalMoves(selectedExternalMove))
+        {
+            UseExternalMoveClientRpc(selectedExternalMove, localPlayer.SelectedFigurine.name);
+
+            yield return new WaitUntil(() => waitingForCompletedExternalMove == false);
+
+            Multiplayer_GameManager.Instance.ChangeTurn();
+        }
+        
     }
 
     [ClientRpc]
@@ -313,16 +344,10 @@ public class MoveManager : NetworkBehaviour
 
     private void CompletedExternalMove(Multiplayer_Player player)
     {
+        Debug.Log("Completed External Move in Move Manager!");
         waitingForCompletedExternalMove = true;
         localPlayer.activeExternalMove = "";
     }
 
-    #endregion
-
-    #region Abilities
-    public void Lifesteal()
-    {
-        
-    }
     #endregion
 }

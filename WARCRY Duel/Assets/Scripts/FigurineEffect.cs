@@ -24,7 +24,8 @@ public class FigurineEffect
     public enum MoveEffects
     {
         None,
-        Pushback
+        Pushback,
+        GrowingFlames
     }
 
     public static readonly HashSet<StatusEffects> PersistentEffects = new()
