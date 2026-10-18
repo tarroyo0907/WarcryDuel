@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Toxic Bud
   m_EditorClassIdentifier: 
   moveName: Toxic Bud
-  moveDescription: Does 100% attack damage with 50% chance to apply DEF Down.
+  moveDescription: Does 100% attack damage and applies 1 stack of DEF Down.
   moveIcon: {fileID: 21300000, guid: 3f2187e6bcf442e4bb9c2c87269118dd, type: 3}
   moveCooldown: 0
   moveType: 1

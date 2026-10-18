@@ -224,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5133020771507349708}
   - component: {fileID: 8516372760846380709}
-  - component: {fileID: 2822644267375981536}
+  - component: {fileID: -2851589214468045317}
   - component: {fileID: 7143849767886585284}
   - component: {fileID: 6352791496684076323}
   m_Layer: 8
@@ -273,7 +273,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.129467, y: 11.234464, z: 6.620457}
   m_Center: {x: -0.106810585, y: 5.791796, z: -0.08873551}
---- !u!114 &2822644267375981536
+--- !u!114 &-2851589214468045317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,8 +284,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2282923055
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 827449831
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

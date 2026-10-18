@@ -38,6 +38,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public static event PlayerHandler FindingPossibleTargets;
     public static event PlayerHandler OnCompletedMoveEffect;
     public static event PlayerHandler OnCompletedExternalMove;
+    public static event PlayerHandler OnCancelledExternalMove;
     public static event PlayerHandler OnPartyLoaded;
     public static event AnnouncementHandler ExternalMoveAnnouncement;
     #endregion
@@ -568,28 +569,36 @@ public class Multiplayer_Player : NetworkBehaviour
     #region External Moves
     public void CompleteExternalMove(GameObject hitObject)
     {
+        bool externalMoveSuccessful = false;
         switch (activeExternalMove)
         {
             case "Fortification":
-                Fortification(hitObject);
+                externalMoveSuccessful = Fortification(hitObject);
                 break;
             case "Fruitful Fury":
-                FruitfulFury(hitObject);
+                externalMoveSuccessful = FruitfulFury(hitObject);
                 break;
             case "Cleansing Rose":
-                CleansingRose(hitObject);
+                externalMoveSuccessful = CleansingRose(hitObject);
                 break;
             case "Rejuvinate":
-                Rejuvinate(hitObject);
+                externalMoveSuccessful = Rejuvinate(hitObject);
                 break;
             case "Heat Siphon":
-                HeatSiphon();
+                externalMoveSuccessful = HeatSiphon();
                 break;
             default:
                 break;
         }
 
-        
+        if (externalMoveSuccessful == false)
+        {
+            activeExternalMove = "";
+            OnCancelledExternalMove?.Invoke(this);
+            CancelExternalMoveClientRpc();
+            return;
+        }
+
         string externalMoveAnnouncement = null;
         if (selectedFigurine != null)
         {
@@ -623,11 +632,11 @@ public class Multiplayer_Player : NetworkBehaviour
 
 
     #region External Move Functions
-    private void Fortification(GameObject hitObject)
+    private bool Fortification(GameObject hitObject)
     {
         if (hitObject.tag != "BoardSpace")
         {
-            return;
+            return false;
         }
 
         List<Tile>[] possibleSpawnLocations = selectedFigurine.GetPossiblePositions();
@@ -656,12 +665,13 @@ public class Multiplayer_Player : NetworkBehaviour
                 wallFigurine.debuffs.Add(FigurineEffect.StatusEffects.Decay, 3);
                 wallFigurine.CheckForSurroundKill();
                 FortificationClientRpc(originalName, wallFigurine.name);
-                break;
+                return true;
             }
         }
+        return false;
     }
     
-    private void FruitfulFury(GameObject hitObject)
+    private bool FruitfulFury(GameObject hitObject)
     {
         if (hitObject.tag == "Figurine")
         {
@@ -672,7 +682,7 @@ public class Multiplayer_Player : NetworkBehaviour
                 {
                     if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
                     {
-                        return;
+                        return false;
                     }
                 }
                 catch (System.Exception) { }
@@ -690,12 +700,14 @@ public class Multiplayer_Player : NetworkBehaviour
                     clickedFigurine.TakeEffect();
                     selectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
                     FruitfulFuryClientRpc(selectedFigurine.name, clickedFigurine.name);
+                    return true;
                 }
             }
         }
+        return false;
     }
     
-    private void CleansingRose(GameObject hitObject)
+    private bool CleansingRose(GameObject hitObject)
     {
         if (hitObject.tag == "Figurine")
         {
@@ -711,16 +723,16 @@ public class Multiplayer_Player : NetworkBehaviour
                     {
                         if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
                         {
-                            return;
+                            return false;
                         }
                     }
                     else
                     {
-                        return;
+                        return false;
                     }
 
                 }
-                catch (System.Exception) { return; }
+                catch (System.Exception) { return false; }
 
                 // Cleansing Rose Effect
                 if (clickedFigurine.debuffs.Count > 0)
@@ -729,12 +741,14 @@ public class Multiplayer_Player : NetworkBehaviour
                     FigurineEffect.StatusEffects randomDebuff = clickedFigurine.debuffs.ElementAt(randomDebuffIndex).Key;
                     clickedFigurine.debuffs.Remove(randomDebuff);
                     RemoveDebuffClientRpc(clickedFigurine.name, randomDebuff);
+                    return true;
                 }
-            }
+            }    
         }
+        return false;
     }
 
-    private void Rejuvinate(GameObject hitObject)
+    private bool Rejuvinate(GameObject hitObject)
     {
         if (hitObject.tag == "Figurine")
         {
@@ -751,27 +765,29 @@ public class Multiplayer_Player : NetworkBehaviour
                     {
                         if (clickedFigurine.CurrentSpacePos.name.Contains("Infirmary"))
                         {
-                            return;
+                            return false;
                         }
                     }
                     else
                     {
-                        return;
+                        return false;
                     }
                     
                 }
-                catch (System.Exception) { return;  }
+                catch (System.Exception) { return false;  }
 
                 // Rejuvinate Effect
                 FigurineEffect.StatusEffects statusEffect = FigurineEffect.StatusEffects.AttackUp;
                 clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + 2;
                 clickedFigurine.TakeEffect();
                 ApplyBuffClientRpc(clickedFigurine.name, statusEffect, 2);
+                return true;
             }
         }
+        return false;
     }
 
-    private void HeatSiphon()
+    private bool HeatSiphon()
     {
         Debug.Log("Heat Siphon Selected Figurine : " + selectedFigurine.name);
         // Grabs all the figurines on the board
@@ -800,8 +816,8 @@ public class Multiplayer_Player : NetworkBehaviour
             selectedFigurine.incomingEffect.SelfBuffsToApply.Add(FigurineEffect.StatusEffects.AttackUp, totalBurnStacksRemoved);
         }
         selectedFigurine.TakeEffect();
-
         HeatSiphonClientRpc(selectedFigurine.name);
+        return true;
     }
     #endregion
     #endregion
@@ -844,7 +860,7 @@ public class Multiplayer_Player : NetworkBehaviour
     [ClientRpc]
     private void FortificationClientRpc(string originalRockName, string newRockName)
     {
-
+        Debug.Log("Original Rock Name Fortification Client Rpc : " + originalRockName);
         GameObject rockWallGO = GameObject.Find(originalRockName);
         rockWallGO.name = newRockName;
         Figurine wallFigurine = rockWallGO.GetComponent<Figurine>(); 
@@ -905,6 +921,13 @@ public class Multiplayer_Player : NetworkBehaviour
         activeExternalMove = "";
         OnCompletedExternalMove?.Invoke(this);
         ExternalMoveAnnouncement?.Invoke(externalMoveAnnouncement);
+    }
+
+    [ClientRpc]
+    private void CancelExternalMoveClientRpc()
+    {
+        activeExternalMove = "";
+        OnCancelledExternalMove?.Invoke(this);
     }
     #endregion
 

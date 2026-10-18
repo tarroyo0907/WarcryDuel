@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3251191587934413916}
-  - component: {fileID: 3251191587934413919}
   - component: {fileID: 3251191587934413917}
+  - component: {fileID: 3251191587934413919}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -25,30 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3251191587934413918}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 18.450872, y: -49.12978, z: 84.882706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3251191587934413919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3251191587934413918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed35252beda50bc4795be0a076b8e438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleButton: {fileID: 0}
-  partyButton: {fileID: 0}
-  pollTicketTimerMax: 1.1
-  pollTicketTimer: 0
 --- !u!114 &3251191587934413917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +45,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
+  GlobalObjectIdHash: 40981619
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
   AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &3251191587934413919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3251191587934413918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed35252beda50bc4795be0a076b8e438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  battleButton: {fileID: 0}
+  partyButton: {fileID: 0}
+  startServerButton: {fileID: 0}
+  partyFigurines: {fileID: 0}
+  favoriteCharacter: {fileID: 0}
+  partyFiguresArray: []
+  homeCanvasView: {fileID: 0}
+  partyCanvasView: {fileID: 0}
+  partyFormationView: {fileID: 0}
+  backButton: {fileID: 0}
+  homeMenuButtons: {fileID: 0}
+  partyNamePanel: {fileID: 0}
+  characterCenterPosition: {fileID: 0}
+  partyFormationButton: {fileID: 0}
+  partyFormationPosition: {fileID: 0}
+  partyFormationBackground: {fileID: 0}
+  collectionFigures: {fileID: 0}
+  collectionPosition: {fileID: 0}
+  pollTicketTimerMax: 1.1
+  pollTicketTimer: 0
+  currentMenuState: 0
+  localTesting: 0
+  _figureNames: []

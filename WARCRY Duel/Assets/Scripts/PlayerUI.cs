@@ -31,6 +31,9 @@ public class PlayerUI : NetworkBehaviour
     #region Header References
     [Header("Header References")]
     [SerializeField] private GameObject headerPanel;
+    [SerializeField] private TMPro.TextMeshProUGUI fpsText;
+    [SerializeField] private TMPro.TextMeshProUGUI pingText;
+    private float timer;
     #endregion
 
     #region Figurine Overview References
@@ -115,6 +118,7 @@ public class PlayerUI : NetworkBehaviour
 
             Multiplayer_Player.OnCompletedExternalMove += ClearFigurineOverview;
             Multiplayer_Player.ExternalMoveAnnouncement += DisplayAnnouncement;
+            Multiplayer_Player.OnCancelledExternalMove += EnablePlayerUICanvas;
 
             Multiplayer_Player.SelectOwnFigurine += DisplayFigurineOverview;
             Multiplayer_Player.SelectEnemyFigurine += DisplayFigurineOverview;
@@ -152,20 +156,51 @@ public class PlayerUI : NetworkBehaviour
             {
                 playerCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                 playerCanvas.worldCamera = GameObject.Find("Player 1 Camera").GetComponent<Camera>();
+                playerCanvas.worldCamera.GetComponent<AudioListener>().enabled = true;
+
             }
 
             if (NetworkManager.Singleton.LocalClientId == 2)
             {
                 playerCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                 playerCanvas.worldCamera = GameObject.Find("Player 2 Camera").GetComponent<Camera>();
+                playerCanvas.worldCamera.GetComponent<AudioListener>().enabled = true;
             }
+        }
+        else
+        {
+            playerCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+            playerCanvas.worldCamera = GameObject.Find("Player 1 Camera").GetComponent<Camera>();
+            playerCanvas.worldCamera.GetComponent<AudioListener>().enabled = true;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Don't calculate if the network session isn't running
+        if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening) return;
+
+        timer += Time.unscaledDeltaTime;
+
+        if (timer >= 0.5f)
+        {
+            // Calculate FPS
+            float fps = 1.0f / Time.unscaledDeltaTime;
+
+            // Calculate Ping via synchronized Netcode Time system
+            double rttInSeconds = NetworkManager.Singleton.LocalTime.Time - NetworkManager.Singleton.ServerTime.Time;
+
+            // Convert to milliseconds (Ping is roughly half the total round trip time)
+            int pingMS = Mathf.RoundToInt((float)rttInSeconds * 1000f);
+
+            // Safety check for singleplayer / host mode
+            if (pingMS < 0) pingMS = 0;
+
+            fpsText.text = $"FPS: {Mathf.RoundToInt(fps)}";
+            pingText.text = $"Ping: {pingMS} ms";
+            timer = 0f;
+        }
     }
     #endregion
 

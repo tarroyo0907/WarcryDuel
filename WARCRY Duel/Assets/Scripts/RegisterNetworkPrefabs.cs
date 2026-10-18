@@ -38,6 +38,13 @@ public class RegisterNetworkPrefabs : MonoBehaviour
 
             if (prefab.tag == "Figurine")
             {
+                // Skip prefabs already registered via a NetworkPrefabsList (e.g. DefaultNetworkPrefabs)
+                // to avoid duplicate GlobalObjectIdHash registration errors.
+                if (networkManager.NetworkConfig.Prefabs.Contains(prefab))
+                {
+                    continue;
+                }
+
                 networkManager.AddNetworkPrefab(prefab); // <- runtime registration
                 added++;
             }

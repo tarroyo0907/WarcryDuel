@@ -157,7 +157,7 @@ public class SectionManager : NetworkBehaviour
                 if (_startingTile.name == "Infirmary")
                 {
                     // The Unit has left the infirmary
-                    unitFigure.debuffs.Add(FigurineEffect.StatusEffects.Wait, 2);
+                    unitFigure.debuffs.Add(FigurineEffect.StatusEffects.Wait, 1);
                 }
 
                 StartCoroutine(unitFigure.MoveFigure(_startingTile, _endingTile, 3f));

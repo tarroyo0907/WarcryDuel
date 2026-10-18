@@ -99,6 +99,7 @@ public class MainMenuManager : NetworkBehaviour
         DontDestroyOnLoad(this);
 
         NetworkManager.Singleton.OnServerStarted += LocalServerTesting;
+        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 
         InitializePartyData();
 
@@ -206,7 +207,8 @@ public class MainMenuManager : NetworkBehaviour
     {
         string savedTeamPath = Application.persistentDataPath + "/savedTeam.txt";
         string playerCollectionPath = Application.persistentDataPath + "/playerCollection.txt";
-        if (!(File.Exists(savedTeamPath) && File.Exists(playerCollectionPath)))
+        //if (!(File.Exists(savedTeamPath) && File.Exists(playerCollectionPath)))
+        if (true)
         {
             Debug.Log("Initializing Party Data");
             // Set Party Data
@@ -224,7 +226,7 @@ public class MainMenuManager : NetworkBehaviour
             // Set Collection Data
             CollectionObject collectionObject = new CollectionObject
             {
-                figureNames = new string[6] { "Bulwark_Figurine", "Bastion_Figurine", "Kleptra_Figurine", "Shade_Figurine", "Rose_Figurine", "Rook_Figurine" }
+                figureNames = new string[7] { "Bulwark_Figurine", "Bastion_Figurine", "Kleptra_Figurine", "Shade_Figurine", "Rose_Figurine", "Rook_Figurine", "Ignitus_Figurine" }
             };
 
             // Convert Collection Object to JSON format string

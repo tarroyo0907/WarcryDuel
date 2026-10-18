@@ -26,6 +26,7 @@ public class MoveManager : NetworkBehaviour
     #region Gameplay Fields
     [SerializeField] private Multiplayer_Player localPlayer;
     [SerializeField] private bool waitingForCompletedExternalMove = false;
+    [SerializeField] private bool cancelledExternalMove = false;
     private const float MoveDelay = 0.1f;
     #endregion
 
@@ -263,10 +264,7 @@ public class MoveManager : NetworkBehaviour
         int playerFigurineAttack = (int)parameters[2];
 
         enemyFigurine.incomingEffect.IncomingDamage += (int)(playerFigurineAttack * 1.0);
-        if (UnityEngine.Random.Range(0, 1) == 0)
-        {
-            //enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
-        }
+        enemyFigurine.incomingEffect.EnemyDebuffsToApply.Add(FigurineEffect.StatusEffects.DefenseDown, 1);
         yield return new WaitForSeconds(MoveDelay);
         enemyFigurine.TakeEffect();
     }
@@ -314,17 +312,26 @@ public class MoveManager : NetworkBehaviour
     IEnumerator ExternalMoveCoroutine(string selectedExternalMove)
     {
         waitingForCompletedExternalMove = true;
-        FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
-        localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
-        Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
+        cancelledExternalMove = false;
         localPlayer.activeExternalMove = selectedExternalMove;
 
         if (!localPlayer.CheckAutomaticExternalMoves(selectedExternalMove))
         {
             UseExternalMoveClientRpc(selectedExternalMove, localPlayer.SelectedFigurine.name);
 
-            yield return new WaitUntil(() => waitingForCompletedExternalMove == false);
+            yield return new WaitUntil(() => waitingForCompletedExternalMove == false || cancelledExternalMove == true);
 
+            if (cancelledExternalMove == true)
+            {
+                localPlayer.activeExternalMove = "";
+                CancelledExternalMoveClientRpc();
+                yield break;
+            }
+
+            FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
+            localPlayer.SelectedFigurine.moveCooldowns[move] = move.moveCooldown;
+            Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
+            FinishedExternalMoveClientRpc(selectedExternalMove, localPlayer.SelectedFigurine.name);
             Multiplayer_GameManager.Instance.ChangeTurn();
         }
         
@@ -333,13 +340,23 @@ public class MoveManager : NetworkBehaviour
     [ClientRpc]
     private void UseExternalMoveClientRpc(string selectedExternalMove, string figurineName)
     {
+        localPlayer.activeExternalMove = selectedExternalMove;
+        OnUseExternalMove?.Invoke(selectedExternalMove);
+    }
+
+    [ClientRpc]
+    private void FinishedExternalMoveClientRpc(string selectedExternalMove, string figurineName)
+    {
         Figurine figurine = GameObject.Find(figurineName).GetComponent<Figurine>();
         FigurineMove move = Resources.Load<FigurineMove>($"Moves/{selectedExternalMove}");
         figurine.moveCooldowns[move] = move.moveCooldown;
         Debug.Log($"External Move : {move.name} has been set to {move.moveCooldown}");
-        localPlayer.activeExternalMove = selectedExternalMove;
+    }
 
-        OnUseExternalMove?.Invoke(selectedExternalMove);
+    [ClientRpc]
+    private void CancelledExternalMoveClientRpc()
+    {
+        localPlayer.activeExternalMove = "";
     }
 
     private void CompletedExternalMove(Multiplayer_Player player)
