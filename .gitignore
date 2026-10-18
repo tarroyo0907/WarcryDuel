@@ -6,4 +6,13 @@ WARCRY Duel_clone_1/*
 WARCRY Duel_BurstDebugInformation_DoNotShip/*
 WARCRY Duel/.utmp/*
 WARCRY Duel/.vs/*
+WARCRY Duel/Builds/*
+WARCRY Duel/UserSettings/*
+*.csproj
+*.sln
+*.pdb
+*.mdb
+*.pidb
+WARCRY Duel/EdgegapBridge/Project/bin/*
+WARCRY Duel/EdgegapBridge/Project/obj/*
 *.log
