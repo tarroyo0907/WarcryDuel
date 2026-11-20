@@ -34,6 +34,15 @@ public class PlayerUI : NetworkBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI fpsText;
     [SerializeField] private TMPro.TextMeshProUGUI pingText;
     private float timer;
+
+    // Dedicated ping measurement: GetCurrentRtt() only refreshes when reliable
+    // traffic happens to be in flight, so it goes stale during idle periods.
+    // Sending our own periodic reliable RPC guarantees a fresh round-trip
+    // measurement on a fixed schedule instead.
+    private const float PingSendIntervalSeconds = 1f;
+    private float pingSendTimer;
+    private double pingSentAtRealtime;
+    private int measuredPingMs;
     #endregion
 
     #region Figurine Overview References
@@ -181,6 +190,20 @@ public class PlayerUI : NetworkBehaviour
         // Don't calculate if the network session isn't running
         if (NetworkManager.Singleton == null || !NetworkManager.Singleton.IsListening) return;
 
+        // Send a dedicated ping on a fixed schedule, independent of the UI
+        // refresh timer below, so the measurement doesn't depend on whatever
+        // other reliable traffic happens to be flowing.
+        if (!NetworkManager.Singleton.IsServer)
+        {
+            pingSendTimer += Time.unscaledDeltaTime;
+            if (pingSendTimer >= PingSendIntervalSeconds)
+            {
+                pingSendTimer = 0f;
+                pingSentAtRealtime = Time.realtimeSinceStartupAsDouble;
+                PingServerRpc();
+            }
+        }
+
         timer += Time.unscaledDeltaTime;
 
         if (timer >= 0.5f)
@@ -188,20 +211,30 @@ public class PlayerUI : NetworkBehaviour
             // Calculate FPS
             float fps = 1.0f / Time.unscaledDeltaTime;
 
-            // Calculate Ping via synchronized Netcode Time system
-            double rttInSeconds = NetworkManager.Singleton.LocalTime.Time - NetworkManager.Singleton.ServerTime.Time;
-
-            // Convert to milliseconds (Ping is roughly half the total round trip time)
-            int pingMS = Mathf.RoundToInt((float)rttInSeconds * 1000f);
-
-            // Safety check for singleplayer / host mode
-            if (pingMS < 0) pingMS = 0;
-
             fpsText.text = $"FPS: {Mathf.RoundToInt(fps)}";
-            pingText.text = $"Ping: {pingMS} ms";
+            pingText.text = $"Ping: {measuredPingMs} ms";
             timer = 0f;
         }
     }
+
+    #region Ping Measurement
+    [ServerRpc(RequireOwnership = false)]
+    private void PingServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        ClientRpcParams clientRpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams { TargetClientIds = new ulong[] { serverRpcParams.Receive.SenderClientId } }
+        };
+        PingClientRpc(clientRpcParams);
+    }
+
+    [ClientRpc]
+    private void PingClientRpc(ClientRpcParams clientRpcParams = default)
+    {
+        double rttSeconds = Time.realtimeSinceStartupAsDouble - pingSentAtRealtime;
+        measuredPingMs = Mathf.RoundToInt((float)(rttSeconds * 1000.0));
+    }
+    #endregion
     #endregion
 
     private void DisplayMoveDescription(Button selectedButton)

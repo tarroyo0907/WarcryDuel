@@ -41,6 +41,7 @@ public class Multiplayer_Player : NetworkBehaviour
     public static event PlayerHandler OnCancelledExternalMove;
     public static event PlayerHandler OnPartyLoaded;
     public static event AnnouncementHandler ExternalMoveAnnouncement;
+    public static event FigurineHandler OnHealEffectTriggered;
     #endregion
 
     #region Data Fields
@@ -829,6 +830,10 @@ public class Multiplayer_Player : NetworkBehaviour
         Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
         clickedFigurine.buffs[statusEffect] = clickedFigurine.buffs.GetValueOrDefault(statusEffect) + stacks;
         clickedFigurine.TakeEffect();
+
+        // Currently only used by Rejuvinate; if this RPC gets reused by a
+        // non-heal move later, move this to a dedicated RPC instead.
+        OnHealEffectTriggered?.Invoke(clickedFigurine);
     }
 
     [ClientRpc]
@@ -845,6 +850,10 @@ public class Multiplayer_Player : NetworkBehaviour
         Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
         clickedFigurine.debuffs.Remove(statusEffect);
         clickedFigurine.TakeEffect();
+
+        // Currently only used by Cleansing Rose; if this RPC gets reused by a
+        // non-heal move later, move this to a dedicated RPC instead.
+        OnHealEffectTriggered?.Invoke(clickedFigurine);
     }
 
     [ClientRpc]
@@ -873,13 +882,14 @@ public class Multiplayer_Player : NetworkBehaviour
         Figurine clickedFigurine = GameObject.Find(clickedFigurineName).GetComponent<Figurine>();
         Figurine externalMoveSelectedFigurine = GameObject.Find(selectedFigureName).GetComponent<Figurine>();
         int lifestealValue = externalMoveSelectedFigurine.buffs[FigurineEffect.StatusEffects.Lifesteal];
-        clickedFigurine.currentHealth += lifestealValue * selectedFigurine.attackStat;
+        clickedFigurine.currentHealth += lifestealValue * externalMoveSelectedFigurine.attackStat;
         if (clickedFigurine.currentHealth > clickedFigurine.totalHealth)
         {
             clickedFigurine.currentHealth = clickedFigurine.totalHealth;
         }
         clickedFigurine.TakeEffect();
         externalMoveSelectedFigurine.buffs.Remove(FigurineEffect.StatusEffects.Lifesteal);
+        OnHealEffectTriggered?.Invoke(clickedFigurine);
     }
 
     [ClientRpc]

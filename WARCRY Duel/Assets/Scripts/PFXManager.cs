@@ -33,6 +33,8 @@ public class PFXManager : NetworkBehaviour
         MoveManager.OnUseExternalMove += HandleExternalMoveParticles;
         MoveManager.OnMoveUse += HandleMoveVFX;
 
+        Multiplayer_Player.OnHealEffectTriggered += HandleHealVFX;
+
         TeamSpawner.OnFiguresSpawned += SelectFigureParticles;
 
         Multiplayer_Player.SelectOwnFigurine += ClearFigureSelectParticles;
@@ -289,6 +291,25 @@ public class PFXManager : NetworkBehaviour
         yield return new WaitForSeconds(3f);
 
         Destroy(arcaneBlastEffect);
+    }
+
+    private void HandleHealVFX(Figurine target)
+    {
+        StartCoroutine(HealVFX(target));
+    }
+
+    private IEnumerator HealVFX(Figurine target)
+    {
+        // Shared by Fruitful Fury, Cleansing Rose, and Rejuvinate
+        GameObject healVFX = Resources.Load<GameObject>("PFX/PS_FruitfulFuryHeal");
+
+        // Spawn at the healed target's position
+        Vector3 particlePos = target.transform.position;
+        GameObject healEffect = Instantiate(healVFX, particlePos, healVFX.transform.rotation);
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(healEffect);
     }
     #endregion
 
